@@ -31,7 +31,7 @@ import {
 
 const config: ControlPanelConfig = {
   controlPanelSections: [
-    sections.legacyRegularTime,
+    sections.legacyRegularTimeForEventFlow,
     {
       label: t('Event definition'),
       controlSetRows: [

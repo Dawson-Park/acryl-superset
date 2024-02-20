@@ -56,6 +56,11 @@ export const legacyRegularTime: ControlPanelSectionConfig = hasGenericChartAxes
       controlSetRows: [['granularity_sqla'], ['time_range']],
     };
 
+export const legacyRegularTimeForEventFlow: ControlPanelSectionConfig = {
+  ...baseTimeSection,
+  controlSetRows: [['granularity_sqla'], ['time_range']],
+};
+
 export const datasourceAndVizType: ControlPanelSectionConfig = {
   label: t('Datasource & Chart Type'),
   expanded: true,
