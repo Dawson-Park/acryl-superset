@@ -80,7 +80,7 @@ services:
     build: ./superset-websocket
     image: superset-websocket
     ports:
-      - 8089:8089
+      - 8080:8080
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -100,7 +100,7 @@ services:
       - /home/superset-websocket/node_modules
       - /home/superset-websocket/dist
     environment:
-      - PORT=8089
+      - PORT=8080
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_SSL=false
