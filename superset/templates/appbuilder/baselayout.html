@@ -1,0 +1,212 @@
+{#
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+#}
+{% extends 'appbuilder/init.html' %}
+{% import 'appbuilder/baselib.html' as baselib %}
+
+{% block body %}
+    <style>
+      body:has(#loginbox) {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: #0F111A;
+      }
+      body:has(#loginbox) #app-menu, body:has(#loginbox) .container-fluid, body:has(#loginbox) #app, body:has(#loginbox) footer, body:has(#loginbox) small {
+        display: none;
+        opacity: 0;
+        background-color: transparent;
+        color: transparent;
+        border-color: transparent;
+      }
+      body:has(#loginbox) {
+        justify-content: center;
+        background-image: url('/static/assets/images/login_surface.png');
+        background-size: cover;
+      }
+
+      .container:has(#loginbox) div.row .container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+      }
+      body:has(#loginbox) #alert-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+      }
+      body:has(#loginbox) #alert-container div.alert {
+        background-color: rgba(233, 78, 78, 0.24);
+        border: none;
+        color: #E94E4E;
+        max-width: 570px;
+        flex-grow: 1;
+        margin-bottom: 16px;
+      }
+      body:has(#loginbox) #alert-container div.alert button {
+        color: #ffffff;
+        opacity: 0.4;
+      }
+
+      #loginbox {
+        margin: 0 !important;
+        border-radius: 4px;
+        border: 1px solid rgba(240, 245, 250, 0.10);
+        background: rgba(240, 245, 250, 0.10);
+        box-shadow: 0 4px 40px 0 rgba(0, 144, 212, 0.08);
+        backdrop-filter: blur(14px);
+        padding: 48px;
+      }
+      #loginbox .panel {
+        background-color: transparent !important;
+        border-color: transparent !important;
+        margin-bottom: 0;
+      }
+
+      #loginbox .panel .panel-heading {
+        padding: 0;
+        background-color: transparent !important;
+        border: none !important;
+      }
+      #loginbox .panel .panel-heading .panel-title {
+        font-size: 0;
+        border: none !important;
+        padding: 0;
+        margin-bottom: 32px;
+      }
+      #loginbox .panel .panel-heading .panel-title::before, #loginbox .panel .panel-heading .panel-title::after {
+        display: block;
+        color: #DDDEE4;
+        font-family: Pretendard, 'Inter', sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      #loginbox .panel .panel-heading .panel-title::before {
+        content: '저작권 침해 종합대응 시스템';
+        display: block;
+        background-image: url('/static/assets/images/license-logo.png');
+        background-size: 18px 20px;
+        background-repeat: no-repeat;
+        background-position: left center;
+        padding-left: 28px;
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 12px;
+      }
+      #loginbox .panel .panel-heading .panel-title::after {
+        content: 'Sign In';
+        font-size: 40px;
+        line-height: 56px;
+      }
+      #loginbox .panel .panel-body {
+        padding: 0 !important;
+      }
+
+      #loginbox .panel .panel-body .form .help-block { display: none; }
+      #loginbox .panel .panel-body .form .input-group .input-group-addon { display: none; }
+      #loginbox .panel .panel-body .form .input-group input.form-control {
+        border-radius: 4px;
+        background-color: transparent;
+        border: 1px solid #989DAE;
+        color: #989DAE;
+        padding: 12px !important;
+      }
+      #loginbox .panel .panel-body .form .input-group input.form-control:focus {
+        box-shadow: none !important;
+        border: 1px solid #F3F4F8;
+        color: #F3F4F8;
+      }
+
+      #loginbox .panel .panel-body .form .control-group > label, #loginbox .panel .panel-body .form .control-group > .controls > label {
+        font-size: 0;
+        margin-bottom: 8px;
+      }
+      #loginbox .panel .panel-body .form .control-group > label::after, #loginbox .panel .panel-body .form .control-group > .controls > label::after {
+        display: block;
+        letter-spacing: -0.02em;
+        font-family: Pretendard, 'Inter', sans-serif;
+        font-weight: 700;
+        color: #DDDEE4;
+      }
+      #loginbox .panel .panel-body .form .control-group > label::after {
+        content: 'ID';
+        font-size: 18px;
+        line-height: 26px;
+      }
+      #loginbox .panel .panel-body .form .control-group > .controls > label::after {
+        content: 'Password';
+        font-size: 18px;
+        line-height: 26px;
+      }
+      #loginbox .panel .panel-body .form .control-group .input-group:first-of-type {
+        margin-bottom: 32px;
+      }
+      #loginbox .panel .panel-body .form .control-group .input-group:last-of-type {
+        margin-bottom: 56px;
+      }
+      #loginbox .panel .panel-body .form .control-group .input-group input[type="text"], #loginbox .panel .panel-body .form .control-group .input-group input[type="password"] {
+        height: 48px;
+      }
+      #loginbox .panel .panel-body .form .control-group > .controls > div > input[type="submit"] {
+        background-color: #0090D4;
+        color: #2F333D;
+        font-family: Pretendard, 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 28px;
+        letter-spacing: -0.02em;
+        border: none !important;
+        padding: 11px 18px;
+        text-transform: none !important;
+      }
+    </style>
+    {% include 'appbuilder/general/confirm.html' %}
+    {% include 'appbuilder/general/alert.html' %}
+
+    {% block navbar %}
+      {% include 'appbuilder/navbar.html' %}
+    {% endblock %}
+
+    {% block uncontained %}{% endblock %}
+
+    <div class="container">
+      <div class="row">
+          {% block messages %}
+            {% include 'superset/flash_wrapper.html' %}
+          {% endblock %}
+          {% block content %}
+          {% endblock %}
+      </div>
+    </div>
+    <div class="container-fluid">
+        {% block content_fluid %}
+        {% endblock %}
+    </div>
+    <div id="app" data-bootstrap="{{ bootstrap_data() }}"></div>
+
+    {% block footer %}
+        <footer>
+          <div class="img-rounded nav-fixed-bottom">
+              <div class="container-fluid">
+                  {% include 'appbuilder/footer.html' %}
+              </div>
+          </div>
+        </footer>
+    {% endblock %}
+{% endblock %}
