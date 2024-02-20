@@ -102,6 +102,7 @@ const StyledTabsContainer = styled.div`
 
     .ant-tabs-content-holder {
       overflow: visible;
+      background-color: transparent;
     }
   }
 
