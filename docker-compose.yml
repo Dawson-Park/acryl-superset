@@ -17,7 +17,7 @@
 x-superset-image: &superset-image apachesuperset.docker.scarf.sh/apache/superset:${TAG:-latest-dev}
 x-superset-user: &superset-user root
 x-superset-depends-on: &superset-depends-on
-#  - db
+  - db
   - redis
 x-superset-volumes: &superset-volumes
   # /app/pythonpath_docker will be appended to the PYTHONPATH in the final container
@@ -48,16 +48,16 @@ services:
     volumes:
       - redis:/data
 
-#  db:
-#    env_file: docker/.env
-#    image: postgres:15
-#    container_name: superset_db
-#    restart: unless-stopped
-#    ports:
-#      - "127.0.0.1:5432:5432"
-#    volumes:
-#      - db_home:/var/lib/postgresql/data
-#      - ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  db:
+    env_file: docker/.env
+    image: postgres:15
+    container_name: superset_db
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - db_home:/var/lib/postgresql/data
+      - ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
   superset:
     env_file: docker/.env
@@ -80,7 +80,7 @@ services:
     build: ./superset-websocket
     image: superset-websocket
     ports:
-      - 8080:8080
+      - 8089:8089
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -100,7 +100,7 @@ services:
       - /home/superset-websocket/node_modules
       - /home/superset-websocket/dist
     environment:
-      - PORT=8080
+      - PORT=8089
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_SSL=false
