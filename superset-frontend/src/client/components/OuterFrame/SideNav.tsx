@@ -192,7 +192,7 @@ const list = [
 const SideNav = () => (
   <SideNavContainer>
     {list.map(v => (
-      <SideItem key={v.label} $active={v.label === '빅데이터 통계분석'}>
+      <SideItem key={v.label} href={v.label} $active={v.label === '빅데이터 통계분석'}>
         {v.icon}
         <SideLabel>{v.label}</SideLabel>
       </SideItem>
