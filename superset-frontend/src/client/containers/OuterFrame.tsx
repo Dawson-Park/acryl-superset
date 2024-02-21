@@ -51,7 +51,7 @@ const OuterFrame = ({ children }: Props) => (
       <Logo />
       <SideNav />
     </StyledNav>
-    <StyledMain className='license-dashboard-main'>
+    <StyledMain className="license-dashboard-main">
       <DashNav />
       {children}
     </StyledMain>
