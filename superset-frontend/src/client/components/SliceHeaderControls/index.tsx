@@ -345,7 +345,7 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
   const {
     // componentId,
     // dashboardId,
-    // slice,
+    slice,
     isFullSize,
     // cachedDttm = [],
     // updatedDttm = null,
@@ -354,7 +354,7 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
     // supersetCanShare = false,
     // isCached = [],
   } = props;
-  // const isTable = slice.viz_type === 'table';
+  const isTable = slice.viz_type === 'table';
   // const cachedWhen = (cachedDttm || []).map(itemCachedDttm =>
   //   moment.utc(itemCachedDttm).fromNow(),
   // );
@@ -564,6 +564,10 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
     props.exportCSV?.(props.slice.slice_id);
   };
 
+  const onClickExcel = () => {
+    props.exportFullXLSX?.(props.slice.slice_id);
+  };
+
   return (
     <>
       {isFullSize && (
@@ -592,7 +596,11 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
       {/*  </span> */}
       {/* </NoAnimationDropdown> */}
       <ButtonBox data-sliceid={props.slice.slice_id}>
-        <DownloadButton onClick={onClickDownloadCSV}>CSV</DownloadButton>
+        {props.supersetCanCSV && isTable ? (
+          <DownloadButton onClick={onClickExcel}>Excel</DownloadButton>
+        ) : (
+          <DownloadButton onClick={onClickDownloadCSV}>CSV</DownloadButton>
+        )}
         <DownloadButton onClick={onClickDownloadImage}>Image</DownloadButton>
       </ButtonBox>
       {canEditCrossFilters && scopingModal}
