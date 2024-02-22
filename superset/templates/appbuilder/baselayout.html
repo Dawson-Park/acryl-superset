@@ -175,6 +175,13 @@
         padding: 11px 18px;
         text-transform: none !important;
       }
+
+      div.modal-dialog:not(& div.modal-body:has(*)) div.modal-header {
+        opacity: 0;
+      }
+      div.modal-dialog:not(& div.modal-body:has(*)) div.modal-footer {
+        opacity: 0;
+      }
     </style>
     {% include 'appbuilder/general/confirm.html' %}
     {% include 'appbuilder/general/alert.html' %}
