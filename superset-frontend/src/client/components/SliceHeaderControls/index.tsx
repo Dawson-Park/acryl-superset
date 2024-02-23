@@ -31,17 +31,17 @@ import {
 } from 'react-router-dom';
 // import moment from 'moment';
 import {
-  Behavior,
+  // Behavior,
   // css,
   isFeatureEnabled,
   FeatureFlag,
-  getChartMetadataRegistry,
+  // getChartMetadataRegistry,
   QueryFormData,
   styled,
   // t,
   // useTheme,
 } from '@superset-ui/core';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 // import { Menu } from 'src/components/Menu';
 // import { NoAnimationDropdown } from 'src/components/Dropdown';
 // import ShareMenuItems from 'src/client/components/menu/ShareMenuItems';
@@ -56,8 +56,8 @@ import Icons from 'src/components/Icons';
 // import Modal from 'src/components/Modal';
 // import { DrillDetailMenuItems } from 'src/components/Chart/DrillDetail';
 import { LOG_ACTIONS_CHART_DOWNLOAD_AS_IMAGE } from 'src/logger/LogUtils';
-import { RootState } from 'src/client/types';
-import { useCrossFiltersScopingModal } from '../nativeFilters/FilterBar/CrossFilters/ScopingModal/useCrossFiltersScopingModal';
+// import { RootState } from 'src/client/types';
+// import { useCrossFiltersScopingModal } from '../nativeFilters/FilterBar/CrossFilters/ScopingModal/useCrossFiltersScopingModal';
 import DownloadButton from '../DownloadButton';
 
 // const MENU_KEYS = {
@@ -76,7 +76,6 @@ import DownloadButton from '../DownloadButton';
 //   CROSS_FILTER_SCOPING: 'cross_filter_scoping',
 // };
 
-// TODO: replace 3 dots with an icon
 // const VerticalDotsContainer = styled.div`
 //   padding: ${({ theme }) => theme.gridUnit / 4}px
 //     ${({ theme }) => theme.gridUnit * 1.5}px;
@@ -255,18 +254,18 @@ const ButtonBox = styled.div`
 // };
 
 const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
-  const [, /* openScopingModal */ scopingModal] = useCrossFiltersScopingModal(
-    props.slice.slice_id,
-  );
+  // const [openScopingModal, scopingModal] = useCrossFiltersScopingModal(
+  //   props.slice.slice_id,
+  // );
 
-  const canEditCrossFilters =
-    useSelector<RootState, boolean>(
-      ({ dashboardInfo }) => dashboardInfo.dash_edit_perm,
-    ) &&
-    isFeatureEnabled(FeatureFlag.DASHBOARD_CROSS_FILTERS) &&
-    getChartMetadataRegistry()
-      .get(props.slice.viz_type)
-      ?.behaviors?.includes(Behavior.INTERACTIVE_CHART);
+  // const canEditCrossFilters =
+  //   useSelector<RootState, boolean>(
+  //     ({ dashboardInfo }) => dashboardInfo.dash_edit_perm,
+  //   ) &&
+  //   isFeatureEnabled(FeatureFlag.DASHBOARD_CROSS_FILTERS) &&
+  //   getChartMetadataRegistry()
+  //     .get(props.slice.viz_type)
+  //     ?.behaviors?.includes(Behavior.INTERACTIVE_CHART);
 
   // const refreshChart = () => {
   //   if (props.updatedDttm) {
@@ -564,8 +563,12 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
     props.exportCSV?.(props.slice.slice_id);
   };
 
-  const onClickExcel = () => {
+  const onClickExcelFull = () => {
     props.exportFullXLSX?.(props.slice.slice_id);
+  };
+
+  const onClickExcel = () => {
+    props.exportXLSX?.(props.slice.slice_id);
   };
 
   return (
@@ -597,13 +600,17 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
       {/* </NoAnimationDropdown> */}
       <ButtonBox data-sliceid={props.slice.slice_id}>
         {props.supersetCanCSV && isTable ? (
-          <DownloadButton onClick={onClickExcel}>Excel</DownloadButton>
+          isFeatureEnabled(FeatureFlag.ALLOW_FULL_CSV_EXPORT) ? (
+            <DownloadButton onClick={onClickExcelFull}>Excel</DownloadButton>
+          ) : (
+            <DownloadButton onClick={onClickExcel}>Excel</DownloadButton>
+          )
         ) : (
           <DownloadButton onClick={onClickDownloadCSV}>CSV</DownloadButton>
         )}
         <DownloadButton onClick={onClickDownloadImage}>Image</DownloadButton>
       </ButtonBox>
-      {canEditCrossFilters && scopingModal}
+      {/* {canEditCrossFilters && scopingModal} */}
     </>
   );
 };
