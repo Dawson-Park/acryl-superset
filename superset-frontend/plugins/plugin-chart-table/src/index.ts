@@ -27,7 +27,7 @@ import buildQuery from './buildQuery';
 import { TableChartFormData, TableChartProps } from './types';
 
 // must export something for the module to be exist in dev mode
-export { default as __hack__ } from './types';
+// export { default as __hack__ } from './types';
 export * from './types';
 
 const metadata = new ChartMetadata({
@@ -56,7 +56,7 @@ const metadata = new ChartMetadata({
   thumbnail,
 });
 
-export default class TableChartPlugin extends ChartPlugin<
+export class TableChartPlugin extends ChartPlugin<
   TableChartFormData,
   TableChartProps
 > {
@@ -64,6 +64,48 @@ export default class TableChartPlugin extends ChartPlugin<
     super({
       loadChart: () => import('./TableChart'),
       metadata,
+      transformProps,
+      controlPanel,
+      buildQuery,
+    });
+  }
+}
+
+const metadata2 = new ChartMetadata({
+  behaviors: [
+    Behavior.INTERACTIVE_CHART,
+    Behavior.DRILL_TO_DETAIL,
+    Behavior.DRILL_BY,
+  ],
+  category: t('Table'),
+  canBeAnnotationTypes: ['EVENT', 'INTERVAL'],
+  description: t(
+    'Classic row-by-column spreadsheet like view of a dataset. Use tables to showcase a view into the underlying data or to show aggregated metrics.',
+  ),
+  exampleGallery: [{ url: example1 }, { url: example2 }, { url: example3 }],
+  name: t('Screenshot Chart'),
+  tags: [
+    t('Acryl'),
+    t('Additive'),
+    t('Business'),
+    t('Pattern'),
+    t('Popular'),
+    t('Report'),
+    t('Sequential'),
+    t('Tabular'),
+    t('Description'),
+  ],
+  thumbnail,
+});
+
+export class ScreenshotChartPlugin extends ChartPlugin<
+  TableChartFormData,
+  TableChartProps
+> {
+  constructor() {
+    super({
+      loadChart: () => import('./ScreenshotChart'),
+      metadata: metadata2,
       transformProps,
       controlPanel,
       buildQuery,
