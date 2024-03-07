@@ -1428,7 +1428,7 @@ TALISMAN_CONFIG = {
     "content_security_policy": {
         "base-uri": ["'self'"],
         "default-src": ["'self'"],
-        "img-src": ["'self'", "blob:", "data:"],
+        "img-src": ["'self'", "blob:", "data:", "https://*", "http://*"],
         "worker-src": ["'self'", "blob:"],
         "connect-src": [
             "'self'",
@@ -1451,7 +1451,7 @@ TALISMAN_DEV_CONFIG = {
     "content_security_policy": {
         "base-uri": ["'self'"],
         "default-src": ["'self'"],
-        "img-src": ["'self'", "blob:", "data:"],
+        "img-src": ["'self'", "blob:", "data:", "https://*", "http://*"],
         "worker-src": ["'self'", "blob:"],
         "connect-src": [
             "'self'",

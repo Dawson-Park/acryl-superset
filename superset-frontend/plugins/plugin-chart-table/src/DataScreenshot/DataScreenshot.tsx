@@ -314,15 +314,15 @@ export default typedMemo(function DataTable<D extends object>({
   //   </table>
   // );
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('React.useEffect: [data, columns]');
-    // eslint-disable-next-line no-console
-    console.log(columns);
-    // eslint-disable-next-line no-console
-    console.log(data);
-  }, [data, columns]);
+  // // eslint-disable-next-line react-hooks/rules-of-hooks
+  // useEffect(() => {
+  //   // eslint-disable-next-line no-console
+  //   console.log('React.useEffect: [data, columns]');
+  //   // eslint-disable-next-line no-console
+  //   console.log(columns);
+  //   // eslint-disable-next-line no-console
+  //   console.log(data);
+  // }, [data, columns]);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
