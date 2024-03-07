@@ -343,15 +343,6 @@ export default typedMemo(function DataTable<D extends object>({
           />
         </div>
       ))}
-      {/* <div className="screenshot-image-box"> */}
-      {/*  <img src={DATA} alt="" className="screenshot-image" /> */}
-      {/* </div> */}
-      {/* <div className="screenshot-image-box"> */}
-      {/*  <img src={DATA2} alt="" className="screenshot-image" /> */}
-      {/* </div> */}
-      {/* <div className="screenshot-image-box"> */}
-      {/*  <img src={DATA} alt="" className="screenshot-image" /> */}
-      {/* </div> */}
     </div>
   );
 
