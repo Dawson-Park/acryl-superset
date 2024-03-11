@@ -1,205 +1,143 @@
-<!--
-Licensed to the Apache Software Foundation (ASF) under one
-or more contributor license agreements.  See the NOTICE file
-distributed with this work for additional information
-regarding copyright ownership.  The ASF licenses this file
-to you under the Apache License, Version 2.0 (the
-"License"); you may not use this file except in compliance
-with the License.  You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing,
-software distributed under the License is distributed on an
-"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, either express or implied.  See the License for the
-specific language governing permissions and limitations
-under the License.
--->
-
 # Superset
+## Superset README.md
+- [Superset Readme](https://github.com/apache/superset?tab=readme-ov-file#superset)
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/apache/superset?sort=semver)](https://github.com/apache/superset/tree/latest)
-[![Build Status](https://github.com/apache/superset/workflows/Python/badge.svg)](https://github.com/apache/superset/actions)
-[![PyPI version](https://badge.fury.io/py/apache-superset.svg)](https://badge.fury.io/py/apache-superset)
-[![Coverage Status](https://codecov.io/github/apache/superset/coverage.svg?branch=master)](https://codecov.io/github/apache/superset)
-[![PyPI](https://img.shields.io/pypi/pyversions/apache-superset.svg?maxAge=2592000)](https://pypi.python.org/pypi/apache-superset)
-[![Get on Slack](https://img.shields.io/badge/slack-join-orange.svg)](http://bit.ly/join-superset-slack)
-[![Documentation](https://img.shields.io/badge/docs-apache.org-blue.svg)](https://superset.apache.org)
+## How to Install in Window
+### WSL2 설치
+#### Windows10 버전 확인
+- 실행 > PC 정보: 20H1, 20H2, 21H1 이상인지 확인
+- 그 이하인 경우 설치 불가
+#### 설치
+- [다운로드](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
+- powershell을 켜고 아래를 입력
+```shell
+wsl --set-default-version 2
+wsl --update
+```
 
-<picture width="500">
-  <source
-    media="(prefers-color-scheme: dark)"
-    src="https://github.com/apache/superset/raw/master/superset-frontend/src/assets/branding/superset-logo-horiz-apache-dark.png"
-    alt="Superset logo (dark)"
-  />
-  <img
-    src="https://github.com/apache/superset/raw/master/superset-frontend/src/assets/branding/superset-logo-horiz-apache.png"
-    alt="Superset logo (light)"
-  />
-</picture>
+### Docker Desktop(windows) 설치
+#### 설치
+1. 설치파일 다운로드: [docker desktop](https://docs.docker.com/desktop/install/windows-install/)
+2. 시스템 요구사항 확인
+   - docker desktop은 wsl2나 hyper-v를 요구하는데, window 환경에서 설치한 경우 기본적으로 wsl2를 자동으로 탐색한다
+3. 설치 후 재부팅
+4. docker desktop 재실행
+5. 서비스 약관 동의
+   - Accept 클릭 후 진행
+   - Continue without signing in 클릭
+   - Skip
+   - wsl2를 설치한 경우 넘어간다
+6. cmd에서 설치 확인
+  ```shell
+  docker version
+  docker --help
+  docker container --help
+  docker container run ubuntu /bin/echo "hello world"
+  docker container ls -al
+  docker image ls
+  ```
 
-A modern, enterprise-ready business intelligence web application.
+### Acryl Superset 설치
+#### 설치
+```shell
+git clone https://github.com/Dawson-Park/acryl-superset.git
+cd superset/docker/
+cp .env-back .env
+cd ../
+docker-compose up # 10분 이상 소요됨
+```
+#### Admin 로그인
+```
+ID : admin
+PS : admin
+```
+#### 권한 설정
+- `User Role`에서 `Admin` 복사 후 `Client` 추가
+- `Client`에서 `Write` 관련 권한 전부 삭제
+- `Client` 권한을 가진 유저 추가
+- 반드시 `Client`여야 한다. 권한 탐색을 하드코딩으로 함.
+#### Dashboard 추가
+- Dashboard 탭으로 이동
+- 새로운 Dashboard 추가 또는 기존의 Dashboard 수정
+- Slug를 다음과 같이 변경하여 매칭한다.
+  ```json
+  {
+    "대시보드": "license_dashboard",
+    "수집 현황": "collection",
+    "유통 현황 분석": "distribution",
+    "침해 현황 분석": "infringement",
+    "동향 분석": "trend",
+    "수사 지원 분석": "investigation"
+  }
+  ```
+#### Client 로그인
+- Client로 로그인 시 정상적으로 화면이 나오면 된다.
 
-[**Why Superset?**](#why-superset) |
-[**Supported Databases**](#supported-databases) |
-[**Installation and Configuration**](#installation-and-configuration) |
-[**Release Notes**](RELEASING/README.md#release-notes-for-recent-releases) |
-[**Get Involved**](#get-involved) |
-[**Contributor Guide**](#contributor-guide) |
-[**Resources**](#resources) |
-[**Organizations Using Superset**](RESOURCES/INTHEWILD.md)
+## How to Develop
+### docker-compose 수정
+`docker-compose.yml`에서 `superset-node`가 작성된 코드 블록 전체를 주석처리한다.
+```yml
+# superset-node:
+#   image: node:16
+#   container_name: superset_node
+#   command: ["/app/docker/docker-frontend.sh"]
+#   env_file: docker/.env
+#   depends_on: *superset-depends-on
+#   volumes: *superset-volumes
+```
+### frontend build
+```shell
+cd superset/superset-frontend
+npm install
+npm run dev
+```
+### docker run
+기존에 실행되던 docker를 정지 및 컨테이너와 이미지 삭제 후 terminal을 새로 열고 아래를 실행
+```shell
+docker-compose up
+```
+frontend를 제외하고 실행되며 `npm run dev`가 실행 중인 동안 프론트엔드 코드 수정시 새로고침하면 변경사항이 반영된다.
+### Directories
+```
+.storybook/				- storybook 관련 설정
+cypress-base/				- superset-frontend에 관련한 cypress 설정
+packages/				- plugin 및 기타 모듈과 연결해주는 함수 및 상수
+plugins/				- chart 관련 설정 및 컴포넌트
+scripts/				- 개발 관련 script 모음
+spec/					- test 관련
+src/					- 실질적으로 front를 구성하는 메인 컴포넌트
+  ├ assets/				- front 구성 시 필요한 icon, image, css
+  ├ components/				- antd 기반 공용 컴포넌트
+  ├ dashboard/				- DOMAIN: dashboard에서 사용할 컴포넌트
+  ├ dataMask/				- data 처리를 위한 Redux 관련 유틸
+  ├ embedded/				- dashboard의 data 및 redux, controller 관련
+  ├ explore/				- DOMAIN: action에서 사용할 컴포넌트
+  ├ features/				- 각 DOMAIN에서 사용하는 기능 컴포넌트
+  ├ filters/				- DOMAIN: filter에서 사용할 컴포넌트
+  ├ hooks/				- 공용 hooks
+  ├ logger/				- DOMAIN: logger에서 사용할 컴포넌트
+  ├ middleware/				- api 통신 중 사용할 미들웨어
+  ├ pages/				- Frontend에서 사용할 페이지 컴포넌트
+  ├ setup/				- frontend 시작 전 설정 파일
+  ├ sqlLab/				- DOMAIN: sqlLab에서 사용할 컴포넌트
+  ├ types/				- 타입을 정의한 폴더
+  ├ utils/				- 기타 유용한 유틸 함수
+  ├ views/				- 중심 컴포넌트를 정의한 폴더
+  ├ visualizations/			- 시각화 관련 컴포넌트
+  ├ constants.ts			- 전역에서 사용하는 상수
+  ├ GlobalStyles.tsx			- 전역 스타일 및 테마 정의
+  ├ preamble.ts				- setup/ 의 설정을 실행시키는 파일
+  ├ reduxUtils.ts			- redux의 util 함수
+  ├ theme.ts				- 테마 스타일 호출
+tools/					- linting 등 개발 관련
+constants.ts				- 취급하는 모든 
+GlobalStyles.tsx			- @emotion의 전역 스타일을 설정하는 컴포넌트
+preamble.ts				- frontend를 시작하기 전 static 정보를 읽어옴
+reduxUtils.ts				- redux 관련 util 함수
+theme.ts				- Theme 관련 less를 호출
+```
 
-## Why Superset?
-
-Superset is a modern data exploration and data visualization platform. Superset can replace or augment proprietary business intelligence tools for many teams. Superset integrates well with a variety of data sources.
-
-Superset provides:
-
-- A **no-code interface** for building charts quickly
-- A powerful, web-based **SQL Editor** for advanced querying
-- A **lightweight semantic layer** for quickly defining custom dimensions and metrics
-- Out of the box support for **nearly any SQL** database or data engine
-- A wide array of **beautiful visualizations** to showcase your data, ranging from simple bar charts to geospatial visualizations
-- Lightweight, configurable **caching layer** to help ease database load
-- Highly extensible **security roles and authentication** options
-- An **API** for programmatic customization
-- A **cloud-native architecture** designed from the ground up for scale
-
-## Screenshots & Gifs
-
-**Video Overview**
-
-https://user-images.githubusercontent.com/64562059/234390129-321d4f35-cb4b-45e8-89d9-20ae292f34fc.mp4
-
-<br/>
-
-**Large Gallery of Visualizations**
-
-<kbd><img title="Gallery" src="superset-frontend/src/assets/images/screenshots/gallery.jpg"/></kbd><br/>
-
-**Craft Beautiful, Dynamic Dashboards**
-
-<kbd><img title="View Dashboards" src="superset-frontend/src/assets/images/screenshots/slack_dash.jpg"/></kbd><br/>
-
-**No-Code Chart Builder**
-
-<kbd><img title="Slice & dice your data" src="superset-frontend/src/assets/images/screenshots/explore.jpg"/></kbd><br/>
-
-**Powerful SQL Editor**
-
-<kbd><img title="SQL Lab" src="superset-frontend/src/assets/images/screenshots/sql_lab.jpg"/></kbd><br/>
-
-## Supported Databases
-
-Superset can query data from any SQL-speaking datastore or data engine (Presto, Trino, Athena, [and more](https://superset.apache.org/docs/databases/installing-database-drivers/)) that has a Python DB-API driver and a SQLAlchemy dialect.
-
-Here are some of the major database solutions that are supported:
-
-<p align="center">
-  <img src="superset-frontend/src/assets/images/redshift.png" alt="redshift" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/google-biquery.png" alt="google-biquery" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/snowflake.png" alt="snowflake" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/trino.png" alt="trino" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/presto.png" alt="presto" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/databricks.png" alt="databricks" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/druid.png" alt="druid" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/firebolt.png" alt="firebolt" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/timescale.png" alt="timescale" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/rockset.png" alt="rockset" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/postgresql.png" alt="postgresql" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/mysql.png" alt="mysql" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/mssql-server.png" alt="mssql-server" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/db2.png" alt="db2" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/sqlite.png" alt="sqlite" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/sybase.png" alt="sybase" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/mariadb.png" alt="mariadb" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/vertica.png" alt="vertica" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/oracle.png" alt="oracle" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/firebird.png" alt="firebird" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/greenplum.png" alt="greenplum" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/clickhouse.png" alt="clickhouse" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/exasol.png" alt="exasol" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/monet-db.png" alt="monet-db" border="0" width="200" height="80" />
-  <img src="superset-frontend/src/assets/images/apache-kylin.png" alt="apache-kylin" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/hologres.png" alt="hologres" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/netezza.png" alt="netezza" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/pinot.png" alt="pinot" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/teradata.png" alt="teradata" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/yugabyte.png" alt="yugabyte" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/databend.png" alt="databend" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/starrocks.png" alt="starrocks" border="0" width="200" height="80"/>
-  <img src="superset-frontend/src/assets/images/doris.png" alt="doris" border="0" width="200" height="80"/>
-</p>
-
-**A more comprehensive list of supported databases** along with the configuration instructions can be found [here](https://superset.apache.org/docs/databases/installing-database-drivers).
-
-Want to add support for your datastore or data engine? Read more [here](https://superset.apache.org/docs/frequently-asked-questions#does-superset-work-with-insert-database-engine-here) about the technical requirements.
-
-## Installation and Configuration
-
-[Extended documentation for Superset](https://superset.apache.org/docs/installation/installing-superset-using-docker-compose)
-
-## Get Involved
-
-- Ask and answer questions on [StackOverflow](https://stackoverflow.com/questions/tagged/apache-superset) using the **apache-superset** tag
-- [Join our community's Slack](http://bit.ly/join-superset-slack)
-  and please read our [Slack Community Guidelines](https://github.com/apache/superset/blob/master/CODE_OF_CONDUCT.md#slack-community-guidelines)
-- [Join our dev@superset.apache.org Mailing list](https://lists.apache.org/list.html?dev@superset.apache.org). To join, simply send an email to [dev-subscribe@superset.apache.org](mailto:dev-subscribe@superset.apache.org)
-- If you want to help troubleshoot GitHub Issues involving the numerous database drivers that Superset supports, please consider adding your name and the databases you have access to on the [Superset Database Familiarity Rolodex](https://docs.google.com/spreadsheets/d/1U1qxiLvOX0kBTUGME1AHHi6Ywel6ECF8xk_Qy-V9R8c/edit#gid=0)
-- Join Superset's Town Hall and [Operational Model](https://preset.io/blog/the-superset-operational-model-wants-you/) recurring meetings.  Meeting info is available on the [Superset Community Calendar](https://superset.apache.org/community)
-
-## Contributor Guide
-
-Interested in contributing? Check out our
-[CONTRIBUTING.md](https://github.com/apache/superset/blob/master/CONTRIBUTING.md)
-to find resources around contributing along with a detailed guide on
-how to set up a development environment.
-
-## Resources
-
-- [Superset "In the Wild"](RESOURCES/INTHEWILD.md) - open a PR to add your org to the list!
-- [Feature Flags](RESOURCES/FEATURE_FLAGS.md) - the status of Superset's Feature Flags.
-- [Standard Roles](RESOURCES/STANDARD_ROLES.md) - How RBAC permissions map to roles.
-- [Superset Wiki](https://github.com/apache/superset/wiki) - Tons of additional community resources: best practices, community content and other information.
-- [Superset SIPs](https://github.com/orgs/apache/projects/170) - The status of Superset's SIPs (Superset Improvement Proposals) for both consensus and implementation status.
-
-Superset 2.0!
-- [Superset 2.0 Meetup](https://preset.io/events/superset-2-0-meetup/)
-- [Superset 2.0 Release Notes](https://github.com/apache/superset/tree/master/RELEASING/release-notes-2-0)
-
-Understanding the Superset Points of View
-- [The Case for Dataset-Centric Visualization](https://preset.io/blog/dataset-centric-visualization/)
-- [Understanding the Superset Semantic Layer](https://preset.io/blog/understanding-superset-semantic-layer/)
-
-
-- Getting Started with Superset
-  - [Superset in 2 Minutes using Docker Compose](https://superset.apache.org/docs/installation/installing-superset-using-docker-compose#installing-superset-locally-using-docker-compose)
-  - [Installing Database Drivers](https://superset.apache.org/docs/databases/docker-add-drivers/)
-  - [Building New Database Connectors](https://preset.io/blog/building-database-connector/)
-  - [Create Your First Dashboard](https://superset.apache.org/docs/creating-charts-dashboards/first-dashboard)
-  - [Comprehensive Tutorial for Contributing Code to Apache Superset
-  ](https://preset.io/blog/tutorial-contributing-code-to-apache-superset/)
-- [Resources to master Superset by Preset](https://preset.io/resources/)
-
-- Deploying Superset
-  - [Official Docker image](https://hub.docker.com/r/apache/superset)
-  - [Helm Chart](https://github.com/apache/superset/tree/master/helm/superset)
-
-- Recordings of Past [Superset Community Events](https://preset.io/events)
-  - [Mixed Time Series Charts](https://preset.io/events/mixed-time-series-visualization-in-superset-workshop/)
-  - [How the Bing Team Customized Superset for the Internal Self-Serve Data & Analytics Platform](https://preset.io/events/how-the-bing-team-heavily-customized-superset-for-their-internal-data/)
-  - [Live Demo: Visualizing MongoDB and Pinot Data using Trino](https://preset.io/events/2021-04-13-visualizing-mongodb-and-pinot-data-using-trino/)
-	- [Introduction to the Superset API](https://preset.io/events/introduction-to-the-superset-api/)
-	- [Building a Database Connector for Superset](https://preset.io/events/2021-02-16-building-a-database-connector-for-superset/)
-
-- Visualizations
-  - [Creating Viz Plugins](https://superset.apache.org/docs/contributing/creating-viz-plugins/)
-  - [Managing and Deploying Custom Viz Plugins](https://medium.com/nmc-techblog/apache-superset-manage-custom-viz-plugins-in-production-9fde1a708e55)
-  - [Why Apache Superset is Betting on Apache ECharts](https://preset.io/blog/2021-4-1-why-echarts/)
-
-- [Superset API](https://superset.apache.org/docs/rest-api)
-
-<!-- telemetry/analytics pixel: -->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=bc1c90cd-bc04-4e11-8c7b-289fb2839492" />
+## 참고자료
+- [(Windows)WSL 설치 및 사용법](https://www.lainyzine.com/ko/article/how-to-install-wsl2-and-use-linux-on-windows-10/)
+- [이전 버전 WSL의 수동 설치 단계](https://learn.microsoft.com/ko-kr/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
+- [윈도우에 도커 데스크탑 설치](https://myanjini.tistory.com/entry/%EC%9C%88%EB%8F%84%EC%9A%B0%EC%97%90-%EB%8F%84%EC%BB%A4-%EB%8D%B0%EC%8A%A4%ED%81%AC%ED%83%91-%EC%84%A4%EC%B9%98)
