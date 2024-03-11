@@ -107,6 +107,7 @@ scripts/				- 개발 관련 script 모음
 spec/					- test 관련
 src/					- 실질적으로 front를 구성하는 메인 컴포넌트
   ├ assets/				- front 구성 시 필요한 icon, image, css
+  ├ client/				- client 로그인 시 화면을 구성하기 위한 컴포넌트 모음
   ├ components/				- antd 기반 공용 컴포넌트
   ├ dashboard/				- DOMAIN: dashboard에서 사용할 컴포넌트
   ├ dataMask/				- data 처리를 위한 Redux 관련 유틸
