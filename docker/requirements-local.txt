@@ -1,0 +1,2 @@
+echo "trino"
+echo "shillelagh[gsheetsapi]"
