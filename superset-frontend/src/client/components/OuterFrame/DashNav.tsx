@@ -2,18 +2,24 @@ import React from 'react';
 import { styled, css } from '@superset-ui/core';
 import { useHistory, useParams } from 'react-router-dom';
 
+// eslint-disable-next-line theme-colors/no-literal-colors
 const NavContainer = styled.nav`
   display: flex;
   flex-flow: row nowrap;
   gap: 16px;
   height: 40px;
-  margin-bottom: 40px;
+  padding: 16px 24px;
+  //padding-bottom: 40px;
+  box-sizing: content-box;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
 `;
 
 type Props = {
   $active?: boolean;
 };
 
+// eslint-disable-next-line theme-colors/no-literal-colors
 const NavItem = styled.div<Props>`
   display: flex;
   flex-flow: row nowrap;
@@ -35,6 +41,7 @@ const NavItem = styled.div<Props>`
 
   ${props =>
     props?.$active &&
+    // eslint-disable-next-line theme-colors/no-literal-colors
     css`
       color: #0f111a;
       border-bottom: 2px solid #5badf4;

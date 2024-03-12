@@ -24,6 +24,7 @@ const StyledNav = styled.nav`
   height: 100%;
 `;
 
+// eslint-disable-next-line theme-colors/no-literal-colors
 const StyledHeader = styled.header`
   position: sticky;
   top: 0;
@@ -35,11 +36,12 @@ const StyledHeader = styled.header`
   flex-flow: row nowrap;
   justify-content: flex-end;
   grid-area: outer-header;
+  border-bottom: 1px solid #e0e0e0;
 `;
 
 const StyledMain = styled.main`
   grid-area: outer-main;
-  padding: 24px;
+  //padding: 24px;
 `;
 
 const OuterFrame = ({ children }: Props) => (

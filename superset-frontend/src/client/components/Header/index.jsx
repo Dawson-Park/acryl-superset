@@ -117,6 +117,7 @@ const defaultProps = {
 
 const headerContainerStyle = theme => css`
   //border-bottom: 1px solid ${theme.colors.grayscale.light2};
+  margin-top: 24px;
 `;
 
 const editButtonStyle = theme => css`

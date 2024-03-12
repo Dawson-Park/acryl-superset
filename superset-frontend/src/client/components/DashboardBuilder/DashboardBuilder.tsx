@@ -37,11 +37,11 @@ import {
   styled,
   t,
   useTheme,
-  // useElementOnScreen,
+  useElementOnScreen,
 } from '@superset-ui/core';
 import { Global } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
-// import ErrorBoundary from 'src/components/ErrorBoundary';
+import ErrorBoundary from 'src/components/ErrorBoundary';
 import BuilderComponentPane from 'src/client/components/BuilderComponentPane';
 import DashboardHeader from 'src/client/containers/DashboardHeader';
 import Icons from 'src/components/Icons';
@@ -75,15 +75,15 @@ import FilterBar from 'src/client/components/nativeFilters/FilterBar';
 import Loading from 'src/components/Loading';
 import { EmptyStateBig } from 'src/components/EmptyState';
 import { useUiConfig } from 'src/components/UiConfigContext';
-// import ResizableSidebar from 'src/components/ResizableSidebar';
+import ResizableSidebar from 'src/components/ResizableSidebar';
 import {
   BUILDER_SIDEPANEL_WIDTH,
-  // CLOSED_FILTER_BAR_WIDTH,
-  // FILTER_BAR_HEADER_HEIGHT,
-  // FILTER_BAR_TABS_HEIGHT,
-  // MAIN_HEADER_HEIGHT,
-  // OPEN_FILTER_BAR_MAX_WIDTH,
-  // OPEN_FILTER_BAR_WIDTH,
+  CLOSED_FILTER_BAR_WIDTH,
+  FILTER_BAR_HEADER_HEIGHT,
+  FILTER_BAR_TABS_HEIGHT,
+  MAIN_HEADER_HEIGHT,
+  OPEN_FILTER_BAR_MAX_WIDTH,
+  OPEN_FILTER_BAR_WIDTH,
 } from 'src/client/constants';
 import { getRootLevelTabsComponent, shouldFocusTabs } from './utils';
 import DashboardContainer from './DashboardContainer';
@@ -97,6 +97,7 @@ const StyledDiv = styled.div`
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
     flex: 1;
+    gap: 0 16px;
     /* Special cases */
 
     /* A row within a column has inset hover menu */
@@ -155,20 +156,25 @@ const StyledDiv = styled.div`
 `;
 
 // @z-index-above-dashboard-charts + 1 = 11
-// const FiltersPanel = styled.div<{ width: number; hidden: boolean }>`
-//   grid-column: 1;
-//   grid-row: 1 / span 2;
-//   z-index: 11;
-//   width: ${({ width }) => width}px;
-//   ${({ hidden }) => hidden && `display: none;`}
-// `;
+const FiltersPanel = styled.div<{ width: number; hidden: boolean }>`
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  z-index: 11;
+  width: ${({ width }) => width}px;
+  ${({ hidden }) => hidden && `display: none;`}
+`;
 
-// const StickyPanel = styled.div<{ width: number }>`
-//   position: sticky;
-//   top: -1px;
-//   width: ${({ width }) => width}px;
-//   flex: 0 0 ${({ width }) => width}px;
-// `;
+const StickyPanel = styled.div<{ width: number }>`
+  position: sticky;
+  //top: -1px;
+  top: 48px;
+  width: ${({ width }) => width}px;
+  flex: 0 0 ${({ width }) => width}px;
+
+  & div[data-test='filter-bar__collapsable'] {
+    top: 0 !important;
+  }
+`;
 
 // @z-index-above-dashboard-popovers (99) + 1 = 100
 const StyledHeader = styled.div`
@@ -344,6 +350,7 @@ const StyledDashboardContent = styled.div<{
   editMode: boolean;
   marginLeft: number;
 }>`
+  // eslint-disable-next-line theme-colors/no-literal-colors
   ${({ theme, editMode, marginLeft }) => css`
     display: flex;
     flex-direction: row;
@@ -438,9 +445,9 @@ const DashboardBuilder: FC<DashboardBuilderProps> = () => {
   const uiConfig = useUiConfig();
   const theme = useTheme();
 
-  // const dashboardId = useSelector<RootState, string>(
-  //   ({ dashboardInfo }) => `${dashboardInfo.id}`,
-  // );
+  const dashboardId = useSelector<RootState, string>(
+    ({ dashboardInfo }) => `${dashboardInfo.id}`,
+  );
   const dashboardLayout = useSelector<RootState, DashboardLayout>(
     state => state.dashboardLayout.present,
   );
@@ -526,29 +533,29 @@ const DashboardBuilder: FC<DashboardBuilderProps> = () => {
   const {
     showDashboard,
     dashboardFiltersOpen,
-    // toggleDashboardFiltersOpen,
+    toggleDashboardFiltersOpen,
     nativeFiltersEnabled,
   } = useNativeFilters();
 
-  // const [ containerRef,  isSticky] = useElementOnScreen<HTMLDivElement>({
-  //   threshold: [1],
-  // });
+  const [containerRef, isSticky] = useElementOnScreen<HTMLDivElement>({
+    threshold: [1],
+  });
 
   // Filter sets depend on native filters
-  // const filterSetEnabled =
-  //   isFeatureEnabled(FeatureFlag.DASHBOARD_NATIVE_FILTERS_SET) &&
-  //   isFeatureEnabled(FeatureFlag.DASHBOARD_NATIVE_FILTERS);
+  const filterSetEnabled =
+    isFeatureEnabled(FeatureFlag.DASHBOARD_NATIVE_FILTERS_SET) &&
+    isFeatureEnabled(FeatureFlag.DASHBOARD_NATIVE_FILTERS);
 
   const showFilterBar =
     (crossFiltersEnabled || nativeFiltersEnabled) && !editMode;
 
-  // const offset =
-  //   FILTER_BAR_HEADER_HEIGHT +
-  //   (isSticky || standaloneMode ? 0 : MAIN_HEADER_HEIGHT) +
-  //   (filterSetEnabled ? FILTER_BAR_TABS_HEIGHT : 0);
+  const offset =
+    FILTER_BAR_HEADER_HEIGHT +
+    (isSticky || standaloneMode ? 0 : MAIN_HEADER_HEIGHT) +
+    (filterSetEnabled ? FILTER_BAR_TABS_HEIGHT : 0);
 
-  // const filterBarHeight = `calc(100vh - ${offset}px)`;
-  // const filterBarOffset = dashboardFiltersOpen ? 0 : barTopOffset + 20;
+  const filterBarHeight = `calc(100vh - ${offset}px)`;
+  const filterBarOffset = dashboardFiltersOpen ? 0 : barTopOffset + 20;
 
   const draggableStyle = useMemo(
     () => ({
@@ -650,46 +657,45 @@ const DashboardBuilder: FC<DashboardBuilderProps> = () => {
 
   return (
     <StyledDiv>
-      {/* {showFilterBar && */}
-      {/*  filterBarOrientation === FilterBarOrientation.VERTICAL && ( */}
-      {/*    <> */}
-      {/*      <ResizableSidebar */}
-      {/*        id={`dashboard:${dashboardId}`} */}
-      {/*        enable={dashboardFiltersOpen} */}
-      {/*        minWidth={OPEN_FILTER_BAR_WIDTH} */}
-      {/*        maxWidth={OPEN_FILTER_BAR_MAX_WIDTH} */}
-      {/*        initialWidth={OPEN_FILTER_BAR_WIDTH} */}
-      {/*      > */}
-      {/*        {adjustedWidth => { */}
-      {/*          const filterBarWidth = dashboardFiltersOpen */}
-      {/*            ? adjustedWidth */}
-      {/*            : CLOSED_FILTER_BAR_WIDTH; */}
-      {/*          return ( */}
-      {/*            <FiltersPanel */}
-      {/*              width={filterBarWidth} */}
-      {/*              hidden={isReport} */}
-      {/*              data-test="dashboard-filters-panel" */}
-      {/*            > */}
-      {/*              <StickyPanel ref={containerRef} width={filterBarWidth}> */}
-      {/*                <ErrorBoundary> */}
-      {/*                  <FilterBar */}
-      {/*                    orientation={FilterBarOrientation.VERTICAL} */}
-      {/*                    verticalConfig={{ */}
-      {/*                      filtersOpen: dashboardFiltersOpen, */}
-      {/*                      toggleFiltersBar: toggleDashboardFiltersOpen, */}
-      {/*                      width: filterBarWidth, */}
-      {/*                      height: filterBarHeight, */}
-      {/*                      offset: filterBarOffset, */}
-      {/*                    }} */}
-      {/*                  /> */}
-      {/*                </ErrorBoundary> */}
-      {/*              </StickyPanel> */}
-      {/*            </FiltersPanel> */}
-      {/*          ); */}
-      {/*        }} */}
-      {/*      </ResizableSidebar> */}
-      {/*    </> */}
-      {/*  )} */}
+      {showFilterBar && filterBarOrientation === FilterBarOrientation.VERTICAL && (
+        <>
+          <ResizableSidebar
+            id={`dashboard:${dashboardId}`}
+            enable={dashboardFiltersOpen}
+            minWidth={OPEN_FILTER_BAR_WIDTH}
+            maxWidth={OPEN_FILTER_BAR_MAX_WIDTH}
+            initialWidth={OPEN_FILTER_BAR_WIDTH}
+          >
+            {adjustedWidth => {
+              const filterBarWidth = dashboardFiltersOpen
+                ? adjustedWidth
+                : CLOSED_FILTER_BAR_WIDTH;
+              return (
+                <FiltersPanel
+                  width={filterBarWidth}
+                  hidden={isReport}
+                  data-test="dashboard-filters-panel"
+                >
+                  <StickyPanel ref={containerRef} width={filterBarWidth}>
+                    <ErrorBoundary>
+                      <FilterBar
+                        orientation={FilterBarOrientation.VERTICAL}
+                        verticalConfig={{
+                          filtersOpen: dashboardFiltersOpen,
+                          toggleFiltersBar: toggleDashboardFiltersOpen,
+                          width: filterBarWidth,
+                          height: filterBarHeight,
+                          offset: filterBarOffset,
+                        }}
+                      />
+                    </ErrorBoundary>
+                  </StickyPanel>
+                </FiltersPanel>
+              );
+            }}
+          </ResizableSidebar>
+        </>
+      )}
       <StyledHeader ref={headerRef}>
         {/* @ts-ignore */}
         <DragDroppable
