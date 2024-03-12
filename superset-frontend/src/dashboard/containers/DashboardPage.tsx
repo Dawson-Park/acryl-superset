@@ -62,6 +62,7 @@ import {
 import SyncDashboardState, {
   getDashboardContextLocalStorage,
 } from '../components/SyncDashboardState';
+import { OuterFrame } from '../components/OuterFrame';
 
 export const DashboardPageIdContext = React.createContext('');
 
@@ -226,7 +227,7 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
   if (!readyToRender || !hasDashboardInfoInitiated) return <Loading />;
 
   return (
-    <>
+    <OuterFrame>
       <Global
         styles={[
           filterCardPopoverStyle(theme),
@@ -240,7 +241,7 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
           <DashboardBuilder />
         </DashboardContainer>
       </DashboardPageIdContext.Provider>
-    </>
+    </OuterFrame>
   );
 };
 
