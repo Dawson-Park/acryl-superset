@@ -48,12 +48,12 @@ const bootstrapData = getBootstrapData();
 const denyList: string[] = bootstrapData.common.conf.VIZ_TYPE_DENYLIST || [];
 const metadataRegistry = getChartMetadataRegistry();
 
-if (
-  isFeatureEnabled(FeatureFlag.DASHBOARD_NATIVE_FILTERS) &&
-  !denyList.includes('filter_box')
-) {
-  denyList.push('filter_box');
-}
+// if (
+//   isFeatureEnabled(FeatureFlag.DASHBOARD_NATIVE_FILTERS) &&
+//   !denyList.includes('filter_box')
+// ) {
+//   denyList.push('filter_box');
+// }
 
 export const VIZ_TYPE_CONTROL_TEST_ID = 'viz-type-control';
 
