@@ -1,2 +1,2 @@
-echo "trino"
-echo "shillelagh[gsheetsapi]"
+trino
+shillelagh[gsheetsapi]
