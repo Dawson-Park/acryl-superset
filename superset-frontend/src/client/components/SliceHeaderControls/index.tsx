@@ -38,7 +38,7 @@ import {
   // getChartMetadataRegistry,
   QueryFormData,
   styled,
-  t,
+  // t,
   // useTheme,
 } from '@superset-ui/core';
 // import { useSelector } from 'react-redux';
@@ -607,7 +607,7 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
                 : onClickExcel
             }
           >
-            {t('excel')}
+            엑셀
           </DownloadButton>
         ) : (
           // isFeatureEnabled(FeatureFlag.ALLOW_FULL_CSV_EXPORT) ? (
@@ -617,9 +617,7 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
           // )
           <DownloadButton onClick={onClickDownloadCSV}>CSV</DownloadButton>
         )}
-        <DownloadButton onClick={onClickDownloadImage}>
-          {t('image')}
-        </DownloadButton>
+        <DownloadButton onClick={onClickDownloadImage}>이미지</DownloadButton>
       </ButtonBox>
       {/* {canEditCrossFilters && scopingModal} */}
     </>
