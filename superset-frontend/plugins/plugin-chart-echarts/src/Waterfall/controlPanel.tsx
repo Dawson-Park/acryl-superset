@@ -88,7 +88,7 @@ const config: ControlPanelConfig = {
           {
             name: 'total_color',
             config: {
-              label: t('Total'),
+              label: t('총합'),
               type: 'ColorPickerControl',
               default: { r: 102, g: 102, b: 102, a: 1 },
               renderTrigger: true,

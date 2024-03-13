@@ -625,7 +625,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
         ),
         Footer: totals ? (
           i === 0 ? (
-            <th>{t('Totals')}</th>
+            <th>총합</th>
           ) : (
             <td style={sharedStyle}>
               <strong>{formatColumnValue(column, totals[key])[1]}</strong>
