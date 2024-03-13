@@ -3971,6 +3971,7 @@
       "every day of the week": [""],
       "every hour": ["1시간"],
       "every month": ["월"],
+      "excel": ["엑셀"],
       "expand": [""],
       "fetching": [""],
       "ffill": [""],
@@ -3984,6 +3985,7 @@
       "heatmap: values are normalized across the entire heatmap": [""],
       "hour": ["시간"],
       "id": [""],
+      "image": ["이미지"],
       "image-rendering CSS attribute of the canvas object that defines how the browser scales up the image": [
         ""
       ],
