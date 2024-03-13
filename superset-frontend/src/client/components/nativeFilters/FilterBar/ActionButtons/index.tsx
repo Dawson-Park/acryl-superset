@@ -21,7 +21,7 @@ import {
   css,
   DataMaskState,
   DataMaskStateWithId,
-  t,
+  // t,
   isDefined,
   SupersetTheme,
 } from '@superset-ui/core';
@@ -150,7 +150,8 @@ const ActionButtons = ({
         onClick={onClearAll}
         {...getFilterBarTestId('clear-button')}
       >
-        {t('Clear all')}
+        {/*{t('Clear all')}*/}
+        전부 해제
       </Button>
     </div>
   );
