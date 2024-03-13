@@ -601,14 +601,14 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
       <ButtonBox data-sliceid={props.slice.slice_id}>
         {props.supersetCanCSV && isTable ? (
           isFeatureEnabled(FeatureFlag.ALLOW_FULL_CSV_EXPORT) ? (
-            <DownloadButton onClick={onClickExcelFull}>Excel</DownloadButton>
+            <DownloadButton onClick={onClickExcelFull}>엑셀</DownloadButton>
           ) : (
-            <DownloadButton onClick={onClickExcel}>Excel</DownloadButton>
+            <DownloadButton onClick={onClickExcel}>엑셀</DownloadButton>
           )
         ) : (
           <DownloadButton onClick={onClickDownloadCSV}>CSV</DownloadButton>
         )}
-        <DownloadButton onClick={onClickDownloadImage}>Image</DownloadButton>
+        <DownloadButton onClick={onClickDownloadImage}>이미지</DownloadButton>
       </ButtonBox>
       {/* {canEditCrossFilters && scopingModal} */}
     </>

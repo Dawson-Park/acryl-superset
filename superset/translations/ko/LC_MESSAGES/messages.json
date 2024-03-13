@@ -464,9 +464,10 @@
       "Applied rolling window did not return any data. Please make sure the source query satisfies the minimum periods defined in the rolling window.": [
         ""
       ],
-      "Apply": [""],
+      "Apply": ["적용"],
       "Apply conditional color formatting to metrics": [""],
       "Apply conditional color formatting to numeric columns": [""],
+      "Apply filters": ["필터 적용"],
       "Apply to all panels": [""],
       "Apply to specific panels": [""],
       "April": [""],
@@ -722,7 +723,7 @@
       ],
       "Clause": [""],
       "Clear": [""],
-      "Clear all": [""],
+      "Clear all": ["전부 해제"],
       "Clear form": [""],
       "Click on \"+Add/Edit Filters\" button to create new dashboard filters": [
         ""
@@ -4083,6 +4084,7 @@
       "y: values are normalized within each row": [""],
       "year": ["년"],
       "zoom area": [""]
-    }
+    },
+    "message": ""
   }
 }
