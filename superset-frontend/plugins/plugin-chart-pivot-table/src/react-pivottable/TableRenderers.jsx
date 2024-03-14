@@ -80,10 +80,10 @@ export class TableRenderer extends React.Component {
       colTotals: true,
       ...props.tableOptions,
     };
-    // const rowTotals = tableOptions.rowTotals || colAttrs.length === 0;
-    // const colTotals = tableOptions.colTotals || rowAttrs.length === 0;
-    const rowTotals = false;
-    const colTotals = false;
+    const rowTotals = tableOptions.rowTotals || colAttrs.length === 0;
+    const colTotals = tableOptions.colTotals || rowAttrs.length === 0;
+    // const rowTotals = false;
+    // const colTotals = false;
 
     const namesMapping = props.namesMapping || {};
     const subtotalOptions = {
