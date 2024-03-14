@@ -248,10 +248,15 @@ export default function PivotTableChart(props: PivotTableProps) {
       ? [groupbyColumns, groupbyRows]
       : [groupbyRows, groupbyColumns];
 
+    // if (metricsLayout === MetricsLayoutEnum.ROWS) {
+    //   rows_ = combineMetric ? [...rows_, METRIC_KEY] : [METRIC_KEY, ...rows_];
+    // } else {
+    //   cols_ = combineMetric ? [...cols_, METRIC_KEY] : [METRIC_KEY, ...cols_];
+    // }
     if (metricsLayout === MetricsLayoutEnum.ROWS) {
-      rows_ = combineMetric ? [...rows_, METRIC_KEY] : [METRIC_KEY, ...rows_];
+      rows_ = [...rows_];
     } else {
-      cols_ = combineMetric ? [...cols_, METRIC_KEY] : [METRIC_KEY, ...cols_];
+      cols_ = [...cols_];
     }
     return [rows_, cols_];
   }, [
