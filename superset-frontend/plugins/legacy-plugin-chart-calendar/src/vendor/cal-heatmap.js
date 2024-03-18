@@ -1774,10 +1774,22 @@ CalHeatMap.prototype = {
       });
 
     function formatSubDomainText(element) {
+      const formatter = (n) => {
+        const date = new Date(n);
+        const y = date.getFullYear();
+        let m = date.getMonth() + 1;
+        let d = date.getDate();
+
+        m = m < 10 ? '0' + m : m;
+        d = d < 10 ? '0' + d : d;
+
+        return `${y}-${m}-${d}`;
+      }
+
       if (typeof options.subDomainTextFormat === 'function') {
         element.text(function (d) {
-          console.log(d.t, d.v, options.subDomainTextFormat(d.t, d.v));
-          return options.subDomainTextFormat(d.t, d.v);
+          console.log(d.t, formatter(d.t), d.v, options.subDomainTextFormat(d.t, d.v));
+          return options.subDomainTextFormat(d.t, d.v) ?? formatter(d.t);
         });
       }
     }
