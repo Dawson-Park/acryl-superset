@@ -24,11 +24,16 @@ var CalHeatMap = function () {
     .direction('n')
     .offset([-5, 0])
     .html(
-      d => `
+      // d => `
+      //   ${self.options.timeFormatter(d.t)}: <strong>${self.options.valueFormatter(
+      //     d.v,
+      //   )}</strong>
+      // `,
+      d => d.v ? `
       ${self.options.timeFormatter(d.t)}: <strong>${self.options.valueFormatter(
-        d.v,
-      )}</strong>
-    `,
+          d.v,
+        )}</strong>
+    ` : `${self.options.timeFormatter(d.t)}`
     );
   self.legendTip = d3tip()
     .attr('class', 'd3-tip')
@@ -1225,7 +1230,8 @@ var CalHeatMap = function () {
         .attr('text-anchor', 'middle')
         .attr('dominant-baseline', 'central')
         .text(function (d) {
-          return self.formatDate(new Date(d.t), options.subDomainTextFormat);
+          // return self.formatDate(new Date(d.t), options.subDomainTextFormat);
+          return d.t;
         });
     }
 
