@@ -1230,8 +1230,9 @@ var CalHeatMap = function () {
         .attr('text-anchor', 'middle')
         .attr('dominant-baseline', 'central')
         .text(function (d) {
+          console.log(d)
           // return self.formatDate(new Date(d.t), options.subDomainTextFormat);
-          return d.t;
+          return self.formatDate(new Date(d.t), options.subDomainTextFormat);
         });
     }
 
