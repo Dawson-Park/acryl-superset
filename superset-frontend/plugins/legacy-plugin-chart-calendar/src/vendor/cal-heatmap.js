@@ -1231,12 +1231,10 @@ var CalHeatMap = function () {
         .attr('dominant-baseline', 'central')
         .text(function (d) {
           const date = new Date(d.t);
-          console.log(d, date)
-          console.log(self.formatDate(new Date(d.t), options.subDomainTextFormat))
-          console.log(self.options.timeFormatter(d.t))
-          console.log(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`)
+          console.log(date, self.formatDate(date, options.subDomainTextFormat), self.options.timeFormatter(d.t));
+          return '-';
           // return self.formatDate(new Date(d.t), options.subDomainTextFormat);
-          return self.formatDate(new Date(d.t), options.subDomainTextFormat) ?? self.options.timeFormatter(d.t) ?? `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`;
+          // return self.formatDate(new Date(d.t), options.subDomainTextFormat) ?? self.options.timeFormatter(d.t) ?? `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`;
         });
     }
 
