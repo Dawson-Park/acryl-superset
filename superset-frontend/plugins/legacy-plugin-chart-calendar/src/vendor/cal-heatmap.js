@@ -1776,8 +1776,8 @@ CalHeatMap.prototype = {
     function formatSubDomainText(element) {
       if (typeof options.subDomainTextFormat === 'function') {
         element.text(function (d) {
-          // return options.subDomainTextFormat(d.t, d.v);
-          return d.v ? options.subDomainTextFormat(d.t, d.v) : self.options.timeFormatter(d.t);
+          console.log(d.t, d.v, options.subDomainTextFormat(d.t, d.v));
+          return options.subDomainTextFormat(d.t, d.v);
         });
       }
     }
