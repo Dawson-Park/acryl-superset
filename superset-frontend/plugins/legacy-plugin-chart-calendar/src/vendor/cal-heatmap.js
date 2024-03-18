@@ -1232,7 +1232,7 @@ var CalHeatMap = function () {
         .text(function (d) {
           console.log(d)
           // return self.formatDate(new Date(d.t), options.subDomainTextFormat);
-          return self.formatDate(new Date(d.t), options.subDomainTextFormat);
+          return self.formatDate(new Date(d.t), options.subDomainTextFormat) ?? self.options.timeFormatter(d.t) ?? '-';
         });
     }
 
