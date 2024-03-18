@@ -1776,14 +1776,15 @@ CalHeatMap.prototype = {
     function formatSubDomainText(element) {
       const formatter = (n) => {
         const date = new Date(n);
-        const y = date.getFullYear();
+        // const y = date.getFullYear();
         let m = date.getMonth() + 1;
         let d = date.getDate();
 
         m = m < 10 ? '0' + m : m;
         d = d < 10 ? '0' + d : d;
 
-        return `${y}-${m}-${d}`;
+        // return `${y}-${m}-${d}`;
+        return `${m}-${d}`;
       }
 
       if (typeof options.subDomainTextFormat === 'function') {
