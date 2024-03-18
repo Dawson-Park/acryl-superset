@@ -8,3 +8,7 @@ echo 'superset_id' $superset_id
 echo 'node_id' $node_id
 
 docker rmi $superset_id $node_id
+
+docker compose up -d
+
+docker ps -a
