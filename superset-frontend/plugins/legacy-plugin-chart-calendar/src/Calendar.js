@@ -90,7 +90,9 @@ function Calendar(element, props) {
   Object.keys(metricsData).forEach(metric => {
     const calContainer = div.append('div');
     if (showMetricName) {
-      calContainer.text(`${METRIC_TEXT}: ${verboseMap[metric] || metric}`);
+      // calContainer.text(`${METRIC_TEXT}: ${verboseMap[metric] || metric}`);
+      const m = verboseMap[metric] || metric
+      calContainer.text(`${METRIC_TEXT}${m ? `: ${m}` : ''}`);
     }
     const timestamps = metricsData[metric];
     const extents = d3Extent(Object.keys(timestamps), key => timestamps[key]);
