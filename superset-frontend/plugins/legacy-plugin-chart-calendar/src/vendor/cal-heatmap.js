@@ -1789,8 +1789,10 @@ CalHeatMap.prototype = {
 
       if (typeof options.subDomainTextFormat === 'function') {
         element.text(function (d) {
-          console.log(d.t, formatter(d.t), d.v, options.subDomainTextFormat(d.t, d.v));
-          return d.v !== null ? options.subDomainTextFormat(d.t, d.v) : formatter(d.t);
+          // return options.subDomainTextFormat(d.t, d.v);
+          // console.log(d.t, formatter(d.t), d.v, options.subDomainTextFormat(d.t, d.v));
+          // return d.v !== null ? options.subDomainTextFormat(d.t, d.v) : formatter(d.t);
+          return formatter(d.t);
         });
       }
     }
