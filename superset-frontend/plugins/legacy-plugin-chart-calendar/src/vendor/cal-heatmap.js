@@ -1232,8 +1232,7 @@ var CalHeatMap = function () {
         .text(function (d) {
           const date = new Date(d.t);
           console.log(date, self.formatDate(date, options.subDomainTextFormat), self.options.timeFormatter(d.t));
-          return '-';
-          // return self.formatDate(new Date(d.t), options.subDomainTextFormat);
+          return self.formatDate(new Date(d.t), options.subDomainTextFormat);
           // return self.formatDate(new Date(d.t), options.subDomainTextFormat) ?? self.options.timeFormatter(d.t) ?? `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`;
         });
     }
@@ -1777,7 +1776,8 @@ CalHeatMap.prototype = {
     function formatSubDomainText(element) {
       if (typeof options.subDomainTextFormat === 'function') {
         element.text(function (d) {
-          return options.subDomainTextFormat(d.t, d.v);
+          // return options.subDomainTextFormat(d.t, d.v);
+          return d.v ? options.subDomainTextFormat(d.t, d.v) : self.options.timeFormatter(d.t);
         });
       }
     }
