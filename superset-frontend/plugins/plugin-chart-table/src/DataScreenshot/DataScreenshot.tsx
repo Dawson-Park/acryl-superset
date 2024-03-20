@@ -22,7 +22,7 @@ import React, {
   ReactNode,
   // HTMLProps,
   MutableRefObject,
-  CSSProperties, useMemo,
+  CSSProperties, useMemo, useEffect,
 } from 'react';
 import {
   useTable,
@@ -359,6 +359,10 @@ export default typedMemo(function DataTable<D extends object>({
   //     console.log('storageImgList', res);
   //   })
   // }, [storageImgList])
+
+  useEffect(() => {
+    console.log(page);
+  }, [page])
 
   const renderScreenshot = useMemo(() => (
     <div className={`screenshot-chart-container ${tableClassName}`}>
