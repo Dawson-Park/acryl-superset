@@ -22,7 +22,7 @@ import React, {
   ReactNode,
   // HTMLProps,
   MutableRefObject,
-  CSSProperties, useEffect, useMemo,
+  CSSProperties, useMemo,
 } from 'react';
 import {
   useTable,
@@ -367,8 +367,9 @@ export default typedMemo(function DataTable<D extends object>({
           <div key={v.id} className="screenshot-image-box">
             <img
               // src={v.values[0]}
-              src={'http://gocap.kr:30643/api/v1/storage/sa_bk_cn_ftr/image/api.themoviedb.org/3/tv/api.themoviedb.org_3_tv|9bcQcp2gvcMW8bLcGsuTCYQBmTW|15736.jpeg'}
-              alt={'http://gocap.kr:30643/api/v1/storage/sa_bk_cn_ftr/image/api.themoviedb.org/3/tv/api.themoviedb.org_3_tv|9bcQcp2gvcMW8bLcGsuTCYQBmTW|15736.jpeg'}
+              // src={'http://gocap.kr:30643/api/v1/storage/sa_bk_cn_ftr/image/api.themoviedb.org/3/tv/api.themoviedb.org_3_tv|9bcQcp2gvcMW8bLcGsuTCYQBmTW|15736.jpeg'}
+              src={'http://gocap.kr:30643/api/v1/storage/sa_bk_cn_ftr/image/'+v.values[0]}
+              alt={'http://gocap.kr:30643/api/v1/storage/sa_bk_cn_ftr/image/'+v.values[0]}
               className="screenshot-image"
             />
           </div>
