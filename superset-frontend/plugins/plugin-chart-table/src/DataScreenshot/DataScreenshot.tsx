@@ -368,8 +368,6 @@ export default typedMemo(function DataTable<D extends object>({
   const renderScreenshot = useMemo(() => (
     <div className={`screenshot-chart-container ${tableClassName}`}>
       {page.map((v) => {
-        console.log('screenshot-chart', v);
-
         return (
           <div key={v.id} className="screenshot-image-box">
             <img
