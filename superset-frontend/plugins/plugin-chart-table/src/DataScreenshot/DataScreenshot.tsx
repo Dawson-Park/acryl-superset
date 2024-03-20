@@ -17,13 +17,12 @@
  * under the License.
  */
 import React, {
-  useEffect,
   useCallback,
   useRef,
   ReactNode,
   // HTMLProps,
   MutableRefObject,
-  CSSProperties,
+  CSSProperties, useEffect, useMemo,
 } from 'react';
 import {
   useTable,
@@ -86,28 +85,28 @@ const sortTypes = {
 
 // Be sure to pass our updateMyData and the skipReset option
 export default typedMemo(function DataTable<D extends object>({
-  tableClassName,
-  columns,
-  data,
-  serverPaginationData,
-  width: initialWidth = '100%',
-  height: initialHeight = 300,
-  pageSize: initialPageSize = 0,
-  initialState: initialState_ = {},
-  pageSizeOptions = PAGE_SIZE_OPTIONS,
-  maxPageItemCount = 9,
-  sticky: doSticky,
-  searchInput = true,
-  onServerPaginationChange,
-  rowCount,
-  // selectPageSize,
-  noResults: noResultsText = 'No data found',
-  hooks,
-  serverPagination,
-  wrapperRef: userWrapperRef,
-  // onColumnOrderChange,
-  ...moreUseTableOptions
-}: DataTableProps<D>): JSX.Element {
+                                                                tableClassName,
+                                                                columns,
+                                                                data,
+                                                                serverPaginationData,
+                                                                width: initialWidth = '100%',
+                                                                height: initialHeight = 300,
+                                                                pageSize: initialPageSize = 0,
+                                                                initialState: initialState_ = {},
+                                                                pageSizeOptions = PAGE_SIZE_OPTIONS,
+                                                                maxPageItemCount = 9,
+                                                                sticky: doSticky,
+                                                                searchInput = true,
+                                                                onServerPaginationChange,
+                                                                rowCount,
+                                                                // selectPageSize,
+                                                                noResults: noResultsText = 'No data found',
+                                                                hooks,
+                                                                serverPagination,
+                                                                wrapperRef: userWrapperRef,
+                                                                // onColumnOrderChange,
+                                                                ...moreUseTableOptions
+                                                              }: DataTableProps<D>): JSX.Element {
   const tableHooks: PluginHook<D>[] = [
     useGlobalFilter,
     useSortBy,
@@ -324,27 +323,59 @@ export default typedMemo(function DataTable<D extends object>({
   //   console.log(data);
   // }, [data, columns]);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('React.useEffect: [page]');
-    // eslint-disable-next-line no-console
-    console.log(page);
-  }, [page]);
+  // // eslint-disable-next-line react-hooks/rules-of-hooks
+  // useEffect(() => {
+  //   // eslint-disable-next-line no-console
+  //   console.log('React.useEffect: [page]');
+  //   // eslint-disable-next-line no-console
+  //   console.log(page);
+  // }, [page]);
 
-  const renderScreenshot = () => (
+  // const storageImgList = useCallback(async () => {
+  //   const result: string[] = [];
+  //   if(page.length === 0) return [];
+  //
+  //   for (let i = 0; i < page.length; i++) {
+  //     // const current = page[i].values[0];
+  //
+  //     // if(typeof current === 'string') {
+  //     //   if(current.includes('http')) {
+  //     //     result.push(current);
+  //     //   }
+  //     //   else {
+  //         const src = 'sa_bk_cn_ftr/image/api.themoviedb.org/3/tv/api.themoviedb.org_3_tv|9bcQcp2gvcMW8bLcGsuTCYQBmTW|15736.jpeg';
+  //         const res = await fetch('http://gocap.kr:30643/api/v1/storage/' + src);
+  //         console.log('res', res);
+  //         result.push(src);
+  //       // }
+  //     // }
+  //   }
+  //
+  //   return result;
+  // }, [page])
+  //
+  // useEffect(() => {
+  //   storageImgList().then(res => {
+  //     console.log('storageImgList', res);
+  //   })
+  // }, [storageImgList])
+
+  const renderScreenshot = useMemo(() => (
     <div className={`screenshot-chart-container ${tableClassName}`}>
-      {page.map(v => (
-        <div key={v.id} className="screenshot-image-box">
-          <img
-            src={v.values[0]}
-            alt={v.values[0]}
-            className="screenshot-image"
-          />
-        </div>
-      ))}
+      {page.map((v) => {
+        return (
+          <div key={v.id} className="screenshot-image-box">
+            <img
+              // src={v.values[0]}
+              src={'http://gocap.kr:30643/api/v1/storage/sa_bk_cn_ftr/image/api.themoviedb.org/3/tv/api.themoviedb.org_3_tv|9bcQcp2gvcMW8bLcGsuTCYQBmTW|15736.jpeg'}
+              alt={'http://gocap.kr:30643/api/v1/storage/sa_bk_cn_ftr/image/api.themoviedb.org/3/tv/api.themoviedb.org_3_tv|9bcQcp2gvcMW8bLcGsuTCYQBmTW|15736.jpeg'}
+              className="screenshot-image"
+            />
+          </div>
+        )
+      })}
     </div>
-  );
+  ), [page, tableClassName]);
 
   // force update the pageSize when it's been update from the initial state
   if (
@@ -422,7 +453,7 @@ export default typedMemo(function DataTable<D extends object>({
       {/* ) : null} */}
       {/* {wrapStickyTable ? wrapStickyTable(renderTable) : renderTable()} */}
       {/* {wrapStickyTable ? wrapStickyTable(renderScreenshot) : renderScreenshot()} */}
-      {renderScreenshot()}
+      {renderScreenshot}
       {hasPagination && resultPageCount > 1 ? (
         <SimplePagination
           ref={paginationRef}
