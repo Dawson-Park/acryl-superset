@@ -361,7 +361,7 @@ export default typedMemo(function DataTable<D extends object>({
   // }, [storageImgList])
 
   useEffect(() => {
-    console.log(page);
+    console.log('page', page);
   }, [page])
 
   const renderScreenshot = useMemo(() => (
