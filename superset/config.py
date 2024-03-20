@@ -1428,7 +1428,7 @@ TALISMAN_CONFIG = {
     "content_security_policy": {
         "base-uri": ["'self'"],
         "default-src": ["'self'"],
-        "img-src": ["'self'", "blob:", "data:", "https://*", "http://*"],
+        "img-src": ["'self'", "blob:", "data:", "https://*", "http://*", "http://gocap.kr:30643"], # CSP 수정
         "worker-src": ["'self'", "blob:"],
         "connect-src": [
             "'self'",
