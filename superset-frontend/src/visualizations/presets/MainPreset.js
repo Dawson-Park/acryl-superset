@@ -31,7 +31,7 @@ import PartitionChartPlugin from '@superset-ui/legacy-plugin-chart-partition';
 import RoseChartPlugin from '@superset-ui/legacy-plugin-chart-rose';
 import SankeyChartPlugin from '@superset-ui/legacy-plugin-chart-sankey';
 import SunburstChartPlugin from '@superset-ui/legacy-plugin-chart-sunburst';
-import { TableChartPlugin, ScreenshotChartPlugin } from '@superset-ui/plugin-chart-table';
+import { TableChartPlugin, ScreenshotChartPlugin, ScreenshotAPIChartPlugin } from '@superset-ui/plugin-chart-table';
 import { WordCloudChartPlugin } from '@superset-ui/plugin-chart-word-cloud';
 import WorldMapChartPlugin from '@superset-ui/legacy-plugin-chart-world-map';
 import {
@@ -130,7 +130,8 @@ export default class MainPreset extends Preset {
         new SankeyChartPlugin().configure({ key: 'sankey' }),
         new SunburstChartPlugin().configure({ key: 'sunburst' }),
         new TableChartPlugin().configure({ key: 'table' }),
-        new ScreenshotChartPlugin().configure({ key: 'screenshot' }),
+        new ScreenshotChartPlugin().configure({ key: 'screenshot_url' }),
+        new ScreenshotAPIChartPlugin().configure({ key: 'screenshot_api' }),
         new TimePivotChartPlugin().configure({ key: 'time_pivot' }),
         new TimeTableChartPlugin().configure({ key: 'time_table' }),
         new WordCloudChartPlugin().configure({ key: 'word_cloud' }),

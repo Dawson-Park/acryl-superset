@@ -27,7 +27,7 @@ import buildQuery from './buildQuery';
 import { TableChartFormData, TableChartProps } from './types';
 
 // must export something for the module to be exist in dev mode
-// export { default as __hack__ } from './types';
+export { default as __hack__ } from './types';
 export * from './types';
 
 const metadata = new ChartMetadata({
@@ -80,10 +80,10 @@ const metadata2 = new ChartMetadata({
   category: t('Table'),
   canBeAnnotationTypes: ['EVENT', 'INTERVAL'],
   description: t(
-    'Classic row-by-column spreadsheet like view of a dataset. Use tables to showcase a view into the underlying data or to show aggregated metrics.',
+    'Screenshot Chart only url',
   ),
   exampleGallery: [{ url: example1 }, { url: example2 }, { url: example3 }],
-  name: t('Screenshot Chart'),
+  name: t('Screenshot Chart(URL)'),
   tags: [
     t('Acryl'),
     t('Additive'),
@@ -106,6 +106,48 @@ export class ScreenshotChartPlugin extends ChartPlugin<
     super({
       loadChart: () => import('./ScreenshotChart'),
       metadata: metadata2,
+      transformProps,
+      controlPanel,
+      buildQuery,
+    });
+  }
+}
+
+const metadata3 = new ChartMetadata({
+  behaviors: [
+    Behavior.INTERACTIVE_CHART,
+    Behavior.DRILL_TO_DETAIL,
+    Behavior.DRILL_BY,
+  ],
+  category: t('Table'),
+  canBeAnnotationTypes: ['EVENT', 'INTERVAL'],
+  description: t(
+    'Screenshot Chart only API',
+  ),
+  exampleGallery: [{ url: example1 }, { url: example2 }, { url: example3 }],
+  name: t('Screenshot Chart(API)'),
+  tags: [
+    t('Acryl'),
+    t('Additive'),
+    t('Business'),
+    t('Pattern'),
+    t('Popular'),
+    t('Report'),
+    t('Sequential'),
+    t('Tabular'),
+    t('Description'),
+  ],
+  thumbnail,
+});
+
+export class ScreenshotAPIChartPlugin extends ChartPlugin<
+  TableChartFormData,
+  TableChartProps
+> {
+  constructor() {
+    super({
+      loadChart: () => import('./ScreenshotAPIChart'),
+      metadata: metadata3,
       transformProps,
       controlPanel,
       buildQuery,
