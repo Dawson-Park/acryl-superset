@@ -49,6 +49,15 @@ export const Styles = styled.div`
       font-size: ${theme.typography.sizes.s}px;
       padding: ${theme.gridUnit}px;
       font-weight: ${theme.typography.weights.normal};
+
+      &.pvtAxisLabel {
+        width: 30%;
+        min-width: 120px;
+        max-width: 200px;
+      }
+      &.pvtColLabel {
+        word-break: break-word;
+      }
     }
 
     table.pvtTable tbody tr.pvtRowTotals {
