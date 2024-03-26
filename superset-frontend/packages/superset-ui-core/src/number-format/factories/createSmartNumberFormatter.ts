@@ -25,6 +25,14 @@ const siFormatter = d3Format(`.3~s`);
 const float2PointFormatter = d3Format(`.2~f`);
 const float4PointFormatter = d3Format(`.4~f`);
 
+const siToKr = (value: string) => {
+  return value.replace('k', '천')
+    .replace('M', '백만')
+    .replace('B', '십억')
+    .replace('T', '조')
+    .replace('Qd', '천조');
+}
+
 function formatValue(value: number) {
   if (value === 0) {
     return '0';
@@ -33,7 +41,7 @@ function formatValue(value: number) {
   if (absoluteValue >= 1000) {
     // Normal human being are more familiar
     // with billion (B) that giga (G)
-    return siFormatter(value).replace('G', 'B');
+    return siToKr(siFormatter(value).replace('G', 'B'));
   }
   if (absoluteValue >= 1) {
     return float2PointFormatter(value);
