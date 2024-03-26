@@ -19,8 +19,8 @@
 import { useSelector } from 'react-redux';
 import { isFeatureEnabled, FeatureFlag } from '@superset-ui/core';
 import { useCallback, useEffect, useState } from 'react';
-import { URL_PARAMS } from 'src/constants';
-import { getUrlParam } from 'src/utils/urlUtils';
+// import { URL_PARAMS } from 'src/constants';
+// import { getUrlParam } from 'src/utils/urlUtils';
 import { RootState } from 'src/client/types';
 import {
   useFilters,
@@ -36,9 +36,10 @@ export const useNativeFilters = () => {
 
   const filters = useFilters();
   const filterValues = Object.values(filters);
-  const expandFilters = getUrlParam(URL_PARAMS.expandFilters);
+  // const expandFilters = getUrlParam(URL_PARAMS.expandFilters);
   const [dashboardFiltersOpen, setDashboardFiltersOpen] = useState(
-    expandFilters ?? !!filterValues.length,
+    // expandFilters ?? !!filterValues.length,
+    false,
   );
 
   const nativeFiltersEnabled =
@@ -67,16 +68,16 @@ export const useNativeFilters = () => {
     [dashboardFiltersOpen],
   );
 
-  useEffect(() => {
-    if (
-      expandFilters === false ||
-      (filterValues.length === 0 && nativeFiltersEnabled)
-    ) {
-      toggleDashboardFiltersOpen(false);
-    } else {
-      toggleDashboardFiltersOpen(true);
-    }
-  }, [filterValues.length]);
+  // useEffect(() => {
+  //   if (
+  //     expandFilters === false ||
+  //     (filterValues.length === 0 && nativeFiltersEnabled)
+  //   ) {
+  //     toggleDashboardFiltersOpen(false);
+  //   } else {
+  //     toggleDashboardFiltersOpen(true);
+  //   }
+  // }, [filterValues.length]);
 
   useEffect(() => {
     if (showDashboard) {
