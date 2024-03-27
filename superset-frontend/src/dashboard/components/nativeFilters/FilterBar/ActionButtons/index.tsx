@@ -62,7 +62,7 @@ const verticalStyle = (theme: SupersetTheme, width: number) => css`
   flex-direction: column;
   align-items: center;
   pointer-events: none;
-  position: fixed;
+  position: sticky;
   z-index: 100;
 
   // filter bar width minus 1px for border

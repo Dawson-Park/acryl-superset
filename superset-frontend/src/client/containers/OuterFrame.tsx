@@ -13,6 +13,7 @@ const StyledDiv = styled.div`
   grid-template-areas:
     'outer-nav outer-header'
     'outer-nav outer-main';
+  width: 1903px;
 `;
 
 const StyledNav = styled.nav`
@@ -22,6 +23,7 @@ const StyledNav = styled.nav`
   grid-area: outer-nav;
   width: 78px;
   height: 100%;
+  z-index: 2000;
 `;
 
 // eslint-disable-next-line theme-colors/no-literal-colors

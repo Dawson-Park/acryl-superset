@@ -5,6 +5,7 @@ import SideNav from './SideNav';
 const Frame = styled.div`
   display: flex;
   flex-flow: row nowrap;
+  width: 1903px;
 `
 
 interface Props {
