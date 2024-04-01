@@ -603,6 +603,8 @@ export class TableRenderer extends React.Component {
     } = this.props.tableOptions;
     const flatRowKey = flatKey(rowKey);
 
+    console.log('console.log', rowAttrs, rowKey, dateFormatters, namesMapping);
+
     // const colIncrSpan = colAttrs.length !== 0 ? 1 : 0;
     const attrValueCells = rowKey.map((r, i) => {
       // let handleContextMenu;
@@ -623,12 +625,6 @@ export class TableRenderer extends React.Component {
       // ) {
       //   valueCellClassName += ' active';
       // }
-      const FormattedValue =
-        dateFormatters && dateFormatters[rowAttrs[i]]
-          ? dateFormatters[rowAttrs[i]](r)
-          : r;
-
-      console.log('console.log', rowAttrs, FormattedValue, namesMapping);
 
       const rowSpan = rowAttrSpans[rowIdx][i];
       if (rowSpan > 0) {
@@ -645,7 +641,6 @@ export class TableRenderer extends React.Component {
             ? dateFormatters[rowAttrs[i]](r)
             : r;
 
-        console.log('console.log', rowAttrs, headerCellFormattedValue, namesMapping);
         return (
           <div
             key={`rowKeyLabel-${i}`}
