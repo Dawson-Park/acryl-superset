@@ -742,7 +742,8 @@ export class TableRenderer extends React.Component {
     const rowCells = [
       // ...attrValueCells,
       // attrValuePaddingCell,
-      ...valueCells,
+      // ...valueCells,
+      valueCells,
       // totalCell,
     ];
 
