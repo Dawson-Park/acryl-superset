@@ -77,7 +77,7 @@ import {
   TimeGrainFilterPlugin,
   GroupByFilterPlugin,
 } from 'src/filters/components';
-import { PivotTableChartPlugin as PivotTableChartPluginV2, PivotScreenChartPlugin } from '@superset-ui/plugin-chart-pivot-table';
+import { PivotTableChartPlugin as PivotTableChartPluginV2, PivotScreenChartURLPlugin, PivotScreenChartAPIPlugin } from '@superset-ui/plugin-chart-pivot-table';
 import { HandlebarsChartPlugin } from '@superset-ui/plugin-chart-handlebars';
 import FilterBoxChartPlugin from '../FilterBox/FilterBoxChartPlugin';
 import TimeTableChartPlugin from '../TimeTable';
@@ -126,7 +126,8 @@ export default class MainPreset extends Preset {
         new PartitionChartPlugin().configure({ key: 'partition' }),
         new EchartsPieChartPlugin().configure({ key: 'pie' }),
         new PivotTableChartPluginV2().configure({ key: 'pivot_table_v2' }),
-        new PivotScreenChartPlugin().configure({ key: 'pivot_screenshot_url' }),
+        new PivotScreenChartURLPlugin().configure({ key: 'pivot_screenshot_url' }),
+        new PivotScreenChartAPIPlugin().configure({ key: 'pivot_screenshot_api' }),
         new RoseChartPlugin().configure({ key: 'rose' }),
         new SankeyChartPlugin().configure({ key: 'sankey' }),
         new SunburstChartPlugin().configure({ key: 'sunburst' }),

@@ -72,7 +72,7 @@ export class PivotTableChartPlugin extends ChartPlugin<
   }
 }
 
-export class PivotScreenChartPlugin extends ChartPlugin<
+export class PivotScreenChartURLPlugin extends ChartPlugin<
   PivotTableQueryFormData,
   ChartProps<QueryFormData>
 > {
@@ -107,6 +107,47 @@ export class PivotScreenChartPlugin extends ChartPlugin<
       buildQuery,
       controlPanel,
       loadChart: () => import('../PivotScreenshotURL'),
+      metadata,
+      transformProps,
+    });
+  }
+}
+
+export class PivotScreenChartAPIPlugin extends ChartPlugin<
+  PivotTableQueryFormData,
+  ChartProps<QueryFormData>
+> {
+  /**
+   * The constructor is used to pass relevant metadata and callbacks that get
+   * registered in respective registries that are used throughout the library
+   * and application. A more thorough description of each property is given in
+   * the respective imported file.
+   *
+   * It is worth noting that `buildQuery` and is optional, and only needed for
+   * advanced visualizations that require either post processing operations
+   * (pivoting, rolling aggregations, sorting etc) or submitting multiple queries.
+   */
+  constructor() {
+    const metadata = new ChartMetadata({
+      behaviors: [
+        Behavior.INTERACTIVE_CHART,
+        Behavior.DRILL_TO_DETAIL,
+        Behavior.DRILL_BY,
+      ],
+      category: t('Table'),
+      description: t(
+        'Used to summarize a set of data by grouping together multiple statistics along two axes. Examples: Sales numbers by region and month, tasks by status and assignee, active users by age and location. Not the most visually stunning visualization, but highly informative and versatile.',
+      ),
+      exampleGallery: [{ url: example }],
+      name: t('Pivot Screenshot-API'),
+      tags: [t('Additive'), t('Report'), t('Tabular'), t('Popular')],
+      thumbnail,
+    });
+
+    super({
+      buildQuery,
+      controlPanel,
+      loadChart: () => import('../PivotScreenshotAPI'),
       metadata,
       transformProps,
     });
