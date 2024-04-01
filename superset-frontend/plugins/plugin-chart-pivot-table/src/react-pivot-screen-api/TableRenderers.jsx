@@ -623,6 +623,13 @@ export class TableRenderer extends React.Component {
       // ) {
       //   valueCellClassName += ' active';
       // }
+      const FormattedValue =
+        dateFormatters && dateFormatters[rowAttrs[i]]
+          ? dateFormatters[rowAttrs[i]](r)
+          : r;
+
+      console.log('console.log', rowAttrs, FormattedValue, namesMapping);
+
       const rowSpan = rowAttrSpans[rowIdx][i];
       if (rowSpan > 0) {
         const flatRowKey = flatKey(rowKey.slice(0, i + 1));
