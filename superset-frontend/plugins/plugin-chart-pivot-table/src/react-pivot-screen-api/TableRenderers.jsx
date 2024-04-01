@@ -23,8 +23,8 @@ import PropTypes from 'prop-types';
 import { PivotData, flatKey } from './utilities';
 // import { Styles } from './Styles';
 
-// const DUDAGI_URL = 'http://gocap.kr:30643/api/v1/storage/';
-const DUDAGI_URL = 'http://125.129.210.138:80/api/v1/storage/';
+const DUDAGI_URL = 'http://gocap.kr:30643/api/v1/storage/';
+// const DUDAGI_URL = 'http://125.129.210.138:80/api/v1/storage/';
 
 const parseLabel = value => {
   if (typeof value === 'number' || typeof value === 'string') {
@@ -637,6 +637,8 @@ export class TableRenderer extends React.Component {
           dateFormatters && dateFormatters[rowAttrs[i]]
             ? dateFormatters[rowAttrs[i]](r)
             : r;
+
+        console.log(rowAttrs, namesMapping);
         return (
           <div
             key={`rowKeyLabel-${i}`}
