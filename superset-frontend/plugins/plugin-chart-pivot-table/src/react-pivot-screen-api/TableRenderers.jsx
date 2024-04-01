@@ -889,8 +889,10 @@ export class TableRenderer extends React.Component {
       ...this.cachedBasePivotSettings,
     };
 
-    console.log('console.log', colAttrs, rowAttrs, pivotSettings, visibleRowKeys)
-    console.log('this.renderTableRow(r, i, pivotSettings)', this.renderTableRow(r, i, pivotSettings))
+    console.log('console.log', colAttrs, pivotSettings)
+    console.log('this.renderTableRow(r, i, pivotSettings)', visibleRowKeys.map((r, i) =>
+      this.renderTableRow(r, i, pivotSettings),
+    ))
     console.log('this.renderTotalsRow(pivotSettings)', this.renderTotalsRow(pivotSettings))
 
     return (
