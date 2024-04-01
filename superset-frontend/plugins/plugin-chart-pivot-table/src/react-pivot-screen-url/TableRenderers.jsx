@@ -21,7 +21,7 @@ import React, { Fragment } from 'react';
 // import { t } from '@superset-ui/core';
 import PropTypes from 'prop-types';
 import { PivotData, flatKey } from './utilities';
-import { Styles } from './Styles';
+// import { Styles } from './Styles';
 
 // const parseLabel = value => {
 //   if (typeof value === 'number' || typeof value === 'string') {
@@ -572,110 +572,110 @@ export class TableRenderer extends React.Component {
     // Render a single row in the pivot table.
 
     const {
-      // rowAttrs,
-      // colAttrs,
-      // rowAttrSpans,
+      rowAttrs,
+      colAttrs,
+      rowAttrSpans,
       visibleColKeys,
       pivotData,
-      // rowTotals,
-      // rowSubtotalDisplay,
-      // arrowExpanded,
-      // arrowCollapsed,
-      // cellCallbacks,
-      // rowTotalCallbacks,
-      // namesMapping,
+      rowTotals,
+      rowSubtotalDisplay,
+      arrowExpanded,
+      arrowCollapsed,
+      cellCallbacks,
+      rowTotalCallbacks,
+      namesMapping,
     } = pivotSettings;
 
     const {
-      // highlightHeaderCellsOnHover,
-      // omittedHighlightHeaderGroups = [],
-      // highlightedHeaderCells,
+      highlightHeaderCellsOnHover,
+      omittedHighlightHeaderGroups = [],
+      highlightedHeaderCells,
       cellColorFormatters,
-      // dateFormatters,
+      dateFormatters,
     } = this.props.tableOptions;
     const flatRowKey = flatKey(rowKey);
 
-    // const colIncrSpan = colAttrs.length !== 0 ? 1 : 0;
-    // const attrValueCells = rowKey.map((r, i) => {
-    //   let handleContextMenu;
-    //   let valueCellClassName = 'pvtRowLabel';
-    //   if (!omittedHighlightHeaderGroups.includes(rowAttrs[i])) {
-    //     if (highlightHeaderCellsOnHover) {
-    //       valueCellClassName += ' hoverable';
-    //     }
-    //     handleContextMenu = e =>
-    //       this.props.onContextMenu(e, undefined, rowKey, {
-    //         [rowAttrs[i]]: r,
-    //       });
-    //   }
-    //   if (
-    //     highlightedHeaderCells &&
-    //     Array.isArray(highlightedHeaderCells[rowAttrs[i]]) &&
-    //     highlightedHeaderCells[rowAttrs[i]].includes(r)
-    //   ) {
-    //     valueCellClassName += ' active';
-    //   }
-    //   const rowSpan = rowAttrSpans[rowIdx][i];
-    //   if (rowSpan > 0) {
-    //     const flatRowKey = flatKey(rowKey.slice(0, i + 1));
-    //     // const colSpan = 1 + (i === rowAttrs.length - 1 ? colIncrSpan : 0);
-    //     const needRowToggle =
-    //       rowSubtotalDisplay.enabled && i !== rowAttrs.length - 1;
-    //     const onArrowClick = needRowToggle
-    //       ? this.toggleRowKey(flatRowKey)
-    //       : null;
-    //
-    //     const headerCellFormattedValue =
-    //       dateFormatters && dateFormatters[rowAttrs[i]]
-    //         ? dateFormatters[rowAttrs[i]](r)
-    //         : r;
-    //     return (
-    //       <div
-    //         key={`rowKeyLabel-${i}`}
-    //         className={valueCellClassName}
-    //         onClick={this.clickHeaderHandler(
-    //           pivotData,
-    //           rowKey,
-    //           this.props.rows,
-    //           i,
-    //           this.props.tableOptions.clickRowHeaderCallback,
-    //         )}
-    //         onContextMenu={handleContextMenu}
-    //       >
-    //         {displayHeaderCell(
-    //           needRowToggle,
-    //           this.state.collapsedRows[flatRowKey]
-    //             ? arrowCollapsed
-    //             : arrowExpanded,
-    //           onArrowClick,
-    //           headerCellFormattedValue,
-    //           namesMapping,
-    //         )}
-    //       </div>
-    //     );
-    //   }
-    //   return null;
-    // });
+    const colIncrSpan = colAttrs.length !== 0 ? 1 : 0;
+    const attrValueCells = rowKey.map((r, i) => {
+      let handleContextMenu;
+      let valueCellClassName = 'pvtRowLabel';
+      if (!omittedHighlightHeaderGroups.includes(rowAttrs[i])) {
+        if (highlightHeaderCellsOnHover) {
+          valueCellClassName += ' hoverable';
+        }
+        handleContextMenu = e =>
+          this.props.onContextMenu(e, undefined, rowKey, {
+            [rowAttrs[i]]: r,
+          });
+      }
+      if (
+        highlightedHeaderCells &&
+        Array.isArray(highlightedHeaderCells[rowAttrs[i]]) &&
+        highlightedHeaderCells[rowAttrs[i]].includes(r)
+      ) {
+        valueCellClassName += ' active';
+      }
+      const rowSpan = rowAttrSpans[rowIdx][i];
+      if (rowSpan > 0) {
+        const flatRowKey = flatKey(rowKey.slice(0, i + 1));
+        // const colSpan = 1 + (i === rowAttrs.length - 1 ? colIncrSpan : 0);
+        const needRowToggle =
+          rowSubtotalDisplay.enabled && i !== rowAttrs.length - 1;
+        const onArrowClick = needRowToggle
+          ? this.toggleRowKey(flatRowKey)
+          : null;
 
-    // const attrValuePaddingCell =
-    //   rowKey.length < rowAttrs.length ? (
-    //     <th
-    //       className="pvtRowLabel pvtSubtotalLabel"
-    //       key="rowKeyBuffer"
-    //       colSpan={rowAttrs.length - rowKey.length + colIncrSpan}
-    //       rowSpan={1}
-    //       onClick={this.clickHeaderHandler(
-    //         pivotData,
-    //         rowKey,
-    //         this.props.rows,
-    //         rowKey.length,
-    //         this.props.tableOptions.clickRowHeaderCallback,
-    //         true,
-    //       )}
-    //     >
-    //       {t('Subtotal')}
-    //     </th>
-    //   ) : null;
+        const headerCellFormattedValue =
+          dateFormatters && dateFormatters[rowAttrs[i]]
+            ? dateFormatters[rowAttrs[i]](r)
+            : r;
+        return (
+          <div
+            key={`rowKeyLabel-${i}`}
+            className={valueCellClassName}
+            onClick={this.clickHeaderHandler(
+              pivotData,
+              rowKey,
+              this.props.rows,
+              i,
+              this.props.tableOptions.clickRowHeaderCallback,
+            )}
+            onContextMenu={handleContextMenu}
+          >
+            {displayHeaderCell(
+              needRowToggle,
+              this.state.collapsedRows[flatRowKey]
+                ? arrowCollapsed
+                : arrowExpanded,
+              onArrowClick,
+              headerCellFormattedValue,
+              namesMapping,
+            )}
+          </div>
+        );
+      }
+      return null;
+    });
+
+    const attrValuePaddingCell =
+      rowKey.length < rowAttrs.length ? (
+        <th
+          className="pvtRowLabel pvtSubtotalLabel"
+          key="rowKeyBuffer"
+          colSpan={rowAttrs.length - rowKey.length + colIncrSpan}
+          rowSpan={1}
+          onClick={this.clickHeaderHandler(
+            pivotData,
+            rowKey,
+            this.props.rows,
+            rowKey.length,
+            this.props.tableOptions.clickRowHeaderCallback,
+            true,
+          )}
+        >
+          {t('Subtotal')}
+        </th>
+      ) : null;
 
     // const rowClickHandlers = cellCallbacks[flatRowKey] || {};
     const valueCells = visibleColKeys.map(colKey => {
@@ -722,29 +722,29 @@ export class TableRenderer extends React.Component {
       ) : null;
     });
 
-    // let totalCell = null;
-    // if (rowTotals) {
-    //   const agg = pivotData.getAggregator(rowKey, []);
-    //   const aggValue = agg.value();
-    //   totalCell = (
-    //     <td
-    //       role="gridcell"
-    //       key="total"
-    //       className="pvtTotal"
-    //       onClick={rowTotalCallbacks[flatRowKey]}
-    //       onContextMenu={e => this.props.onContextMenu(e, undefined, rowKey)}
-    //     >
-    //       {agg.format(aggValue)}
-    //     </td>
-    //   );
-    // }
+    let totalCell = null;
+    if (rowTotals) {
+      const agg = pivotData.getAggregator(rowKey, []);
+      const aggValue = agg.value();
+      totalCell = (
+        <td
+          role="gridcell"
+          key="total"
+          className="pvtTotal"
+          onClick={rowTotalCallbacks[flatRowKey]}
+          onContextMenu={e => this.props.onContextMenu(e, undefined, rowKey)}
+        >
+          {agg.format(aggValue)}
+        </td>
+      );
+    }
 
     const rowCells = [
-      // ...attrValueCells,
-      // attrValuePaddingCell,
-      // ...valueCells,
+      ...attrValueCells,
+      attrValuePaddingCell,
+      ...valueCells,
       valueCells,
-      // totalCell,
+      totalCell,
     ];
 
     // return <div key={`keyRow-${flatRowKey}`}>{rowCells}</div>;
@@ -844,9 +844,9 @@ export class TableRenderer extends React.Component {
     );
   }
 
-  isDashboardEditMode() {
-    return document.contains(document.querySelector('.dashboard--editing'));
-  }
+  // isDashboardEditMode() {
+  //   return document.contains(document.querySelector('.dashboard--editing'));
+  // }
 
   render() {
     if (this.cachedProps !== this.props) {
