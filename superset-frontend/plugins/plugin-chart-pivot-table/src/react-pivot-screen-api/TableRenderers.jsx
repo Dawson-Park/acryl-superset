@@ -889,28 +889,32 @@ export class TableRenderer extends React.Component {
       ...this.cachedBasePivotSettings,
     };
 
-    console.log('console.log', colAttrs, pivotSettings)
-    console.log('this.renderTableRow(r, i, pivotSettings)', visibleRowKeys.map((r, i) =>
-      this.renderTableRow(r, i, pivotSettings),
-    ))
-    console.log('this.renderTotalsRow(pivotSettings)', this.renderTotalsRow(pivotSettings))
+    console.log('console.log', pivotSettings.colAttrs, pivotSettings.colKeys, pivotSettings.visibleColKeys
+    )
 
     return (
       <Styles isDashboardEditMode={this.isDashboardEditMode()}>
-        <table className="pvtTable" role="grid">
-          <thead>
-          {colAttrs.map((c, j) =>
-            this.renderColHeaderRow(c, j, pivotSettings),
-          )}
-          {rowAttrs.length !== 0 && this.renderRowHeaderRow(pivotSettings)}
-          </thead>
-          <tbody>
-          {visibleRowKeys.map((r, i) =>
-            this.renderTableRow(r, i, pivotSettings),
-          )}
-          {colTotals && this.renderTotalsRow(pivotSettings)}
-          </tbody>
-        </table>
+        <div className='box2'>
+          {pivotSettings.visibleColKeys.map((v, i) => (
+            <div key={i} className='box'>
+              <img src={v[1]} alt={v[1]}/>
+            </div>
+          ))}
+        </div>
+        {/*<table className="pvtTable" role="grid">*/}
+        {/*  <thead>*/}
+        {/*  {colAttrs.map((c, j) =>*/}
+        {/*    this.renderColHeaderRow(c, j, pivotSettings),*/}
+        {/*  )}*/}
+        {/*  {rowAttrs.length !== 0 && this.renderRowHeaderRow(pivotSettings)}*/}
+        {/*  </thead>*/}
+        {/*  <tbody>*/}
+        {/*  {visibleRowKeys.map((r, i) =>*/}
+        {/*    this.renderTableRow(r, i, pivotSettings),*/}
+        {/*  )}*/}
+        {/*  {colTotals && this.renderTotalsRow(pivotSettings)}*/}
+        {/*  </tbody>*/}
+        {/*</table>*/}
       </Styles>
     );
   }
