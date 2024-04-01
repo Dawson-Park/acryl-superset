@@ -22,7 +22,8 @@ import React, {
   ReactNode,
   // HTMLProps,
   MutableRefObject,
-  CSSProperties, useMemo
+  // CSSProperties,
+  useMemo
 } from 'react';
 import {
   useTable,
@@ -46,7 +47,7 @@ import {
   /* SelectPageSize, */ SelectPageSizeProps,
   SizeOption,
 } from './components/SelectPageSize';
-import SimplePagination from './components/Pagination';
+// import SimplePagination from './components/Pagination';
 import useSticky from './hooks/useSticky';
 import { PAGE_SIZE_OPTIONS } from '../consts';
 import { sortAlphanumericCaseInsensitive } from './utils/sortAlphanumericCaseInsensitive';
@@ -178,15 +179,15 @@ export default typedMemo(function DataTable<D extends object>({
     // headerGroups,
     // footerGroups,
     page,
-    pageCount,
-    gotoPage,
+    // pageCount,
+    // gotoPage,
     // preGlobalFilteredRows,
     // setGlobalFilter,
     setPageSize: setPageSize_,
     wrapStickyTable,
     // setColumnOrder,
     // allColumns,
-    state: { pageIndex, pageSize, globalFilter: filterValue, sticky = {} },
+    state: { /*pageIndex, */pageSize, globalFilter: filterValue, /*sticky = {} */},
   } = useTable<D>(
     {
       columns,
@@ -392,30 +393,30 @@ export default typedMemo(function DataTable<D extends object>({
     setPageSize(initialPageSize);
   }
 
-  const paginationStyle: CSSProperties = sticky.height
-    ? {}
-    : { visibility: 'hidden' };
+  // const paginationStyle: CSSProperties = sticky.height
+  //   ? {}
+  //   : { visibility: 'hidden' };
 
-  let resultPageCount = pageCount;
+  // let resultPageCount = pageCount;
   let resultCurrentPageSize = pageSize;
-  let resultCurrentPage = pageIndex;
-  let resultOnPageChange: (page: number) => void = gotoPage;
+  // let resultCurrentPage = pageIndex;
+  // let resultOnPageChange: (page: number) => void = gotoPage;
   if (serverPagination) {
-    const serverPageSize = serverPaginationData?.pageSize ?? initialPageSize;
-    resultPageCount = Math.ceil(rowCount / serverPageSize);
-    if (!Number.isFinite(resultPageCount)) {
-      resultPageCount = 0;
-    }
-    resultCurrentPageSize = serverPageSize;
+    // const serverPageSize = serverPaginationData?.pageSize ?? initialPageSize;
+    // resultPageCount = Math.ceil(rowCount / serverPageSize);
+    // if (!Number.isFinite(resultPageCount)) {
+    //   resultPageCount = 0;
+    // }
+    resultCurrentPageSize = serverPaginationData?.pageSize ?? initialPageSize;
     const foundPageSizeIndex = pageSizeOptions.findIndex(
       ([option]) => option >= resultCurrentPageSize,
     );
     if (foundPageSizeIndex === -1) {
       resultCurrentPageSize = 0;
     }
-    resultCurrentPage = serverPaginationData?.currentPage ?? 0;
-    resultOnPageChange = (pageNumber: number) =>
-      onServerPaginationChange(pageNumber, serverPageSize);
+    // resultCurrentPage = serverPaginationData?.currentPage ?? 0;
+    // resultOnPageChange = (pageNumber: number) =>
+    //   onServerPaginationChange(pageNumber, serverPageSize);
   }
   return (
     <div
@@ -458,16 +459,16 @@ export default typedMemo(function DataTable<D extends object>({
       {/* {wrapStickyTable ? wrapStickyTable(renderTable) : renderTable()} */}
       {/* {wrapStickyTable ? wrapStickyTable(renderScreenshot) : renderScreenshot()} */}
       {renderScreenshot}
-      {hasPagination && resultPageCount > 1 ? (
-        <SimplePagination
-          ref={paginationRef}
-          style={paginationStyle}
-          maxPageItemCount={maxPageItemCount}
-          pageCount={resultPageCount}
-          currentPage={resultCurrentPage}
-          onPageChange={resultOnPageChange}
-        />
-      ) : null}
+      {/*{hasPagination && resultPageCount > 1 ? (*/}
+      {/*  <SimplePagination*/}
+      {/*    ref={paginationRef}*/}
+      {/*    style={paginationStyle}*/}
+      {/*    maxPageItemCount={maxPageItemCount}*/}
+      {/*    pageCount={resultPageCount}*/}
+      {/*    currentPage={resultCurrentPage}*/}
+      {/*    onPageChange={resultOnPageChange}*/}
+      {/*  />*/}
+      {/*) : null}*/}
     </div>
   );
 });
