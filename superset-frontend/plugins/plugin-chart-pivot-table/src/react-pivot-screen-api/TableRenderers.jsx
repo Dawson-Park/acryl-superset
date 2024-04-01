@@ -21,7 +21,7 @@ import React from 'react';
 // import { t } from '@superset-ui/core';
 import PropTypes from 'prop-types';
 import { PivotData, flatKey } from './utilities';
-import { Styles } from './Styles';
+// import { Styles } from './Styles';
 
 const DUDAGI_URL = 'http://125.129.210.138:80/api/v1/storage/';
 
@@ -847,9 +847,9 @@ export class TableRenderer extends React.Component {
     );
   }
 
-  isDashboardEditMode() {
-    return document.contains(document.querySelector('.dashboard--editing'));
-  }
+  // isDashboardEditMode() {
+  //   return document.contains(document.querySelector('.dashboard--editing'));
+  // }
 
   render() {
     if (this.cachedProps !== this.props) {
@@ -892,29 +892,29 @@ export class TableRenderer extends React.Component {
     // };
 
     return (
-      <Styles isDashboardEditMode={this.isDashboardEditMode()}>
-        <div className='box2'>
+      // <Styles isDashboardEditMode={this.isDashboardEditMode()}>
+        <div className='screenshot-chart-container'>
           {visibleColKeys.map((v, i) => (
-            <div key={i} className='box'>
-              <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]}/>
+            <div key={i} className='screenshot-image-box'>
+              <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>
             </div>
           ))}
         </div>
-        {/*<table className="pvtTable" role="grid">*/}
-        {/*  <thead>*/}
-        {/*  {colAttrs.map((c, j) =>*/}
-        {/*    this.renderColHeaderRow(c, j, pivotSettings),*/}
-        {/*  )}*/}
-        {/*  {rowAttrs.length !== 0 && this.renderRowHeaderRow(pivotSettings)}*/}
-        {/*  </thead>*/}
-        {/*  <tbody>*/}
-        {/*  {visibleRowKeys.map((r, i) =>*/}
-        {/*    this.renderTableRow(r, i, pivotSettings),*/}
-        {/*  )}*/}
-        {/*  {colTotals && this.renderTotalsRow(pivotSettings)}*/}
-        {/*  </tbody>*/}
-        {/*</table>*/}
-      </Styles>
+        // {/*<table className="pvtTable" role="grid">*/}
+        // {/*  <thead>*/}
+        // {/*  {colAttrs.map((c, j) =>*/}
+        // {/*    this.renderColHeaderRow(c, j, pivotSettings),*/}
+        // {/*  )}*/}
+        // {/*  {rowAttrs.length !== 0 && this.renderRowHeaderRow(pivotSettings)}*/}
+        // {/*  </thead>*/}
+        // {/*  <tbody>*/}
+        // {/*  {visibleRowKeys.map((r, i) =>*/}
+        // {/*    this.renderTableRow(r, i, pivotSettings),*/}
+        // {/*  )}*/}
+        // {/*  {colTotals && this.renderTotalsRow(pivotSettings)}*/}
+        // {/*  </tbody>*/}
+        // {/*</table>*/}
+      // </Styles>
     );
   }
 }
