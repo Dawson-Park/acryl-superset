@@ -17,48 +17,43 @@
  * under the License.
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 // import { t } from '@superset-ui/core';
 import PropTypes from 'prop-types';
 import { PivotData, flatKey } from './utilities';
 // import { Styles } from './Styles';
 
-const parseLabel = value => {
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value;
-  }
-  return String(value);
-};
+// const parseLabel = value => {
+//   if (typeof value === 'number' || typeof value === 'string') {
+//     return value;
+//   }
+//   return String(value);
+// };
 
-function displayHeaderCell(
-  needToggle,
-  ArrowIcon,
-  onArrowClick,
-  value,
-  namesMapping,
-) {
-  const name = namesMapping[value] || value;
-  return (
-    <div className='screenshot-image-box'>
-      <img src={ parseLabel(name) } alt={ parseLabel(name) } className='screenshot-image'/>
-    </div>
-  )
-  // return needToggle ? (
-  //   <span className="toggle-wrapper">
-  //     {/*<span*/}
-  //     {/*  role="button"*/}
-  //     {/*  tabIndex="0"*/}
-  //     {/*  className="toggle"*/}
-  //     {/*  onClick={onArrowClick}*/}
-  //     {/*>*/}
-  //     {/*  {ArrowIcon}*/}
-  //     {/*</span>*/}
-  //     <span className="toggle-val">{parseLabel(name)}</span>
-  //   </span>
-  // ) : (
-  //   parseLabel(name)
-  // );
-}
+// function displayHeaderCell(
+//   needToggle,
+//   ArrowIcon,
+//   onArrowClick,
+//   value,
+//   namesMapping,
+// ) {
+//   const name = namesMapping[value] || value;
+//   return needToggle ? (
+//     <span className="toggle-wrapper">
+//       <span
+//         role="button"
+//         tabIndex="0"
+//         className="toggle"
+//         onClick={onArrowClick}
+//       >
+//         {ArrowIcon}
+//       </span>
+//       <span className="toggle-val">{parseLabel(name)}</span>
+//     </span>
+//   ) : (
+//     parseLabel(name)
+//   );
+// }
 
 export class TableRenderer extends React.Component {
   constructor(props) {
@@ -281,17 +276,17 @@ export class TableRenderer extends React.Component {
   //   };
   // }
 
-  // toggleRowKey(flatRowKey) {
-  //   return e => {
-  //     e.stopPropagation();
-  //     this.setState(state => ({
-  //       collapsedRows: {
-  //         ...state.collapsedRows,
-  //         [flatRowKey]: !state.collapsedRows[flatRowKey],
-  //       },
-  //     }));
-  //   };
-  // }
+  toggleRowKey(flatRowKey) {
+    return e => {
+      e.stopPropagation();
+      this.setState(state => ({
+        collapsedRows: {
+          ...state.collapsedRows,
+          [flatRowKey]: !state.collapsedRows[flatRowKey],
+        },
+      }));
+    };
+  }
 
   // toggleColKey(flatColKey) {
   //   return e => {
@@ -305,38 +300,38 @@ export class TableRenderer extends React.Component {
   //   };
   // }
 
-  calcAttrSpans(attrArr, numAttrs) {
-    // Given an array of attribute values (i.e. each element is another array with
-    // the value at every level), compute the spans for every attribute value at
-    // every level. The return value is a nested array of the same shape. It has
-    // -1's for repeated values and the span number otherwise.
-
-    const spans = [];
-    // Index of the last new value
-    const li = Array(numAttrs).map(() => 0);
-    let lv = Array(numAttrs).map(() => null);
-    for (let i = 0; i < attrArr.length; i += 1) {
-      // Keep increasing span values as long as the last keys are the same. For
-      // the rest, record spans of 1. Update the indices too.
-      const cv = attrArr[i];
-      const ent = [];
-      let depth = 0;
-      const limit = Math.min(lv.length, cv.length);
-      while (depth < limit && lv[depth] === cv[depth]) {
-        ent.push(-1);
-        spans[li[depth]][depth] += 1;
-        depth += 1;
-      }
-      while (depth < cv.length) {
-        li[depth] = i;
-        ent.push(1);
-        depth += 1;
-      }
-      spans.push(ent);
-      lv = cv;
-    }
-    return spans;
-  }
+  // calcAttrSpans(attrArr, numAttrs) {
+  //   // Given an array of attribute values (i.e. each element is another array with
+  //   // the value at every level), compute the spans for every attribute value at
+  //   // every level. The return value is a nested array of the same shape. It has
+  //   // -1's for repeated values and the span number otherwise.
+  //
+  //   const spans = [];
+  //   // Index of the last new value
+  //   const li = Array(numAttrs).map(() => 0);
+  //   let lv = Array(numAttrs).map(() => null);
+  //   for (let i = 0; i < attrArr.length; i += 1) {
+  //     // Keep increasing span values as long as the last keys are the same. For
+  //     // the rest, record spans of 1. Update the indices too.
+  //     const cv = attrArr[i];
+  //     const ent = [];
+  //     let depth = 0;
+  //     const limit = Math.min(lv.length, cv.length);
+  //     while (depth < limit && lv[depth] === cv[depth]) {
+  //       ent.push(-1);
+  //       spans[li[depth]][depth] += 1;
+  //       depth += 1;
+  //     }
+  //     while (depth < cv.length) {
+  //       li[depth] = i;
+  //       ent.push(1);
+  //       depth += 1;
+  //     }
+  //     spans.push(ent);
+  //     lv = cv;
+  //   }
+  //   return spans;
+  // }
 
   // renderColHeaderRow(attrName, attrIdx, pivotSettings) {
   //   // Render a single row in the column header at the top of the pivot table.
@@ -565,196 +560,197 @@ export class TableRenderer extends React.Component {
   //       >
   //         {colAttrs.length === 0
   //           ? t('Total (%(aggregatorName)s)', {
-  //               aggregatorName: t(this.props.aggregatorName),
-  //             })
+  //             aggregatorName: t(this.props.aggregatorName),
+  //           })
   //           : null}
   //       </th>
   //     </tr>
   //   );
   // }
 
-  renderTableRow(rowKey, rowIdx, pivotSettings) {
-    // Render a single row in the pivot table.
-
-    const {
-      rowAttrs,
-      // colAttrs,
-      rowAttrSpans,
-      // visibleColKeys,
-      // pivotData,
-      // rowTotals,
-      rowSubtotalDisplay,
-      arrowExpanded,
-      arrowCollapsed,
-      // cellCallbacks,
-      // rowTotalCallbacks,
-      namesMapping,
-    } = pivotSettings;
-
-    const {
-      // highlightHeaderCellsOnHover,
-      // omittedHighlightHeaderGroups = [],
-      // highlightedHeaderCells,
-      // cellColorFormatters,
-      dateFormatters,
-    } = this.props.tableOptions;
-    const flatRowKey = flatKey(rowKey);
-
-    // const colIncrSpan = colAttrs.length !== 0 ? 1 : 0;
-    const attrValueCells = rowKey.map((r, i) => {
-      // let handleContextMenu;
-      // let valueCellClassName = 'pvtRowLabel';
-      // if (!omittedHighlightHeaderGroups.includes(rowAttrs[i])) {
-      //   if (highlightHeaderCellsOnHover) {
-      //     valueCellClassName += ' hoverable';
-      //   }
-      //   handleContextMenu = e =>
-      //     this.props.onContextMenu(e, undefined, rowKey, {
-      //       [rowAttrs[i]]: r,
-      //     });
-      // }
-      // if (
-      //   highlightedHeaderCells &&
-      //   Array.isArray(highlightedHeaderCells[rowAttrs[i]]) &&
-      //   highlightedHeaderCells[rowAttrs[i]].includes(r)
-      // ) {
-      //   valueCellClassName += ' active';
-      // }
-      const rowSpan = rowAttrSpans[rowIdx][i];
-      if (rowSpan > 0) {
-        const flatRowKey = flatKey(rowKey.slice(0, i + 1));
-        // const colSpan = 1 + (i === rowAttrs.length - 1 ? colIncrSpan : 0);
-        const needRowToggle =
-          rowSubtotalDisplay.enabled && i !== rowAttrs.length - 1;
-        const onArrowClick = needRowToggle
-          ? this.toggleRowKey(flatRowKey)
-          : null;
-
-        const headerCellFormattedValue =
-          dateFormatters && dateFormatters[rowAttrs[i]]
-            ? dateFormatters[rowAttrs[i]](r)
-            : r;
-        return (
-          <div
-            key={`rowKeyLabel-${i}`}
-            // className={valueCellClassName}
-            // onClick={this.clickHeaderHandler(
-            //   pivotData,
-            //   rowKey,
-            //   this.props.rows,
-            //   i,
-            //   this.props.tableOptions.clickRowHeaderCallback,
-            // )}
-            // onContextMenu={handleContextMenu}
-          >
-            {displayHeaderCell(
-              needRowToggle,
-              this.state.collapsedRows[flatRowKey]
-                ? arrowCollapsed
-                : arrowExpanded,
-              onArrowClick,
-              headerCellFormattedValue,
-              namesMapping,
-            )}
-          </div>
-        );
-      }
-      return null;
-    });
-
-    // const attrValuePaddingCell =
-    //   rowKey.length < rowAttrs.length ? (
-    //     <th
-    //       className="pvtRowLabel pvtSubtotalLabel"
-    //       key="rowKeyBuffer"
-    //       colSpan={rowAttrs.length - rowKey.length + colIncrSpan}
-    //       rowSpan={1}
-    //       onClick={this.clickHeaderHandler(
-    //         pivotData,
-    //         rowKey,
-    //         this.props.rows,
-    //         rowKey.length,
-    //         this.props.tableOptions.clickRowHeaderCallback,
-    //         true,
-    //       )}
-    //     >
-    //       {t('Subtotal')}
-    //     </th>
-    //   ) : null;
-
-    // const rowClickHandlers = cellCallbacks[flatRowKey] || {};
-    // const valueCells = visibleColKeys.map(colKey => {
-    //   const flatColKey = flatKey(colKey);
-    //   const agg = pivotData.getAggregator(rowKey, colKey);
-    //   const aggValue = agg.value();
-    //
-    //   const keys = [...rowKey, ...colKey];
-    //   let backgroundColor;
-    //   if (cellColorFormatters) {
-    //     Object.values(cellColorFormatters).forEach(cellColorFormatter => {
-    //       if (Array.isArray(cellColorFormatter)) {
-    //         keys.forEach(key => {
-    //           if (backgroundColor) {
-    //             return;
-    //           }
-    //           cellColorFormatter
-    //             .filter(formatter => formatter.column === key)
-    //             .forEach(formatter => {
-    //               const formatterResult = formatter.getColorFromValue(aggValue);
-    //               if (formatterResult) {
-    //                 backgroundColor = formatterResult;
-    //               }
-    //             });
-    //         });
-    //       }
-    //     });
-    //   }
-    //
-    //   const style = agg.isSubtotal
-    //     ? { fontWeight: 'bold' }
-    //     : { backgroundColor };
-    //
-    //   return (agg.format(aggValue)?.length ?? 0) > 0 ? (
-    //     <div
-    //       className="screenshot-image-box"
-    //       key={`scsImgBox-${flatColKey}`}
-    //       // onClick={rowClickHandlers[flatColKey]}
-    //       // onContextMenu={e => this.props.onContextMenu(e, colKey, rowKey)}
-    //       style={style}
-    //     >
-    //       <img src={agg.format(aggValue)} alt={agg.format(aggValue)} className="screenshot-image"/>
-    //     </div>
-    //   ) : null;
-    // });
-
-    // let totalCell = null;
-    // if (rowTotals) {
-    //   const agg = pivotData.getAggregator(rowKey, []);
-    //   const aggValue = agg.value();
-    //   totalCell = (
-    //     <td
-    //       role="gridcell"
-    //       key="total"
-    //       className="pvtTotal"
-    //       onClick={rowTotalCallbacks[flatRowKey]}
-    //       onContextMenu={e => this.props.onContextMenu(e, undefined, rowKey)}
-    //     >
-    //       {agg.format(aggValue)}
-    //     </td>
-    //   );
-    // }
-
-    const rowCells = [
-      ...attrValueCells,
-      // attrValuePaddingCell,
-      // ...valueCells,
-      // valueCells,
-      // totalCell,
-    ];
-
-    // return <div key={`keyRow-${flatRowKey}`}>{rowCells}</div>;
-    return <Fragment key={`keyRow-${flatRowKey}`}>{rowCells}</Fragment>;
-  }
+  // renderTableRow(rowKey, rowIdx, pivotSettings) {
+  //   // Render a single row in the pivot table.
+  //
+  //   const {
+  //     rowAttrs,
+  //     colAttrs,
+  //     rowAttrSpans,
+  //     visibleColKeys,
+  //     pivotData,
+  //     rowTotals,
+  //     rowSubtotalDisplay,
+  //     arrowExpanded,
+  //     arrowCollapsed,
+  //     cellCallbacks,
+  //     rowTotalCallbacks,
+  //     namesMapping,
+  //   } = pivotSettings;
+  //
+  //   const {
+  //     highlightHeaderCellsOnHover,
+  //     omittedHighlightHeaderGroups = [],
+  //     highlightedHeaderCells,
+  //     cellColorFormatters,
+  //     dateFormatters,
+  //   } = this.props.tableOptions;
+  //   const flatRowKey = flatKey(rowKey);
+  //
+  //   const colIncrSpan = colAttrs.length !== 0 ? 1 : 0;
+  //   const attrValueCells = rowKey.map((r, i) => {
+  //     let handleContextMenu;
+  //     let valueCellClassName = 'pvtRowLabel';
+  //     if (!omittedHighlightHeaderGroups.includes(rowAttrs[i])) {
+  //       if (highlightHeaderCellsOnHover) {
+  //         valueCellClassName += ' hoverable';
+  //       }
+  //       handleContextMenu = e =>
+  //         this.props.onContextMenu(e, undefined, rowKey, {
+  //           [rowAttrs[i]]: r,
+  //         });
+  //     }
+  //     if (
+  //       highlightedHeaderCells &&
+  //       Array.isArray(highlightedHeaderCells[rowAttrs[i]]) &&
+  //       highlightedHeaderCells[rowAttrs[i]].includes(r)
+  //     ) {
+  //       valueCellClassName += ' active';
+  //     }
+  //     const rowSpan = rowAttrSpans[rowIdx][i];
+  //     if (rowSpan > 0) {
+  //       const flatRowKey = flatKey(rowKey.slice(0, i + 1));
+  //       const colSpan = 1 + (i === rowAttrs.length - 1 ? colIncrSpan : 0);
+  //       const needRowToggle =
+  //         rowSubtotalDisplay.enabled && i !== rowAttrs.length - 1;
+  //       const onArrowClick = needRowToggle
+  //         ? this.toggleRowKey(flatRowKey)
+  //         : null;
+  //
+  //       const headerCellFormattedValue =
+  //         dateFormatters && dateFormatters[rowAttrs[i]]
+  //           ? dateFormatters[rowAttrs[i]](r)
+  //           : r;
+  //       return (
+  //         <th
+  //           key={`rowKeyLabel-${i}`}
+  //           className={valueCellClassName}
+  //           rowSpan={rowSpan}
+  //           colSpan={colSpan}
+  //           onClick={this.clickHeaderHandler(
+  //             pivotData,
+  //             rowKey,
+  //             this.props.rows,
+  //             i,
+  //             this.props.tableOptions.clickRowHeaderCallback,
+  //           )}
+  //           onContextMenu={handleContextMenu}
+  //         >
+  //           {displayHeaderCell(
+  //             needRowToggle,
+  //             this.state.collapsedRows[flatRowKey]
+  //               ? arrowCollapsed
+  //               : arrowExpanded,
+  //             onArrowClick,
+  //             headerCellFormattedValue,
+  //             namesMapping,
+  //           )}
+  //         </th>
+  //       );
+  //     }
+  //     return null;
+  //   });
+  //
+  //   const attrValuePaddingCell =
+  //     rowKey.length < rowAttrs.length ? (
+  //       <th
+  //         className="pvtRowLabel pvtSubtotalLabel"
+  //         key="rowKeyBuffer"
+  //         colSpan={rowAttrs.length - rowKey.length + colIncrSpan}
+  //         rowSpan={1}
+  //         onClick={this.clickHeaderHandler(
+  //           pivotData,
+  //           rowKey,
+  //           this.props.rows,
+  //           rowKey.length,
+  //           this.props.tableOptions.clickRowHeaderCallback,
+  //           true,
+  //         )}
+  //       >
+  //         {t('Subtotal')}
+  //       </th>
+  //     ) : null;
+  //
+  //   const rowClickHandlers = cellCallbacks[flatRowKey] || {};
+  //   const valueCells = visibleColKeys.map(colKey => {
+  //     const flatColKey = flatKey(colKey);
+  //     const agg = pivotData.getAggregator(rowKey, colKey);
+  //     const aggValue = agg.value();
+  //
+  //     const keys = [...rowKey, ...colKey];
+  //     let backgroundColor;
+  //     if (cellColorFormatters) {
+  //       Object.values(cellColorFormatters).forEach(cellColorFormatter => {
+  //         if (Array.isArray(cellColorFormatter)) {
+  //           keys.forEach(key => {
+  //             if (backgroundColor) {
+  //               return;
+  //             }
+  //             cellColorFormatter
+  //               .filter(formatter => formatter.column === key)
+  //               .forEach(formatter => {
+  //                 const formatterResult = formatter.getColorFromValue(aggValue);
+  //                 if (formatterResult) {
+  //                   backgroundColor = formatterResult;
+  //                 }
+  //               });
+  //           });
+  //         }
+  //       });
+  //     }
+  //
+  //     const style = agg.isSubtotal
+  //       ? { fontWeight: 'bold' }
+  //       : { backgroundColor };
+  //
+  //     return (
+  //       <td
+  //         role="gridcell"
+  //         className="pvtVal"
+  //         key={`pvtVal-${flatColKey}`}
+  //         onClick={rowClickHandlers[flatColKey]}
+  //         onContextMenu={e => this.props.onContextMenu(e, colKey, rowKey)}
+  //         style={style}
+  //       >
+  //         {agg.format(aggValue)}
+  //       </td>
+  //     );
+  //   });
+  //
+  //   let totalCell = null;
+  //   if (rowTotals) {
+  //     const agg = pivotData.getAggregator(rowKey, []);
+  //     const aggValue = agg.value();
+  //     totalCell = (
+  //       <td
+  //         role="gridcell"
+  //         key="total"
+  //         className="pvtTotal"
+  //         onClick={rowTotalCallbacks[flatRowKey]}
+  //         onContextMenu={e => this.props.onContextMenu(e, undefined, rowKey)}
+  //       >
+  //         {agg.format(aggValue)}
+  //       </td>
+  //     );
+  //   }
+  //
+  //   const rowCells = [
+  //     ...attrValueCells,
+  //     attrValuePaddingCell,
+  //     ...valueCells,
+  //     totalCell,
+  //   ];
+  //
+  //   return <tr key={`keyRow-${flatRowKey}`}>{rowCells}</tr>;
+  // }
 
   // renderTotalsRow(pivotSettings) {
   //   // Render the final totals rows that has the totals for all the columns.
@@ -860,22 +856,22 @@ export class TableRenderer extends React.Component {
     }
     const {
       colAttrs,
-      rowAttrs,
-      rowKeys,
+      // rowAttrs,
+      // rowKeys,
       colKeys,
       // colTotals,
-      rowSubtotalDisplay,
+      // rowSubtotalDisplay,
       colSubtotalDisplay,
     } = this.cachedBasePivotSettings;
 
     // Need to account for exclusions to compute the effective row
     // and column keys.
-    const visibleRowKeys = this.visibleKeys(
-      rowKeys,
-      this.state.collapsedRows,
-      rowAttrs.length,
-      rowSubtotalDisplay,
-    );
+    // const visibleRowKeys = this.visibleKeys(
+    //   rowKeys,
+    //   this.state.collapsedRows,
+    //   rowAttrs.length,
+    //   rowSubtotalDisplay,
+    // );
     const visibleColKeys = this.visibleKeys(
       colKeys,
       this.state.collapsedCols,
@@ -883,30 +879,39 @@ export class TableRenderer extends React.Component {
       colSubtotalDisplay,
     );
 
-    const pivotSettings = {
-      visibleRowKeys,
-      maxRowVisible: Math.max(...visibleRowKeys.map(k => k.length)),
-      visibleColKeys,
-      maxColVisible: Math.max(...visibleColKeys.map(k => k.length)),
-      rowAttrSpans: this.calcAttrSpans(visibleRowKeys, rowAttrs.length),
-      colAttrSpans: this.calcAttrSpans(visibleColKeys, colAttrs.length),
-      ...this.cachedBasePivotSettings,
-    };
+    // const pivotSettings = {
+    //   visibleRowKeys,
+    //   maxRowVisible: Math.max(...visibleRowKeys.map(k => k.length)),
+    //   visibleColKeys,
+    //   maxColVisible: Math.max(...visibleColKeys.map(k => k.length)),
+    //   rowAttrSpans: this.calcAttrSpans(visibleRowKeys, rowAttrs.length),
+    //   colAttrSpans: this.calcAttrSpans(visibleColKeys, colAttrs.length),
+    //   ...this.cachedBasePivotSettings,
+    // };
 
     return (
       // <Styles isDashboardEditMode={this.isDashboardEditMode()}>
-        <div className="screenshot-chart-container">
-          {/*<thead>*/}
-          {/*  {colAttrs.map((c, j) =>*/}
-          {/*    this.renderColHeaderRow(c, j, pivotSettings),*/}
-          {/*  )}*/}
-          {/*  {rowAttrs.length !== 0 && this.renderRowHeaderRow(pivotSettings)}*/}
-          {/*</thead>*/}
-          {visibleRowKeys.map((r, i) =>
-            this.renderTableRow(r, i, pivotSettings),
-          )}
-          {/*{colTotals && this.renderTotalsRow(pivotSettings)}*/}
-        </div>
+      <div className='screenshot-chart-container'>
+        {visibleColKeys.map((v, i) => (
+          <div key={i} className='screenshot-image-box'>
+            <img src={v[1]} alt={v[1]} className="screenshot-image"/>
+          </div>
+        ))}
+      </div>
+      // {/*<table className="pvtTable" role="grid">*/}
+      // {/*  <thead>*/}
+      // {/*  {colAttrs.map((c, j) =>*/}
+      // {/*    this.renderColHeaderRow(c, j, pivotSettings),*/}
+      // {/*  )}*/}
+      // {/*  {rowAttrs.length !== 0 && this.renderRowHeaderRow(pivotSettings)}*/}
+      // {/*  </thead>*/}
+      // {/*  <tbody>*/}
+      // {/*  {visibleRowKeys.map((r, i) =>*/}
+      // {/*    this.renderTableRow(r, i, pivotSettings),*/}
+      // {/*  )}*/}
+      // {/*  {colTotals && this.renderTotalsRow(pivotSettings)}*/}
+      // {/*  </tbody>*/}
+      // {/*</table>*/}
       // </Styles>
     );
   }
