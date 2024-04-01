@@ -638,7 +638,7 @@ export class TableRenderer extends React.Component {
             ? dateFormatters[rowAttrs[i]](r)
             : r;
 
-        console.log(rowAttrs, headerCellFormattedValue, namesMapping);
+        console.log('console.log', rowAttrs, headerCellFormattedValue, namesMapping);
         return (
           <div
             key={`rowKeyLabel-${i}`}
