@@ -900,6 +900,8 @@ export class TableRenderer extends React.Component {
       ...this.cachedBasePivotSettings,
     };
 
+    console.log('visibleRowKeys', visibleRowKeys, visibleColKeys);
+
     return (
       // <Styles isDashboardEditMode={this.isDashboardEditMode()}>
         <div className="screenshot-chart-container">
