@@ -18,7 +18,7 @@
  */
 
 import React, { Fragment } from 'react';
-import { t } from '@superset-ui/core';
+// import { t } from '@superset-ui/core';
 import PropTypes from 'prop-types';
 import { PivotData, flatKey } from './utilities';
 // import { Styles } from './Styles';
@@ -38,21 +38,26 @@ function displayHeaderCell(
   namesMapping,
 ) {
   const name = namesMapping[value] || value;
-  return needToggle ? (
-    <span className="toggle-wrapper">
-      {/*<span*/}
-      {/*  role="button"*/}
-      {/*  tabIndex="0"*/}
-      {/*  className="toggle"*/}
-      {/*  onClick={onArrowClick}*/}
-      {/*>*/}
-      {/*  {ArrowIcon}*/}
-      {/*</span>*/}
-      <span className="toggle-val">{parseLabel(name)}</span>
-    </span>
-  ) : (
-    parseLabel(name)
-  );
+  return (
+    <div className='screenshot-image-box'>
+      <img src={ parseLabel(name) } alt={ parseLabel(name) } className='screenshot-image'/>
+    </div>
+  )
+  // return needToggle ? (
+  //   <span className="toggle-wrapper">
+  //     {/*<span*/}
+  //     {/*  role="button"*/}
+  //     {/*  tabIndex="0"*/}
+  //     {/*  className="toggle"*/}
+  //     {/*  onClick={onArrowClick}*/}
+  //     {/*>*/}
+  //     {/*  {ArrowIcon}*/}
+  //     {/*</span>*/}
+  //     <span className="toggle-val">{parseLabel(name)}</span>
+  //   </span>
+  // ) : (
+  //   parseLabel(name)
+  // );
 }
 
 export class TableRenderer extends React.Component {
@@ -573,48 +578,48 @@ export class TableRenderer extends React.Component {
 
     const {
       rowAttrs,
-      colAttrs,
+      // colAttrs,
       rowAttrSpans,
-      visibleColKeys,
-      pivotData,
-      rowTotals,
+      // visibleColKeys,
+      // pivotData,
+      // rowTotals,
       rowSubtotalDisplay,
       arrowExpanded,
       arrowCollapsed,
       // cellCallbacks,
-      rowTotalCallbacks,
+      // rowTotalCallbacks,
       namesMapping,
     } = pivotSettings;
 
     const {
-      highlightHeaderCellsOnHover,
-      omittedHighlightHeaderGroups = [],
-      highlightedHeaderCells,
-      cellColorFormatters,
+      // highlightHeaderCellsOnHover,
+      // omittedHighlightHeaderGroups = [],
+      // highlightedHeaderCells,
+      // cellColorFormatters,
       dateFormatters,
     } = this.props.tableOptions;
     const flatRowKey = flatKey(rowKey);
 
-    const colIncrSpan = colAttrs.length !== 0 ? 1 : 0;
+    // const colIncrSpan = colAttrs.length !== 0 ? 1 : 0;
     const attrValueCells = rowKey.map((r, i) => {
-      let handleContextMenu;
-      let valueCellClassName = 'pvtRowLabel';
-      if (!omittedHighlightHeaderGroups.includes(rowAttrs[i])) {
-        if (highlightHeaderCellsOnHover) {
-          valueCellClassName += ' hoverable';
-        }
-        handleContextMenu = e =>
-          this.props.onContextMenu(e, undefined, rowKey, {
-            [rowAttrs[i]]: r,
-          });
-      }
-      if (
-        highlightedHeaderCells &&
-        Array.isArray(highlightedHeaderCells[rowAttrs[i]]) &&
-        highlightedHeaderCells[rowAttrs[i]].includes(r)
-      ) {
-        valueCellClassName += ' active';
-      }
+      // let handleContextMenu;
+      // let valueCellClassName = 'pvtRowLabel';
+      // if (!omittedHighlightHeaderGroups.includes(rowAttrs[i])) {
+      //   if (highlightHeaderCellsOnHover) {
+      //     valueCellClassName += ' hoverable';
+      //   }
+      //   handleContextMenu = e =>
+      //     this.props.onContextMenu(e, undefined, rowKey, {
+      //       [rowAttrs[i]]: r,
+      //     });
+      // }
+      // if (
+      //   highlightedHeaderCells &&
+      //   Array.isArray(highlightedHeaderCells[rowAttrs[i]]) &&
+      //   highlightedHeaderCells[rowAttrs[i]].includes(r)
+      // ) {
+      //   valueCellClassName += ' active';
+      // }
       const rowSpan = rowAttrSpans[rowIdx][i];
       if (rowSpan > 0) {
         const flatRowKey = flatKey(rowKey.slice(0, i + 1));
@@ -632,15 +637,15 @@ export class TableRenderer extends React.Component {
         return (
           <div
             key={`rowKeyLabel-${i}`}
-            className={valueCellClassName}
-            onClick={this.clickHeaderHandler(
-              pivotData,
-              rowKey,
-              this.props.rows,
-              i,
-              this.props.tableOptions.clickRowHeaderCallback,
-            )}
-            onContextMenu={handleContextMenu}
+            // className={valueCellClassName}
+            // onClick={this.clickHeaderHandler(
+            //   pivotData,
+            //   rowKey,
+            //   this.props.rows,
+            //   i,
+            //   this.props.tableOptions.clickRowHeaderCallback,
+            // )}
+            // onContextMenu={handleContextMenu}
           >
             {displayHeaderCell(
               needRowToggle,
@@ -657,94 +662,94 @@ export class TableRenderer extends React.Component {
       return null;
     });
 
-    const attrValuePaddingCell =
-      rowKey.length < rowAttrs.length ? (
-        <th
-          className="pvtRowLabel pvtSubtotalLabel"
-          key="rowKeyBuffer"
-          colSpan={rowAttrs.length - rowKey.length + colIncrSpan}
-          rowSpan={1}
-          onClick={this.clickHeaderHandler(
-            pivotData,
-            rowKey,
-            this.props.rows,
-            rowKey.length,
-            this.props.tableOptions.clickRowHeaderCallback,
-            true,
-          )}
-        >
-          {t('Subtotal')}
-        </th>
-      ) : null;
+    // const attrValuePaddingCell =
+    //   rowKey.length < rowAttrs.length ? (
+    //     <th
+    //       className="pvtRowLabel pvtSubtotalLabel"
+    //       key="rowKeyBuffer"
+    //       colSpan={rowAttrs.length - rowKey.length + colIncrSpan}
+    //       rowSpan={1}
+    //       onClick={this.clickHeaderHandler(
+    //         pivotData,
+    //         rowKey,
+    //         this.props.rows,
+    //         rowKey.length,
+    //         this.props.tableOptions.clickRowHeaderCallback,
+    //         true,
+    //       )}
+    //     >
+    //       {t('Subtotal')}
+    //     </th>
+    //   ) : null;
 
     // const rowClickHandlers = cellCallbacks[flatRowKey] || {};
-    const valueCells = visibleColKeys.map(colKey => {
-      const flatColKey = flatKey(colKey);
-      const agg = pivotData.getAggregator(rowKey, colKey);
-      const aggValue = agg.value();
+    // const valueCells = visibleColKeys.map(colKey => {
+    //   const flatColKey = flatKey(colKey);
+    //   const agg = pivotData.getAggregator(rowKey, colKey);
+    //   const aggValue = agg.value();
+    //
+    //   const keys = [...rowKey, ...colKey];
+    //   let backgroundColor;
+    //   if (cellColorFormatters) {
+    //     Object.values(cellColorFormatters).forEach(cellColorFormatter => {
+    //       if (Array.isArray(cellColorFormatter)) {
+    //         keys.forEach(key => {
+    //           if (backgroundColor) {
+    //             return;
+    //           }
+    //           cellColorFormatter
+    //             .filter(formatter => formatter.column === key)
+    //             .forEach(formatter => {
+    //               const formatterResult = formatter.getColorFromValue(aggValue);
+    //               if (formatterResult) {
+    //                 backgroundColor = formatterResult;
+    //               }
+    //             });
+    //         });
+    //       }
+    //     });
+    //   }
+    //
+    //   const style = agg.isSubtotal
+    //     ? { fontWeight: 'bold' }
+    //     : { backgroundColor };
+    //
+    //   return (agg.format(aggValue)?.length ?? 0) > 0 ? (
+    //     <div
+    //       className="screenshot-image-box"
+    //       key={`scsImgBox-${flatColKey}`}
+    //       // onClick={rowClickHandlers[flatColKey]}
+    //       // onContextMenu={e => this.props.onContextMenu(e, colKey, rowKey)}
+    //       style={style}
+    //     >
+    //       <img src={agg.format(aggValue)} alt={agg.format(aggValue)} className="screenshot-image"/>
+    //     </div>
+    //   ) : null;
+    // });
 
-      const keys = [...rowKey, ...colKey];
-      let backgroundColor;
-      if (cellColorFormatters) {
-        Object.values(cellColorFormatters).forEach(cellColorFormatter => {
-          if (Array.isArray(cellColorFormatter)) {
-            keys.forEach(key => {
-              if (backgroundColor) {
-                return;
-              }
-              cellColorFormatter
-                .filter(formatter => formatter.column === key)
-                .forEach(formatter => {
-                  const formatterResult = formatter.getColorFromValue(aggValue);
-                  if (formatterResult) {
-                    backgroundColor = formatterResult;
-                  }
-                });
-            });
-          }
-        });
-      }
-
-      const style = agg.isSubtotal
-        ? { fontWeight: 'bold' }
-        : { backgroundColor };
-
-      return (agg.format(aggValue)?.length ?? 0) > 0 ? (
-        <div
-          className="screenshot-image-box"
-          key={`scsImgBox-${flatColKey}`}
-          // onClick={rowClickHandlers[flatColKey]}
-          // onContextMenu={e => this.props.onContextMenu(e, colKey, rowKey)}
-          style={style}
-        >
-          <img src={agg.format(aggValue)} alt={agg.format(aggValue)} className="screenshot-image"/>
-        </div>
-      ) : null;
-    });
-
-    let totalCell = null;
-    if (rowTotals) {
-      const agg = pivotData.getAggregator(rowKey, []);
-      const aggValue = agg.value();
-      totalCell = (
-        <td
-          role="gridcell"
-          key="total"
-          className="pvtTotal"
-          onClick={rowTotalCallbacks[flatRowKey]}
-          onContextMenu={e => this.props.onContextMenu(e, undefined, rowKey)}
-        >
-          {agg.format(aggValue)}
-        </td>
-      );
-    }
+    // let totalCell = null;
+    // if (rowTotals) {
+    //   const agg = pivotData.getAggregator(rowKey, []);
+    //   const aggValue = agg.value();
+    //   totalCell = (
+    //     <td
+    //       role="gridcell"
+    //       key="total"
+    //       className="pvtTotal"
+    //       onClick={rowTotalCallbacks[flatRowKey]}
+    //       onContextMenu={e => this.props.onContextMenu(e, undefined, rowKey)}
+    //     >
+    //       {agg.format(aggValue)}
+    //     </td>
+    //   );
+    // }
 
     const rowCells = [
       ...attrValueCells,
-      attrValuePaddingCell,
-      ...valueCells,
-      valueCells,
-      totalCell,
+      // attrValuePaddingCell,
+      // ...valueCells,
+      // valueCells,
+      // totalCell,
     ];
 
     // return <div key={`keyRow-${flatRowKey}`}>{rowCells}</div>;
