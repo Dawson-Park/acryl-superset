@@ -709,7 +709,7 @@ export class TableRenderer extends React.Component {
         ? { fontWeight: 'bold' }
         : { backgroundColor };
 
-      return (
+      return (agg.format(aggValue)?.length ?? 0) > 0 ? (
         <div
           className="screenshot-image-box"
           key={`scsImgBox-${flatColKey}`}
@@ -719,7 +719,7 @@ export class TableRenderer extends React.Component {
         >
           <img src={agg.format(aggValue)} alt={agg.format(aggValue)} className="screenshot-image"/>
         </div>
-      );
+      ) : null;
     });
 
     // let totalCell = null;
