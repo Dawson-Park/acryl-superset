@@ -18,42 +18,42 @@
  */
 
 import React, { Fragment } from 'react';
-// import { t } from '@superset-ui/core';
+import { t } from '@superset-ui/core';
 import PropTypes from 'prop-types';
 import { PivotData, flatKey } from './utilities';
 // import { Styles } from './Styles';
 
-// const parseLabel = value => {
-//   if (typeof value === 'number' || typeof value === 'string') {
-//     return value;
-//   }
-//   return String(value);
-// };
+const parseLabel = value => {
+  if (typeof value === 'number' || typeof value === 'string') {
+    return value;
+  }
+  return String(value);
+};
 
-// function displayHeaderCell(
-//   needToggle,
-//   ArrowIcon,
-//   onArrowClick,
-//   value,
-//   namesMapping,
-// ) {
-//   const name = namesMapping[value] || value;
-//   return needToggle ? (
-//     <span className="toggle-wrapper">
-//       {/*<span*/}
-//       {/*  role="button"*/}
-//       {/*  tabIndex="0"*/}
-//       {/*  className="toggle"*/}
-//       {/*  onClick={onArrowClick}*/}
-//       {/*>*/}
-//       {/*  {ArrowIcon}*/}
-//       {/*</span>*/}
-//       <span className="toggle-val">{parseLabel(name)}</span>
-//     </span>
-//   ) : (
-//     parseLabel(name)
-//   );
-// }
+function displayHeaderCell(
+  needToggle,
+  ArrowIcon,
+  onArrowClick,
+  value,
+  namesMapping,
+) {
+  const name = namesMapping[value] || value;
+  return needToggle ? (
+    <span className="toggle-wrapper">
+      {/*<span*/}
+      {/*  role="button"*/}
+      {/*  tabIndex="0"*/}
+      {/*  className="toggle"*/}
+      {/*  onClick={onArrowClick}*/}
+      {/*>*/}
+      {/*  {ArrowIcon}*/}
+      {/*</span>*/}
+      <span className="toggle-val">{parseLabel(name)}</span>
+    </span>
+  ) : (
+    parseLabel(name)
+  );
+}
 
 export class TableRenderer extends React.Component {
   constructor(props) {
@@ -581,7 +581,7 @@ export class TableRenderer extends React.Component {
       rowSubtotalDisplay,
       arrowExpanded,
       arrowCollapsed,
-      cellCallbacks,
+      // cellCallbacks,
       rowTotalCallbacks,
       namesMapping,
     } = pivotSettings;
