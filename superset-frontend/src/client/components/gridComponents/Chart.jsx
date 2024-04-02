@@ -350,8 +350,6 @@ class Chart extends React.Component {
       is_cached: this.props.isCached,
     });
 
-    console.log('this.props.formData', this.props.formData);
-
     exportChart({
       formData: isFullCSV
         ? { ...this.props.formData, row_limit: this.props.maxRows }
