@@ -36,17 +36,18 @@ const NavItem = styled.div<Props>`
   letter-spacing: -0.02em;
   
   & > a {
+    text-decoration: none;
     color: #afb2c0;
     transition: color 0.3s ease-in-out;
-    
-    &[data-active=true] {
-      color: #0f111a;
-    }
 
     &:hover {
       color: #0f111a;
+      text-decoration: none;
       cursor: pointer;
     }
+  }
+  &[data-active=true] > a {
+    color: #0f111a;
   }
   
   .dashnav-menu {
@@ -55,6 +56,10 @@ const NavItem = styled.div<Props>`
     flex-flow: row nowrap;
     align-items: center;
     border-bottom: none !important;
+  }
+  .dashnav-title {
+    position: static !important;
+    top: 0 !important;
   }
   .dashnav-title[data-active=true] {
     color: #0f111a;
