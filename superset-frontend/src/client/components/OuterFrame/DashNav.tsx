@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import { Link } from 'react-router-dom';
 import { styled, css } from '@superset-ui/core';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Menu, MainNav as DropdownMenu } from 'src/components/Menu';
 import Icons from 'src/components/Icons';
 
@@ -22,8 +22,9 @@ type Props = {
   $active?: boolean;
 };
 
+// noinspection CssUnusedSymbol
 const NavItem = styled.div<Props>`
-  a {
+  & > a {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -99,14 +100,6 @@ type ListType = {
   to: string;
   label: string;
 };
-// const lists: ListType[] = [
-//   { /* to: '10', */ label: '대시보드', to: 'license_dashboard' },
-//   { /* to: '9', */ label: '수집 현황', to: 'collection' },
-//   { /* to: '8', */ label: '유통 현황 분석', to: 'distribution' },
-//   { /* to: '7', */ label: '침해 현황 분석', to: 'infringement' },
-//   { /* to: '5', */ label: '동향 분석', to: 'trend' },
-//   { /* to: 'world_health', */ label: '수사 지원 분석', to: 'investigation' },
-// ];
 
 const collection: ListType[] = [
   { label: '불법 유통 사이트 탐지 현황', to: '' },
@@ -145,60 +138,45 @@ const { SubMenu } = DropdownMenu;
 
 const DashNav = () => {
   const params = useParams<Params>();
-  const history = useHistory();
 
-  const onClick = (link: string) => {
-    history.push(linkPrefix(link));
-  }
+  const renderMenu = useCallback((title: string, list: ListType[]) => {
+    return (
+      <NavItem>
+        <Menu mode="horizontal" triggerSubMenuAction="click" className='dashnav-menu'>
+          <SubMenu title={
+            <>
+              {title}
+              <Icons.TriangleDown className='dashnav-icon' />
+            </>
+          }
+            // popupOffset={[0, 0]}
+           className='dashnav-submenu'
+          >
+            {
+              list.map(v => (
+                <DropdownMenu.Item key={v.to} className='dashnav-dropdown-item'
+                                   data-active={params?.idOrSlug === v.to}
+                >
+                  <Link to={linkPrefix(v.to)}>{v.label}</Link>
+                </DropdownMenu.Item>
+              ))
+            }
+          </SubMenu>
+        </Menu>
+      </NavItem>
+    )
+  }, [params])
 
   return (
     <NavContainer>
       <NavItem>
         <Link to='/superset/dashboard/license_dashboard/'>대시보드</Link>
       </NavItem>
-      <NavItem>
-        <Menu mode="horizontal" triggerSubMenuAction="click" className='dashnav-menu'>
-          <SubMenu title={
-            <>
-              유통 및 침해 분석
-              <Icons.TriangleDown className='dashnav-icon' />
-            </>
-          }
-            // popupOffset={[0, 0]}
-                   className='dashnav-submenu'
-          >
-            <DropdownMenu.Item className='dashnav-dropdown-item'
-                               onClick={() => {
-                                 onClick('distribution')
-                               }}
-                               data-active={params?.idOrSlug === 'distribution'}
-            >
-              유통 현황 분석
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className='dashnav-dropdown-item' onClick={() => {
-              onClick('infringement')
-            }}
-                               data-active={params?.idOrSlug === 'infringement'}
-            >
-              침해 현황 분석
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className='dashnav-dropdown-item' onClick={() => {
-              onClick('trend')
-            }}
-                               data-active={params?.idOrSlug === 'trend'}
-            >
-              동향 분석
-            </DropdownMenu.Item>
-          </SubMenu>
-        </Menu>
-      </NavItem>
-
-      <NavItem onClick={() => {
-        onClick('investigation')
-      }}
-               $active={params?.idOrSlug === 'investigation'}>
-        수사 지원 분석
-      </NavItem>
+      {renderMenu('수집 현황', collection)}
+      {renderMenu('유통 현황 분석', distribution)}
+      {renderMenu('침해 현황 분석', infringement)}
+      {renderMenu('동향 분석', trend)}
+      {renderMenu('수사 지원 분석', investigation)}
     </NavContainer>
   )
   // return (
