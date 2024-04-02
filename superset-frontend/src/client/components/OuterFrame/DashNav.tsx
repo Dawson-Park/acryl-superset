@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import { Link } from 'react-router-dom';
-import { styled, css } from '@superset-ui/core';
+import { styled } from '@superset-ui/core';
 import { useParams } from 'react-router-dom';
 import { Menu, MainNav as DropdownMenu } from 'src/components/Menu';
 import Icons from 'src/components/Icons';
@@ -43,13 +43,6 @@ const NavItem = styled.div<Props>`
       cursor: pointer;
     }
   }
-
-  ${props =>
-  props?.$active &&
-  css`
-      color: #0f111a;
-      //border-bottom: 2px solid #5badf4;
-    `}
   
   .dashnav-menu {
     line-height: 24px;
@@ -58,11 +51,18 @@ const NavItem = styled.div<Props>`
     align-items: center;
     border-bottom: none !important;
   }
+  .dashnav-title[data-active=true] {
+    color: #0f111a;
+  }
   .dashnav-submenu {
     margin: 0 !important;
     padding: 0 !important;
     position: static !important;
     border-bottom: none !important;
+    
+    .dashnav-dropdown-item {
+      font-weight: 500;
+    }
     
     & > .ant-menu-submenu-title {
       display: inline-flex;
@@ -102,32 +102,32 @@ type ListType = {
 };
 
 const collection: ListType[] = [
-  { label: '불법 유통 사이트 탐지 현황', to: '' },
-  { label: '불법 콘텐츠 수집 현황', to: '' },
-  { label: '뉴스 수집 현황', to: '' },
-  { label: 'SNS 수집 현황', to: '' },
+  { label: '불법 유통 사이트 탐지 현황', to: 'collection_site' },
+  { label: '불법 콘텐츠 수집 현황', to: 'collection_contents' },
+  { label: '뉴스 수집 현황', to: 'collection_news' },
+  { label: 'SNS 수집 현황', to: 'collection_sns' },
 ];
 const distribution: ListType[] = [
-  { label: '사이트별 유통 현황 분석', to: '' },
-  { label: '언어별 유통 현황 분석', to: '' },
-  { label: '장르별 유통 현황 분석', to: '' },
-  { label: '중점 저작물별 유통 현황 분석', to: '' },
+  { label: '사이트별 유통 현황 분석', to: 'distribution_site' },
+  { label: '언어별 유통 현황 분석', to: 'distribution_language' },
+  { label: '장르별 유통 현황 분석', to: 'distribution_genre' },
+  { label: '중점 저작물별 유통 현황 분석', to: 'distribution_focus' },
 ];
 const infringement: ListType[] = [
-  { label: '사이트별 침해 금액 추정 분석', to: '' },
-  { label: '언어별 침해 금액 추정 분석', to: '' },
-  { label: '장르별 침해 금액 추정 분석', to: '' },
-  { label: '사이트별 수익 규모 추정 분석', to: '' },
+  { label: '사이트별 침해 금액 추정 분석', to: 'infringement_site' },
+  { label: '언어별 침해 금액 추정 분석', to: 'infringement_language' },
+  { label: '장르별 침해 금액 추정 분석', to: 'infringement_genre' },
+  { label: '사이트별 수익 규모 추정 분석', to: 'infringement_revenue' },
 ];
 const trend: ListType[] = [
-  { label: '뉴스 동향 분석', to: '' },
-  { label: 'SNS 동향 분석', to: '' },
+  { label: '뉴스 동향 분석', to: 'trend_news' },
+  { label: 'SNS 동향 분석', to: 'trend_sns' },
 ];
 const investigation: ListType[] = [
-  { label: '사이트 정보 분석', to: '' },
-  { label: '동적 응답 분석', to: '' },
-  { label: '클러스터링 분석', to: '' },
-  { label: '라이프사이클 분석', to: '' },
+  { label: '사이트 정보 분석', to: 'investigation_site' },
+  { label: '동적 응답 분석', to: 'investigation_response' },
+  { label: '클러스터링 분석', to: 'investigation_clustering' },
+  { label: '라이프사이클 분석', to: 'investigation_lifecycle' },
 ];
 
 interface Params {
@@ -139,13 +139,13 @@ const { SubMenu } = DropdownMenu;
 const DashNav = () => {
   const params = useParams<Params>();
 
-  const renderMenu = useCallback((title: string, list: ListType[]) => {
+  const renderMenu = useCallback((title: string, list: ListType[], slug: string) => {
     return (
       <NavItem>
         <Menu mode="horizontal" triggerSubMenuAction="click" className='dashnav-menu'>
           <SubMenu title={
             <>
-              {title}
+              <span className='dashnav-title' data-active={params?.idOrSlug.includes(slug)}>{title}</span>
               <Icons.TriangleDown className='dashnav-icon' />
             </>
           }
@@ -172,11 +172,11 @@ const DashNav = () => {
       <NavItem>
         <Link to='/superset/dashboard/license_dashboard/'>대시보드</Link>
       </NavItem>
-      {renderMenu('수집 현황', collection)}
-      {renderMenu('유통 현황 분석', distribution)}
-      {renderMenu('침해 현황 분석', infringement)}
-      {renderMenu('동향 분석', trend)}
-      {renderMenu('수사 지원 분석', investigation)}
+      {renderMenu('수집 현황', collection, 'collection')}
+      {renderMenu('유통 현황 분석', distribution, 'distribution')}
+      {renderMenu('침해 현황 분석', infringement, 'infringement')}
+      {renderMenu('동향 분석', trend, 'trend')}
+      {renderMenu('수사 지원 분석', investigation, 'investigation')}
     </NavContainer>
   )
   // return (
