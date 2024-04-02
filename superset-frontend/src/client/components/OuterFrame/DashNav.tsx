@@ -23,71 +23,73 @@ type Props = {
 };
 
 const NavItem = styled.div<Props>`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  height: 100%;
-  width: fit-content;
-  font-family: Pretendard, 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 26px;
-  letter-spacing: -0.02em;
-  color: #afb2c0;
-  transition: color 0.3s ease-in-out;
-
-  &:hover {
-    color: #0f111a;
-    cursor: pointer;
-  }
-
-  ${props =>
-  props?.$active &&
-  css`
-      color: #0f111a;
-      //border-bottom: 2px solid #5badf4;
-    `}
-  
-  .dashnav-menu {
-    line-height: 24px;
+  & > a {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    border-bottom: none !important;
-  }
-  .dashnav-submenu {
-    margin: 0 !important;
-    padding: 0 !important;
-    position: static !important;
-    border-bottom: none !important;
-    
-    & > .ant-menu-submenu-title {
-      display: inline-flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      
-      padding: 0 !important;
-      position: static;
-      top: auto;
+    height: 100%;
+    width: fit-content;
+    font-family: Pretendard, 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: -0.02em;
+    color: #afb2c0;
+    transition: color 0.3s ease-in-out;
 
-      font-family: Pretendard, 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 26px;
-      letter-spacing: -0.02em;
-      color: #afb2c0;
-      transition: color 0.3s ease-in-out;
-    }
-    &:hover > .ant-menu-submenu-title {
+    &:hover {
       color: #0f111a;
       cursor: pointer;
     }
-  }
-  .dashnav-icon {
-    position: static !important;
-    right: auto;
-    top: auto;
-    margin-right: 0 !important;
+
+    ${props =>
+            props?.$active &&
+            css`
+      color: #0f111a;
+      //border-bottom: 2px solid #5badf4;
+    `}
+
+    .dashnav-menu {
+      line-height: 24px;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      border-bottom: none !important;
+    }
+    .dashnav-submenu {
+      margin: 0 !important;
+      padding: 0 !important;
+      position: static !important;
+      border-bottom: none !important;
+
+      & > .ant-menu-submenu-title {
+        display: inline-flex;
+        flex-flow: row nowrap;
+        align-items: center;
+
+        padding: 0 !important;
+        position: static;
+        top: auto;
+
+        font-family: Pretendard, 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 26px;
+        letter-spacing: -0.02em;
+        color: #afb2c0;
+        transition: color 0.3s ease-in-out;
+      }
+      &:hover > .ant-menu-submenu-title {
+        color: #0f111a;
+        cursor: pointer;
+      }
+    }
+    .dashnav-icon {
+      position: static !important;
+      right: auto;
+      top: auto;
+      margin-right: 0 !important;
+    }
   }
 `;
 
@@ -152,7 +154,7 @@ const DashNav = () => {
   return (
     <NavContainer>
       <NavItem>
-        <Link to='/superset/dashboard/license_dashboard/' />
+        <Link to='/superset/dashboard/license_dashboard/'>대시보드</Link>
       </NavItem>
       <NavItem>
         <Menu mode="horizontal" triggerSubMenuAction="click" className='dashnav-menu'>
