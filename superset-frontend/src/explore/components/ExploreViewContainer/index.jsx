@@ -95,6 +95,7 @@ const ExploreContainer = styled.div`
   flex-direction: column;
   height: 100%;
   min-height: 0;
+  max-width: 100vw;
 `;
 
 const ExplorePanelContainer = styled.div`
