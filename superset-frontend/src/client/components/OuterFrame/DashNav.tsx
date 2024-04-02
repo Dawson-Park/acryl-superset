@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { styled, css } from '@superset-ui/core';
 import { useHistory, useParams } from 'react-router-dom';
 import { Menu, MainNav as DropdownMenu } from 'src/components/Menu';
@@ -92,10 +93,10 @@ const NavItem = styled.div<Props>`
 
 const linkPrefix = (str: string | number) => `/superset/dashboard/${str}/`;
 
-// type ListType = {
-//   to: string;
-//   label: string;
-// };
+type ListType = {
+  to: string;
+  label: string;
+};
 // const lists: ListType[] = [
 //   { /* to: '10', */ label: '대시보드', to: 'license_dashboard' },
 //   { /* to: '9', */ label: '수집 현황', to: 'collection' },
@@ -104,6 +105,35 @@ const linkPrefix = (str: string | number) => `/superset/dashboard/${str}/`;
 //   { /* to: '5', */ label: '동향 분석', to: 'trend' },
 //   { /* to: 'world_health', */ label: '수사 지원 분석', to: 'investigation' },
 // ];
+
+const collection: ListType[] = [
+  { label: '불법 유통 사이트 탐지 현황', to: '' },
+  { label: '불법 콘텐츠 수집 현황', to: '' },
+  { label: '뉴스 수집 현황', to: '' },
+  { label: 'SNS 수집 현황', to: '' },
+];
+const distribution: ListType[] = [
+  { label: '사이트별 유통 현황 분석', to: '' },
+  { label: '언어별 유통 현황 분석', to: '' },
+  { label: '장르별 유통 현황 분석', to: '' },
+  { label: '중점 저작물별 유통 현황 분석', to: '' },
+];
+const infringement: ListType[] = [
+  { label: '사이트별 침해 금액 추정 분석', to: '' },
+  { label: '언어별 침해 금액 추정 분석', to: '' },
+  { label: '장르별 침해 금액 추정 분석', to: '' },
+  { label: '사이트별 수익 규모 추정 분석', to: '' },
+];
+const trend: ListType[] = [
+  { label: '뉴스 동향 분석', to: '' },
+  { label: 'SNS 동향 분석', to: '' },
+];
+const investigation: ListType[] = [
+  { label: '사이트 정보 분석', to: '' },
+  { label: '동적 응답 분석', to: '' },
+  { label: '클러스터링 분석', to: '' },
+  { label: '라이프사이클 분석', to: '' },
+];
 
 interface Params {
   idOrSlug: string;
@@ -121,20 +151,9 @@ const DashNav = () => {
 
   return (
     <NavContainer>
-      <NavItem onClick={() => {
-        onClick('license_dashboard');
-      }}
-               $active={params?.idOrSlug === 'license_dashboard'}>
-        대시보드
+      <NavItem>
+        <Link to='/superset/dashboard/license_dashboard/' />
       </NavItem>
-
-      <NavItem onClick={() => {
-        onClick('collection')
-      }}
-               $active={params?.idOrSlug === 'collection'}>
-        수집 현황
-      </NavItem>
-
       <NavItem>
         <Menu mode="horizontal" triggerSubMenuAction="click" className='dashnav-menu'>
           <SubMenu title={
@@ -180,6 +199,67 @@ const DashNav = () => {
       </NavItem>
     </NavContainer>
   )
+  // return (
+  //   <NavContainer>
+  //     <NavItem onClick={() => {
+  //       onClick('license_dashboard');
+  //     }}
+  //              $active={params?.idOrSlug === 'license_dashboard'}>
+  //       대시보드
+  //     </NavItem>
+  //
+  //     <NavItem onClick={() => {
+  //       onClick('collection')
+  //     }}
+  //              $active={params?.idOrSlug === 'collection'}>
+  //       수집 현황
+  //     </NavItem>
+  //
+  //     <NavItem>
+  //       <Menu mode="horizontal" triggerSubMenuAction="click" className='dashnav-menu'>
+  //         <SubMenu title={
+  //           <>
+  //             유통 및 침해 분석
+  //             <Icons.TriangleDown className='dashnav-icon' />
+  //           </>
+  //         }
+  //           // popupOffset={[0, 0]}
+  //                  className='dashnav-submenu'
+  //         >
+  //           <DropdownMenu.Item className='dashnav-dropdown-item'
+  //                              onClick={() => {
+  //                                onClick('distribution')
+  //                              }}
+  //                              data-active={params?.idOrSlug === 'distribution'}
+  //           >
+  //             유통 현황 분석
+  //           </DropdownMenu.Item>
+  //           <DropdownMenu.Item className='dashnav-dropdown-item' onClick={() => {
+  //             onClick('infringement')
+  //           }}
+  //                              data-active={params?.idOrSlug === 'infringement'}
+  //           >
+  //             침해 현황 분석
+  //           </DropdownMenu.Item>
+  //           <DropdownMenu.Item className='dashnav-dropdown-item' onClick={() => {
+  //             onClick('trend')
+  //           }}
+  //                              data-active={params?.idOrSlug === 'trend'}
+  //           >
+  //             동향 분석
+  //           </DropdownMenu.Item>
+  //         </SubMenu>
+  //       </Menu>
+  //     </NavItem>
+  //
+  //     <NavItem onClick={() => {
+  //       onClick('investigation')
+  //     }}
+  //              $active={params?.idOrSlug === 'investigation'}>
+  //       수사 지원 분석
+  //     </NavItem>
+  //   </NavContainer>
+  // )
 };
 
 export default React.memo(DashNav);
