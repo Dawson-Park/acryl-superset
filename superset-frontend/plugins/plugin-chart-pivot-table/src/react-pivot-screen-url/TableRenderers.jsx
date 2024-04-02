@@ -276,17 +276,17 @@ export class TableRenderer extends React.Component {
   //   };
   // }
 
-  toggleRowKey(flatRowKey) {
-    return e => {
-      e.stopPropagation();
-      this.setState(state => ({
-        collapsedRows: {
-          ...state.collapsedRows,
-          [flatRowKey]: !state.collapsedRows[flatRowKey],
-        },
-      }));
-    };
-  }
+  // toggleRowKey(flatRowKey) {
+  //   return e => {
+  //     e.stopPropagation();
+  //     this.setState(state => ({
+  //       collapsedRows: {
+  //         ...state.collapsedRows,
+  //         [flatRowKey]: !state.collapsedRows[flatRowKey],
+  //       },
+  //     }));
+  //   };
+  // }
 
   // toggleColKey(flatColKey) {
   //   return e => {
