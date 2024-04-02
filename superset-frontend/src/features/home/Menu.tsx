@@ -43,6 +43,7 @@ interface MenuProps {
 }
 
 const StyledHeader = styled.header`
+  max-width: 100vw;
   ${({ theme }) => `
       background-color: ${theme.colors.grayscale.light5};
       margin-bottom: 2px;

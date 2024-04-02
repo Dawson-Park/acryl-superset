@@ -201,7 +201,7 @@ export class UnwrappedDragDroppable extends React.PureComponent {
 
     return (
       <DragDroppableStyles
-        style={style}
+        // style={style}
         ref={this.setRef}
         data-test="dragdroppable-object"
         className={cx(
