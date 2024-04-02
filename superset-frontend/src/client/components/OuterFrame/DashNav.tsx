@@ -37,6 +37,10 @@ const NavItem = styled.div<Props>`
     letter-spacing: -0.02em;
     color: #afb2c0;
     transition: color 0.3s ease-in-out;
+    
+    &[data-active=true] {
+      color: #0f111a;
+    }
 
     &:hover {
       color: #0f111a;
@@ -169,7 +173,7 @@ const DashNav = () => {
 
   return (
     <NavContainer>
-      <NavItem>
+      <NavItem data-active={params?.idOrSlug.includes('license_dashboard')}>
         <Link to='/superset/dashboard/license_dashboard/'>대시보드</Link>
       </NavItem>
       {renderMenu('수집 현황', collection, 'collection')}
