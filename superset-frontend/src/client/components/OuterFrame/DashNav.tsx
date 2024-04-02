@@ -24,17 +24,18 @@ type Props = {
 
 // noinspection CssUnusedSymbol
 const NavItem = styled.div<Props>`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 100%;
+  width: fit-content;
+  font-family: Pretendard, 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: -0.02em;
+  
   & > a {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    height: 100%;
-    width: fit-content;
-    font-family: Pretendard, 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 26px;
-    letter-spacing: -0.02em;
     color: #afb2c0;
     transition: color 0.3s ease-in-out;
     
