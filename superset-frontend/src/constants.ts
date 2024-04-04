@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { t, DEFAULT_D3_FORMAT } from '@superset-ui/core';
+import { /*t,*/ DEFAULT_D3_FORMAT } from '@superset-ui/core';
 
 import { BootstrapData, CommonBootstrapData } from './types/bootstrapTypes';
 
@@ -140,7 +140,8 @@ export const SLOW_DEBOUNCE = 500;
 /**
  * Display null as `N/A`
  */
-export const NULL_DISPLAY = t('N/A');
+// export const NULL_DISPLAY = t('N/A');
+export const NULL_DISPLAY = '-';
 
 export const DEFAULT_COMMON_BOOTSTRAP_DATA: CommonBootstrapData = {
   flash_messages: [],

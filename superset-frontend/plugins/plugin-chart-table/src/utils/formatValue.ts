@@ -44,7 +44,8 @@ function formatValue(
     // handle them here too
     (value instanceof DateWithFormatter && value.input === null)
   ) {
-    return [false, 'N/A'];
+    // return [false, 'N/A'];
+    return [false, '-'];
   }
   if (formatter) {
     return [false, formatter(value as number)];

@@ -159,7 +159,8 @@ function getCategoryName(columnName: string, name?: DataRecordValue) {
     return `${columnName}: true`;
   }
   if (name == null) {
-    return 'N/A';
+    // return 'N/A';
+    return '-';
   }
   return String(name);
 }
