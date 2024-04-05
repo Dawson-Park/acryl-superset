@@ -24,7 +24,6 @@ import { PivotData, flatKey } from './utilities';
 import { Styles } from './Styles';
 
 const parseLabel = value => {
-  console.log(value);
   if (typeof value === 'number' || typeof value === 'string') {
     if(value === 'null') return '-';
     return value;
