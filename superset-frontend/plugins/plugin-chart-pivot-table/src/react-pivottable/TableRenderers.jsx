@@ -27,7 +27,7 @@ const parseLabel = value => {
   if (typeof value === 'number' || typeof value === 'string') {
     return value;
   }
-  return String(value);
+  return String(value ?? '-');
 };
 
 function displayHeaderCell(
@@ -51,7 +51,7 @@ function displayHeaderCell(
       <span className="toggle-val">{parseLabel(name)}</span>
     </span>
   ) : (
-    parseLabel(name ?? '-')
+    parseLabel(name)
   );
 }
 
