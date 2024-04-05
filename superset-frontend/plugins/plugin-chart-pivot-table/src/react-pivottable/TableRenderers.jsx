@@ -51,7 +51,7 @@ function displayHeaderCell(
       <span className="toggle-val">{parseLabel(name)}</span>
     </span>
   ) : (
-    parseLabel(name)
+    parseLabel(name ?? '-')
   );
 }
 
@@ -711,8 +711,6 @@ export class TableRenderer extends React.Component {
         ? { fontWeight: 'bold' }
         : { backgroundColor };
 
-      const td = (agg.format(aggValue) ?? 'null') === 'null' ? '-' : agg.format(aggValue);
-
       return (
         <td
           role="gridcell"
@@ -722,8 +720,7 @@ export class TableRenderer extends React.Component {
           onContextMenu={e => this.props.onContextMenu(e, colKey, rowKey)}
           style={style}
         >
-          {/*{agg.format(aggValue)}*/}
-          {td}
+          {agg.format(aggValue)}
         </td>
       );
     });
@@ -740,8 +737,7 @@ export class TableRenderer extends React.Component {
           onClick={rowTotalCallbacks[flatRowKey]}
           onContextMenu={e => this.props.onContextMenu(e, undefined, rowKey)}
         >
-          {/*{agg.format(aggValue)}*/}
-          {td}
+          {agg.format(aggValue)}
         </td>
       );
     }
