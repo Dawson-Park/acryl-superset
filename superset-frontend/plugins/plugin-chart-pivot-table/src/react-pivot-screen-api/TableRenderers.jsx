@@ -851,7 +851,21 @@ export class TableRenderer extends React.Component {
   //   return document.contains(document.querySelector('.dashboard--editing'));
   // }
 
-  componentDidMount() {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.cachedProps !== this.props) {
+      this.cachedProps = this.props;
+      this.cachedBasePivotSettings = this.getBasePivotSettings();
+    }
+    const {
+      colAttrs,
+      // rowAttrs,
+      // rowKeys,
+      colKeys,
+      // colTotals,
+      // rowSubtotalDisplay,
+      colSubtotalDisplay,
+    } = this.cachedBasePivotSettings;
+
     const visibleColKeys = this.visibleKeys(
       colKeys,
       this.state.collapsedCols,
@@ -882,10 +896,6 @@ export class TableRenderer extends React.Component {
       this.state.imageList = [...list];
       console.log('this.state.imageList', this.state.imageList);
     })();
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('prevState', prevState);
   }
 
   render() {
