@@ -880,7 +880,12 @@ export class TableRenderer extends React.Component {
       }
 
       this.state.imageList = [...list];
+      console.log('this.state.imageList', this.state.imageList);
     })();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('prevState', prevState);
   }
 
   render() {
