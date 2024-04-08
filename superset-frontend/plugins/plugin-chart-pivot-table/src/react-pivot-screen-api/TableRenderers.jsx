@@ -64,7 +64,7 @@ export class TableRenderer extends React.Component {
     // We need state to record which entries are collapsed and which aren't.
     // This is an object with flat-keys indicating if the corresponding rows
     // should be collapsed.
-    this.state = { collapsedRows: {}, collapsedCols: {} };
+    this.state = { collapsedRows: {}, collapsedCols: {}, imageList: [] };
 
     this.clickHeaderHandler = this.clickHeaderHandler.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
@@ -851,6 +851,38 @@ export class TableRenderer extends React.Component {
   //   return document.contains(document.querySelector('.dashboard--editing'));
   // }
 
+  componentDidMount() {
+    const visibleColKeys = this.visibleKeys(
+      colKeys,
+      this.state.collapsedCols,
+      colAttrs.length,
+      colSubtotalDisplay,
+    )
+
+    (async () => {
+      const list = [];
+
+      for (let i = 0; i < visibleColKeys; i++) {
+        const v = visibleColKeys[i];
+
+        try {
+          const response = await fetch(DUDAGI_URL + v);
+          const blob = await response.blob();
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => {
+            const base64data = reader.result;
+            list.push(base64data);
+          };
+        } catch (e) {
+          console.error("Error: ", e);
+        }
+      }
+
+      this.state.imageList = [...list];
+    })();
+  }
+
   render() {
     if (this.cachedProps !== this.props) {
       this.cachedProps = this.props;
@@ -894,11 +926,26 @@ export class TableRenderer extends React.Component {
     return (
       // <Styles isDashboardEditMode={this.isDashboardEditMode()}>
         <div className='screenshot-chart-container'>
-          {visibleColKeys.map((v, i) => (
-            <div key={i} className='screenshot-image-box'>
-              <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>
-            </div>
-          ))}
+          {
+            this.state.imageList.length === 0 ? (
+              visibleColKeys.map((v, i) => (
+                <div key={i} className='screenshot-image-box'>
+                  <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>
+                </div>
+              ))
+            ) : (
+              this.state.imageList.map((v, i) => (
+                <div key={i} className='screenshot-image-box'>
+                  <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>
+                </div>
+              ))
+            )
+          }
+          {/*{visibleColKeys.map((v, i) => (*/}
+          {/*  <div key={i} className='screenshot-image-box'>*/}
+          {/*    <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>*/}
+          {/*  </div>*/}
+          {/*))}*/}
         </div>
         // {/*<table className="pvtTable" role="grid">*/}
         // {/*  <thead>*/}
