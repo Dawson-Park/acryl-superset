@@ -856,6 +856,7 @@ export class TableRenderer extends React.Component {
     if(!this.visibleKeys) {
       return;
     }
+    console.log(this.visibleKeys);
 
     if (this.cachedProps !== this.props) {
       this.cachedProps = this.props;
@@ -873,6 +874,8 @@ export class TableRenderer extends React.Component {
       colAttrs.length,
       colSubtotalDisplay,
     )
+
+      console.log(visibleColKeys);
 
     (async () => {
       const list = [];
