@@ -1002,7 +1002,7 @@ export class TableRenderer extends React.Component {
     // };
 
     const { base64URLs } = this.state;
-    console.log(base64URLs);
+    console.log("base64URLs", base64URLs);
 
     return (
       // <Styles isDashboardEditMode={this.isDashboardEditMode()}>
