@@ -853,11 +853,6 @@ export class TableRenderer extends React.Component {
   // }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if(!this.visibleKeys) {
-      return;
-    }
-    console.log(this.visibleKeys);
-
     if (this.cachedProps !== this.props) {
       this.cachedProps = this.props;
       this.cachedBasePivotSettings = this.getBasePivotSettings();
@@ -868,14 +863,18 @@ export class TableRenderer extends React.Component {
       colSubtotalDisplay,
     } = this.cachedBasePivotSettings;
 
-    const visibleColKeys = this.visibleKeys(
-      colKeys,
-      this.state.collapsedCols,
-      colAttrs.length,
-      colSubtotalDisplay,
+    const visibleColKeys = colKeys.filter(
+      key =>
+        // Is the key hidden by one of its parents?
+        !key.some((k, j) => this.state.collapsedCols[flatKey(key.slice(0, j))]) &&
+        // Leaf key.
+        (key.length === colAttrs.length ||
+          // Children hidden. Must show total.
+          flatKey(key) in this.state.collapsedCols ||
+          // Don't hide totals.
+          !colSubtotalDisplay.hideOnExpand),
     )
-
-      console.log(visibleColKeys);
+    console.log(visibleColKeys);
 
     (async () => {
       const list = [];
