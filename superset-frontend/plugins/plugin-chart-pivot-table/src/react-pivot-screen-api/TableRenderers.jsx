@@ -879,7 +879,7 @@ export class TableRenderer extends React.Component {
     (async () => {
       const list = [];
 
-      for (let i = 0; i < visibleColKeys; i++) {
+      for (let i = 0; i < visibleColKeys.length; i++) {
         const v = visibleColKeys[i];
 
         try {
