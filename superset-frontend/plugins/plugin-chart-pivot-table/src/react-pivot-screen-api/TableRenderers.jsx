@@ -929,10 +929,12 @@ export class TableRenderer extends React.Component {
           // Don't hide totals.
           !colSubtotalDisplay.hideOnExpand),
     );
+    console.log('visibleColKeys', visibleColKeys);
 
     // 각 이미지 URL에 대해 toDataURL 함수를 호출합니다.
     visibleColKeys.forEach(url => {
       this.toDataURL(url[1], dataUrl => {
+        console.log('url[1]', url[1]);
         this.setState(prevState => ({
           base64URLs: [...prevState.base64URLs, dataUrl],
         }));
