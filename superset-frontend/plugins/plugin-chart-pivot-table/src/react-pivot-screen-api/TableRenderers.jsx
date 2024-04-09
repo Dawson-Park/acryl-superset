@@ -928,13 +928,13 @@ export class TableRenderer extends React.Component {
           flatKey(key) in this.state.collapsedCols ||
           // Don't hide totals.
           !colSubtotalDisplay.hideOnExpand),
-    );
+    ).map(v => v[1]);
     console.log('visibleColKeys', visibleColKeys);
 
     // 각 이미지 URL에 대해 toDataURL 함수를 호출합니다.
     visibleColKeys.forEach(url => {
-      this.toDataURL(url[1], dataUrl => {
-        console.log('url[1]', url[1]);
+      console.log('url', url);
+      this.toDataURL(url, dataUrl => {
         this.setState(prevState => ({
           base64URLs: [...prevState.base64URLs, dataUrl],
         }));
@@ -959,7 +959,7 @@ export class TableRenderer extends React.Component {
     if (img.complete || img.complete === undefined) {
       // 로드를 강제로 다시 시도하기 전에 일시적으로 다른 src를 할당합니다.
       img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-      img.src = src;
+      img.src = DUDAGI_URL + src;
     }
   }
 
