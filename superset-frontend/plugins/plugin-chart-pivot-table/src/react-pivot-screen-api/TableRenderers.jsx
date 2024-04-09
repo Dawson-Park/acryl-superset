@@ -1,3 +1,5 @@
+// noinspection DuplicatedCode
+
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -838,7 +840,7 @@ export class TableRenderer extends React.Component {
     return keys.filter(
       key =>
         // Is the key hidden by one of its parents?
-        !key.some((k, j) => collapsed[flatKey(key.slice(0, j))]) &&
+        !key.some((_, j) => collapsed[flatKey(key.slice(0, j))]) &&
         // Leaf key.
         (key.length === numAttrs ||
           // Children hidden. Must show total.
@@ -874,7 +876,7 @@ export class TableRenderer extends React.Component {
   //         // Don't hide totals.
   //         !colSubtotalDisplay.hideOnExpand),
   //   )
-  //   console.log(visibleColKeys);
+  //   // console.log(visibleColKeys);
   //
   //   (async () => {
   //     const list = [];
@@ -904,7 +906,7 @@ export class TableRenderer extends React.Component {
   //         imageList: [...list],
   //       }));
   //     }
-  //     console.log('this.state.imageList', listjoin === join, this.state.imageList);
+  //     // console.log('this.state.imageList', listjoin === join, this.state.imageList);
   //   })();
   // }
 
@@ -921,7 +923,7 @@ export class TableRenderer extends React.Component {
     const visibleColKeys = colKeys.filter(
       key =>
         // Is the key hidden by one of its parents?
-        !key.some((k, j) => this.state.collapsedCols[flatKey(key.slice(0, j))]) &&
+        !key.some((_, j) => this.state.collapsedCols[flatKey(key.slice(0, j))]) &&
         // Leaf key.
         (key.length === colAttrs.length ||
           // Children hidden. Must show total.
@@ -929,14 +931,14 @@ export class TableRenderer extends React.Component {
           // Don't hide totals.
           !colSubtotalDisplay.hideOnExpand),
     ).map(v => v[1]);
-    console.log('visibleColKeys', visibleColKeys);
+    // console.log('visibleColKeys', visibleColKeys);
 
     try {
       // 각 이미지 URL에 대해 toDataURL 함수를 호출합니다.
       visibleColKeys.forEach(url => {
-        console.log('url', url);
+        // console.log('url', url);
         this.toDataURL(DUDAGI_URL + url, dataUrl => {
-          console.log('dataUrl', dataUrl)
+          // console.log('dataUrl', dataUrl)
           this.setState(prevState => ({
             base64URLs: [...prevState.base64URLs, dataUrl],
           }));
@@ -945,7 +947,7 @@ export class TableRenderer extends React.Component {
     } catch (e) {
       console.error('Error: ', e);
     }
-    console.log(1);
+    // console.log(1);
   }
 
   toDataURL(src, callback, outputFormat = 'image/png') {
@@ -1010,7 +1012,7 @@ export class TableRenderer extends React.Component {
     // };
 
     const { base64URLs } = this.state;
-    console.log("base64URLs", base64URLs);
+    // console.log("base64URLs", base64URLs);
 
     return (
       // <Styles isDashboardEditMode={this.isDashboardEditMode()}>
