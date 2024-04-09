@@ -935,6 +935,7 @@ export class TableRenderer extends React.Component {
     visibleColKeys.forEach(url => {
       console.log('url', url);
       this.toDataURL(url, dataUrl => {
+        console.log('dataUrl', dataUrl)
         this.setState(prevState => ({
           base64URLs: [...prevState.base64URLs, dataUrl],
         }));
