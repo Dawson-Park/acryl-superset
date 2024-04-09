@@ -853,6 +853,10 @@ export class TableRenderer extends React.Component {
   // }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    if(!this.visibleKeys) {
+      return;
+    }
+
     if (this.cachedProps !== this.props) {
       this.cachedProps = this.props;
       this.cachedBasePivotSettings = this.getBasePivotSettings();
