@@ -932,7 +932,7 @@ export class TableRenderer extends React.Component {
 
     // 각 이미지 URL에 대해 toDataURL 함수를 호출합니다.
     visibleColKeys.forEach(url => {
-      this.toDataURL(url, dataUrl => {
+      this.toDataURL(url[1], dataUrl => {
         this.setState(prevState => ({
           base64URLs: [...prevState.base64URLs, dataUrl],
         }));
@@ -1002,6 +1002,7 @@ export class TableRenderer extends React.Component {
     // };
 
     const { base64URLs } = this.state;
+    console.log(base64URLs);
 
     return (
       // <Styles isDashboardEditMode={this.isDashboardEditMode()}>
@@ -1012,7 +1013,11 @@ export class TableRenderer extends React.Component {
                 <img key={index} src={base64URL} alt={`Converted ${index}`} />
               ))
             ) : (
-              <p>Loading images...</p>
+              visibleColKeys.map((v, i) => (
+                <div key={i} className='screenshot-image-box'>
+                  <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>
+                </div>
+              ))
             )
           }
 
