@@ -853,6 +853,7 @@ export class TableRenderer extends React.Component {
   // }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(this.visibleKeys);
     if(!this.visibleKeys) {
       return;
     }
