@@ -65,7 +65,7 @@ export class TableRenderer extends React.Component {
     // We need state to record which entries are collapsed and which aren't.
     // This is an object with flat-keys indicating if the corresponding rows
     // should be collapsed.
-    this.state = { collapsedRows: {}, collapsedCols: {}, imageList: [] };
+    this.state = { collapsedRows: {}, collapsedCols: {}, base64URLs: [] };
 
     this.clickHeaderHandler = this.clickHeaderHandler.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
@@ -852,7 +852,63 @@ export class TableRenderer extends React.Component {
   //   return document.contains(document.querySelector('.dashboard--editing'));
   // }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  // getData() {
+  //   if (this.cachedProps !== this.props) {
+  //     this.cachedProps = this.props;
+  //     this.cachedBasePivotSettings = this.getBasePivotSettings();
+  //   }
+  //   const {
+  //     colAttrs,
+  //     colKeys,
+  //     colSubtotalDisplay,
+  //   } = this.cachedBasePivotSettings;
+  //
+  //   const visibleColKeys = colKeys.filter(
+  //     key =>
+  //       // Is the key hidden by one of its parents?
+  //       !key.some((k, j) => this.state.collapsedCols[flatKey(key.slice(0, j))]) &&
+  //       // Leaf key.
+  //       (key.length === colAttrs.length ||
+  //         // Children hidden. Must show total.
+  //         flatKey(key) in this.state.collapsedCols ||
+  //         // Don't hide totals.
+  //         !colSubtotalDisplay.hideOnExpand),
+  //   )
+  //   console.log(visibleColKeys);
+  //
+  //   (async () => {
+  //     const list = [];
+  //
+  //     for (let i = 0; i < visibleColKeys.length; i++) {
+  //       const v = visibleColKeys[i];
+  //
+  //       try {
+  //         const response = await fetch(DUDAGI_URL + v[1]);
+  //         const blob = await response.blob();
+  //         const reader = new FileReader();
+  //         reader.readAsDataURL(blob);
+  //         reader.onloadend = () => {
+  //           const base64data = reader.result;
+  //           list.push(base64data);
+  //         };
+  //       } catch (e) {
+  //         console.error("Error: ", e);
+  //       }
+  //     }
+  //
+  //     const listjoin = list.join(',');
+  //     const join = this.state.imageList.join(',');
+  //
+  //     if(listjoin !== join) {
+  //       this.setState(() => ({
+  //         imageList: [...list],
+  //       }));
+  //     }
+  //     console.log('this.state.imageList', listjoin === join, this.state.imageList);
+  //   })();
+  // }
+
+  componentDidMount() {
     if (this.cachedProps !== this.props) {
       this.cachedProps = this.props;
       this.cachedBasePivotSettings = this.getBasePivotSettings();
@@ -862,7 +918,6 @@ export class TableRenderer extends React.Component {
       colKeys,
       colSubtotalDisplay,
     } = this.cachedBasePivotSettings;
-
     const visibleColKeys = colKeys.filter(
       key =>
         // Is the key hidden by one of its parents?
@@ -873,39 +928,37 @@ export class TableRenderer extends React.Component {
           flatKey(key) in this.state.collapsedCols ||
           // Don't hide totals.
           !colSubtotalDisplay.hideOnExpand),
-    )
-    console.log(visibleColKeys);
+    );
 
-    (async () => {
-      const list = [];
-
-      for (let i = 0; i < visibleColKeys.length; i++) {
-        const v = visibleColKeys[i];
-
-        try {
-          const response = await fetch(DUDAGI_URL + v[1]);
-          const blob = await response.blob();
-          const reader = new FileReader();
-          reader.readAsDataURL(blob);
-          reader.onloadend = () => {
-            const base64data = reader.result;
-            list.push(base64data);
-          };
-        } catch (e) {
-          console.error("Error: ", e);
-        }
-      }
-
-      const listjoin = list.join(',');
-      const join = this.state.imageList.join(',');
-
-      if(listjoin !== join) {
-        this.setState(() => ({
-          imageList: [...list],
+    // 각 이미지 URL에 대해 toDataURL 함수를 호출합니다.
+    visibleColKeys.forEach(url => {
+      this.toDataURL(url, dataUrl => {
+        this.setState(prevState => ({
+          base64URLs: [...prevState.base64URLs, dataUrl],
         }));
-      }
-      console.log('this.state.imageList', listjoin === join, this.state.imageList);
-    })();
+      });
+    });
+  }
+
+  toDataURL(src, callback, outputFormat = 'image/png') {
+    const img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      let dataURL;
+      canvas.height = this.naturalHeight;
+      canvas.width = this.naturalWidth;
+      ctx.drawImage(this, 0, 0);
+      dataURL = canvas.toDataURL(outputFormat);
+      callback(dataURL);
+    };
+    img.src = DUDAGI_URL + src;
+    if (img.complete || img.complete === undefined) {
+      // 로드를 강제로 다시 시도하기 전에 일시적으로 다른 src를 할당합니다.
+      img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+      img.src = src;
+    }
   }
 
   render() {
@@ -948,22 +1001,18 @@ export class TableRenderer extends React.Component {
     //   ...this.cachedBasePivotSettings,
     // };
 
+    const { base64URLs } = this.state;
+
     return (
       // <Styles isDashboardEditMode={this.isDashboardEditMode()}>
         <div className='screenshot-chart-container'>
           {
-            this.state.imageList.length === 0 ? (
-              visibleColKeys.map((v, i) => (
-                <div key={i} className='screenshot-image-box'>
-                  <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>
-                </div>
+            base64URLs.length > 0 ? (
+              base64URLs.map((base64URL, index) => (
+                <img key={index} src={base64URL} alt={`Converted ${index}`} />
               ))
             ) : (
-              this.state.imageList.map((v, i) => (
-                <div key={i} className='screenshot-image-box'>
-                  <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>
-                </div>
-              ))
+              <p>Loading images...</p>
             )
           }
 
