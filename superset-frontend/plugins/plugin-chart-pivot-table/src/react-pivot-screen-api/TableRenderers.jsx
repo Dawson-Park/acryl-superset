@@ -853,7 +853,7 @@ export class TableRenderer extends React.Component {
   // }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(this.visibleKeys);
+    console.log('this.visibleKeys', this.visibleKeys);
     if(!this.visibleKeys) {
       return;
     }
@@ -874,6 +874,7 @@ export class TableRenderer extends React.Component {
       colAttrs.length,
       colSubtotalDisplay,
     )
+    console.log('visibleColKeys', visibleColKeys);
 
     (async () => {
       const list = [];
@@ -895,7 +896,10 @@ export class TableRenderer extends React.Component {
         }
       }
 
-      this.state.imageList = [...list];
+      this.setState(() => ({
+        imageList: [...list],
+      }));
+      // this.state.imageList = [...list];
       console.log('this.state.imageList', this.state.imageList);
     })();
   }
