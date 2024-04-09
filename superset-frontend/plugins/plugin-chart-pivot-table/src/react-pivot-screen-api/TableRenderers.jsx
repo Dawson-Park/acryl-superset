@@ -899,9 +899,11 @@ export class TableRenderer extends React.Component {
       const listjoin = list.join(',');
       const join = this.state.imageList.join(',');
 
-      this.setState(() => ({
-        imageList: [...list],
-      }));
+      if(listjoin !== join) {
+        this.setState(() => ({
+          imageList: [...list],
+        }));
+      }
       console.log('this.state.imageList', listjoin === join, this.state.imageList);
     })();
   }
