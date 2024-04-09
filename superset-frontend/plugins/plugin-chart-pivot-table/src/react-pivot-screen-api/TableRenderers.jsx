@@ -931,16 +931,20 @@ export class TableRenderer extends React.Component {
     ).map(v => v[1]);
     console.log('visibleColKeys', visibleColKeys);
 
-    // 각 이미지 URL에 대해 toDataURL 함수를 호출합니다.
-    visibleColKeys.forEach(url => {
-      console.log('url', url);
-      this.toDataURL(DUDAGI_URL + url, dataUrl => {
-        console.log('dataUrl', dataUrl)
-        this.setState(prevState => ({
-          base64URLs: [...prevState.base64URLs, dataUrl],
-        }));
+    try {
+      // 각 이미지 URL에 대해 toDataURL 함수를 호출합니다.
+      visibleColKeys.forEach(url => {
+        console.log('url', url);
+        this.toDataURL(DUDAGI_URL + url, dataUrl => {
+          console.log('dataUrl', dataUrl)
+          this.setState(prevState => ({
+            base64URLs: [...prevState.base64URLs, dataUrl],
+          }));
+        });
       });
-    });
+    } catch (e) {
+      console.error('Error: ', e);
+    }
     console.log(1);
   }
 
