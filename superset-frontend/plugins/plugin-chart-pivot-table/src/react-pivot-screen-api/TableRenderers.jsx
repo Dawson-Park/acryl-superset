@@ -910,66 +910,66 @@ export class TableRenderer extends React.Component {
   //   })();
   // }
 
-  componentDidMount() {
-    if (this.cachedProps !== this.props) {
-      this.cachedProps = this.props;
-      this.cachedBasePivotSettings = this.getBasePivotSettings();
-    }
-    const {
-      colAttrs,
-      colKeys,
-      colSubtotalDisplay,
-    } = this.cachedBasePivotSettings;
-    const visibleColKeys = colKeys.filter(
-      key =>
-        // Is the key hidden by one of its parents?
-        !key.some((_, j) => this.state.collapsedCols[flatKey(key.slice(0, j))]) &&
-        // Leaf key.
-        (key.length === colAttrs.length ||
-          // Children hidden. Must show total.
-          flatKey(key) in this.state.collapsedCols ||
-          // Don't hide totals.
-          !colSubtotalDisplay.hideOnExpand),
-    ).map(v => v[1]);
-    // console.log('visibleColKeys', visibleColKeys);
-
-    try {
-      // 각 이미지 URL에 대해 toDataURL 함수를 호출합니다.
-      visibleColKeys.forEach(url => {
-        // console.log('url', url);
-        this.toDataURL(DUDAGI_URL + url, dataUrl => {
-          // console.log('dataUrl', dataUrl)
-          this.setState(prevState => ({
-            base64URLs: [...prevState.base64URLs, dataUrl],
-          }));
-        });
-      });
-    } catch (e) {
-      console.error('Error: ', e);
-    }
-    // console.log(1);
-  }
-
-  toDataURL(src, callback, outputFormat = 'image/png') {
-    const img = new Image();
-    img.crossOrigin = 'Anonymous';
-    img.onload = function() {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      let dataURL;
-      canvas.height = this.naturalHeight;
-      canvas.width = this.naturalWidth;
-      ctx.drawImage(this, 0, 0);
-      dataURL = canvas.toDataURL(outputFormat);
-      callback(dataURL);
-    };
-    img.src = src;
-    if (img.complete || img.complete === undefined) {
-      // 로드를 강제로 다시 시도하기 전에 일시적으로 다른 src를 할당합니다.
-      img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-      img.src = src;
-    }
-  }
+  // componentDidMount() {
+  //   if (this.cachedProps !== this.props) {
+  //     this.cachedProps = this.props;
+  //     this.cachedBasePivotSettings = this.getBasePivotSettings();
+  //   }
+  //   const {
+  //     colAttrs,
+  //     colKeys,
+  //     colSubtotalDisplay,
+  //   } = this.cachedBasePivotSettings;
+  //   const visibleColKeys = colKeys.filter(
+  //     key =>
+  //       // Is the key hidden by one of its parents?
+  //       !key.some((_, j) => this.state.collapsedCols[flatKey(key.slice(0, j))]) &&
+  //       // Leaf key.
+  //       (key.length === colAttrs.length ||
+  //         // Children hidden. Must show total.
+  //         flatKey(key) in this.state.collapsedCols ||
+  //         // Don't hide totals.
+  //         !colSubtotalDisplay.hideOnExpand),
+  //   ).map(v => v[1]);
+  //   // console.log('visibleColKeys', visibleColKeys);
+  //
+  //   try {
+  //     // 각 이미지 URL에 대해 toDataURL 함수를 호출합니다.
+  //     visibleColKeys.forEach(url => {
+  //       // console.log('url', url);
+  //       this.toDataURL(DUDAGI_URL + url, dataUrl => {
+  //         // console.log('dataUrl', dataUrl)
+  //         this.setState(prevState => ({
+  //           base64URLs: [...prevState.base64URLs, dataUrl],
+  //         }));
+  //       });
+  //     });
+  //   } catch (e) {
+  //     console.error('Error: ', e);
+  //   }
+  //   // console.log(1);
+  // }
+  //
+  // toDataURL(src, callback, outputFormat = 'image/png') {
+  //   const img = new Image();
+  //   img.crossOrigin = 'Anonymous';
+  //   img.onload = function() {
+  //     const canvas = document.createElement('canvas');
+  //     const ctx = canvas.getContext('2d');
+  //     let dataURL;
+  //     canvas.height = this.naturalHeight;
+  //     canvas.width = this.naturalWidth;
+  //     ctx.drawImage(this, 0, 0);
+  //     dataURL = canvas.toDataURL(outputFormat);
+  //     callback(dataURL);
+  //   };
+  //   img.src = src;
+  //   if (img.complete || img.complete === undefined) {
+  //     // 로드를 강제로 다시 시도하기 전에 일시적으로 다른 src를 할당합니다.
+  //     img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+  //     img.src = src;
+  //   }
+  // }
 
   render() {
     if (this.cachedProps !== this.props) {
@@ -1011,31 +1011,31 @@ export class TableRenderer extends React.Component {
     //   ...this.cachedBasePivotSettings,
     // };
 
-    const { base64URLs } = this.state;
+    // const { base64URLs } = this.state;
     // console.log("base64URLs", base64URLs);
 
     return (
       // <Styles isDashboardEditMode={this.isDashboardEditMode()}>
         <div className='screenshot-chart-container'>
-          {
-            base64URLs.length > 0 ? (
-              base64URLs.map((base64URL, index) => (
-                <img key={index} src={base64URL} alt={`Converted ${index}`} />
-              ))
-            ) : (
-              visibleColKeys.map((v, i) => (
-                <div key={i} className='screenshot-image-box'>
-                  <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>
-                </div>
-              ))
-            )
-          }
+          {/*{*/}
+          {/*  base64URLs.length > 0 ? (*/}
+          {/*    base64URLs.map((base64URL, index) => (*/}
+          {/*      <img key={index} src={base64URL} alt={`Converted ${index}`} />*/}
+          {/*    ))*/}
+          {/*  ) : (*/}
+          {/*    visibleColKeys.map((v, i) => (*/}
+          {/*      <div key={i} className='screenshot-image-box'>*/}
+          {/*        <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>*/}
+          {/*      </div>*/}
+          {/*    ))*/}
+          {/*  )*/}
+          {/*}*/}
 
-          {/*{visibleColKeys.map((v, i) => (*/}
-          {/*  <div key={i} className='screenshot-image-box'>*/}
-          {/*    <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>*/}
-          {/*  </div>*/}
-          {/*))}*/}
+          {visibleColKeys.map((v, i) => (
+            <div key={i} className='screenshot-image-box'>
+              <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>
+            </div>
+          ))}
         </div>
         // {/*<table className="pvtTable" role="grid">*/}
         // {/*  <thead>*/}
