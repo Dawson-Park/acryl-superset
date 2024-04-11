@@ -74,6 +74,7 @@ services:
     volumes: *superset-volumes
     environment:
       CYPRESS_CONFIG: "${CYPRESS_CONFIG}"
+      SUPERSET_FEATURE_EMBEDDED_SUPERSET: "true"
 
 #   superset-websocket:
 #     container_name: superset_websocket

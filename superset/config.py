@@ -184,12 +184,11 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 SECRET_KEY = os.environ.get("SUPERSET_SECRET_KEY") or CHANGE_ME_SECRET_KEY
 
 # The SQLAlchemy connection string.
-SQLALCHEMY_DATABASE_URI = (
-    f"""sqlite:///{os.path.join(DATA_DIR, "superset.db")}?check_same_thread=false"""
-)
-
+# SQLALCHEMY_DATABASE_URI = (
+#     f"""sqlite:///{os.path.join(DATA_DIR, "superset.db")}?check_same_thread=false"""
+# )
 # SQLALCHEMY_DATABASE_URI = 'mysql://myapp@localhost/myapp'
-# SQLALCHEMY_DATABASE_URI = 'postgresql://root:password@localhost/myapp'
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@db:5432/superset'
 
 # In order to hook up a custom password store for all SQLALCHEMY connections
 # implement a function that takes a single argument of type 'sqla.engine.url',
@@ -239,7 +238,7 @@ SQLALCHEMY_ENCRYPTED_FIELD_TYPE_ADAPTER = (  # pylint: disable=invalid-name
 QUERY_SEARCH_LIMIT = 1000
 
 # Flask-WTF flag for CSRF
-WTF_CSRF_ENABLED = True
+WTF_CSRF_ENABLED = False
 
 # Add endpoints that need to be exempt from CSRF protection
 WTF_CSRF_EXEMPT_LIST = [
@@ -263,7 +262,9 @@ SHOW_STACKTRACE = False
 
 # Use all X-Forwarded headers when ENABLE_PROXY_FIX is True.
 # When proxying to a different port, set "x_port" to 0 to avoid downstream issues.
-ENABLE_PROXY_FIX = False
+# ENABLE_PROXY_FIX = False
+ENABLE_PROXY_FIX = True
+PUBLIC_ROLE_LIKE_GAMMA = True
 PROXY_FIX_CONFIG = {"x_for": 1, "x_proto": 1, "x_host": 1, "x_port": 1, "x_prefix": 1}
 
 # Configuration for scheduling queries from SQL Lab.
@@ -343,7 +344,8 @@ AUTH_TYPE = AUTH_DB
 # Grant public role the same set of permissions as for a selected builtin role.
 # This is useful if one wants to enable anonymous users to view
 # dashboards. Explicit grant on specific datasets is still required.
-PUBLIC_ROLE_LIKE: str | None = None
+# PUBLIC_ROLE_LIKE: str | None = None
+PUBLIC_ROLE_LIKE: str | None = "Gamma"
 
 # ---------------------------------------------------
 # Babel config for translations
@@ -451,7 +453,8 @@ DEFAULT_FEATURE_FLAGS: dict[str, bool] = {
     "DASHBOARD_VIRTUALIZATION": False,
     "GLOBAL_ASYNC_QUERIES": False,
     "VERSIONED_EXPORT": True,  # deprecated
-    "EMBEDDED_SUPERSET": False,
+#     "EMBEDDED_SUPERSET": False,
+    "EMBEDDED_SUPERSET": True,
     # Enables Alerts and reports new implementation
     "ALERT_REPORTS": False,
     "DASHBOARD_RBAC": False,
@@ -749,8 +752,14 @@ EXPLORE_FORM_DATA_CACHE_CONFIG: CacheConfig = {
 STORE_CACHE_KEYS_IN_METADATA_DB = False
 
 # CORS Options
-ENABLE_CORS = False
-CORS_OPTIONS: dict[Any, Any] = {}
+ENABLE_CORS = True
+CORS_OPTIONS: dict[Any, Any] = {
+                                 'supports_credentials': True,
+                                 'allow_headers': ['*'],
+                                 'resources':['*'],
+                                 # 'origins': ['http://localhost:8088', 'http://localhost:8888', 'http://localhost:5173']
+                                 'origins': ['*']
+                               }
 
 # Sanitizes the HTML content used in markdowns to allow its rendering in a safe manner.
 # Disabling this option is not recommended for security reasons. If you wish to allow
@@ -977,8 +986,16 @@ CELERY_CONFIG = CeleryConfig  # pylint: disable=invalid-name
 # OVERRIDE_HTTP_HEADERS: sets override values for HTTP headers. These values will
 # override anything set within the app
 DEFAULT_HTTP_HEADERS: dict[str, Any] = {}
-OVERRIDE_HTTP_HEADERS: dict[str, Any] = {}
-HTTP_HEADERS: dict[str, Any] = {}
+# OVERRIDE_HTTP_HEADERS: dict[str, Any] = {}
+# HTTP_HEADERS: dict[str, Any] = {}
+OVERRIDE_HTTP_HEADERS: dict[str, Any] = {
+#   "X-Frame-Options": "ALLOW-FROM http://localhost:5173/"
+  'X-Frame-Options': 'ALLOWALL'
+}
+HTTP_HEADERS: dict[str, Any] = {
+#   "X-Frame-Options": "ALLOW-FROM http://localhost:5173/"
+  'X-Frame-Options': 'ALLOWALL'
+}
 
 # The db id here results in selecting this one as a default in SQL Lab
 DEFAULT_DB_ID = None
@@ -1422,7 +1439,8 @@ TEST_DATABASE_CONNECTION_TIMEOUT = timedelta(seconds=30)
 CONTENT_SECURITY_POLICY_WARNING = True
 
 # Do you want Talisman enabled?
-TALISMAN_ENABLED = utils.cast_to_boolean(os.environ.get("TALISMAN_ENABLED", True))
+# TALISMAN_ENABLED = utils.cast_to_boolean(os.environ.get("TALISMAN_ENABLED", True))
+TALISMAN_ENABLED = False
 
 # If you want Talisman, how do you want it configured??
 TALISMAN_CONFIG = {
@@ -1477,9 +1495,11 @@ TALISMAN_DEV_CONFIG = {
 # See https://flask.palletsprojects.com/en/1.1.x/security/#set-cookie-options
 # for details
 #
-SESSION_COOKIE_HTTPONLY = True  # Prevent cookie from being read by frontend JS?
+# SESSION_COOKIE_HTTPONLY = True  # Prevent cookie from being read by frontend JS?
+SESSION_COOKIE_HTTPONLY = False  # Prevent cookie from being read by frontend JS?
 SESSION_COOKIE_SECURE = False  # Prevent cookie from being transmitted over non-tls?
-SESSION_COOKIE_SAMESITE: Literal["None", "Lax", "Strict"] | None = "Lax"
+# SESSION_COOKIE_SAMESITE: Literal["None", "Lax", "Strict"] | None = "Lax"
+SESSION_COOKIE_SAMESITE = None
 # Whether to use server side sessions from flask-session or Flask secure cookies
 SESSION_SERVER_SIDE = False
 # Example config using Redis as the backend for server side sessions
