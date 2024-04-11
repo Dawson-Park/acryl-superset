@@ -25,8 +25,8 @@ import PropTypes from 'prop-types';
 import { PivotData, flatKey } from './utilities';
 // import { Styles } from './Styles';
 
-const DUDAGI_URL = 'http://gocap.kr:30643/api/v1/storage/';
-// const DUDAGI_URL = 'http://125.129.210.138:80/api/v1/storage/';
+// const DUDAGI_URL = 'http://gocap.kr:30643/api/v1/storage/';
+const DUDAGI_URL = 'http://125.129.210.138:80/api/v1/storage/';
 
 // const parseLabel = value => {
 //   if (typeof value === 'number' || typeof value === 'string') {
