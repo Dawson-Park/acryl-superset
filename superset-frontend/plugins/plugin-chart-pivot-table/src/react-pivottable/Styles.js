@@ -72,6 +72,7 @@ export const Styles = styled.div`
     table.pvtTable tbody tr:last-of-type th,
     table.pvtTable tbody tr:last-of-type td {
       border-bottom: 1px solid ${theme.colors.grayscale.light2};
+      min-width: 60px;
     }
 
     table.pvtTable
