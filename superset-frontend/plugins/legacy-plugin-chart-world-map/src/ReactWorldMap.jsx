@@ -39,6 +39,10 @@ WorldMapComponent.propTypes = {
 export default styled(WorldMapComponent)`
   .superset-legacy-chart-world-map {
     position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
     svg {
       background-color: ${({ theme }) => theme.colors.grayscale.light5};
     }

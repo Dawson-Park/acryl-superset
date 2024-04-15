@@ -198,8 +198,8 @@ function WorldMap(element, props) {
 
   const map = new Datamap({
     element,
-    width: width - 16,
-    height: height - 16,
+    width,
+    height,
     data: processedData,
     fills: {
       defaultFill: theme.colors.grayscale.light2,
