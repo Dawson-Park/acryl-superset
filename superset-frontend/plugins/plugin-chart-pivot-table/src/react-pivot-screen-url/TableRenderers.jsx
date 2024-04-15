@@ -57,8 +57,6 @@ import { PivotData, flatKey } from './utilities';
 //   );
 // }
 
-const TEST = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg4rQb1Tjr2KNSe5A2I5FegW2Vw-_kohEWINsmLYxD-w&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOg4SCkphgqBOTS3finNqYMBwXdUSsfxy2N1eN4hUC0A&s"]
-
 export class TableRenderer extends React.Component {
   constructor(props) {
     super(props);
@@ -850,32 +848,25 @@ export class TableRenderer extends React.Component {
   }
 
   componentDidMount() {
-    // if (this.cachedProps !== this.props) {
-    //   this.cachedProps = this.props;
-    //   this.cachedBasePivotSettings = this.getBasePivotSettings();
-    // }
-    // const {
-    //   colAttrs,
-    //   colKeys,
-    //   colSubtotalDisplay,
-    // } = this.cachedBasePivotSettings;
-    // const visibleColKeys = colKeys.filter(
-    //   key =>
-    //     !key.some((_, j) => this.state.collapsedCols[flatKey(key.slice(0, j))]) &&
-    //     (key.length === colAttrs.length ||
-    //       flatKey(key) in this.state.collapsedCols ||
-    //       !colSubtotalDisplay.hideOnExpand),
-    // ).map(v => v[1]);
+    if (this.cachedProps !== this.props) {
+      this.cachedProps = this.props;
+      this.cachedBasePivotSettings = this.getBasePivotSettings();
+    }
+    const {
+      colAttrs,
+      colKeys,
+      colSubtotalDisplay,
+    } = this.cachedBasePivotSettings;
+    const visibleColKeys = colKeys.filter(
+      key =>
+        !key.some((_, j) => this.state.collapsedCols[flatKey(key.slice(0, j))]) &&
+        (key.length === colAttrs.length ||
+          flatKey(key) in this.state.collapsedCols ||
+          !colSubtotalDisplay.hideOnExpand),
+    ).map(v => v[1]);
 
     try {
-      // visibleColKeys.forEach(url => {
-      //   this.toDataURL(url, dataUrl => {
-      //     this.setState(prevState => ({
-      //       base64URLs: [...prevState.base64URLs, dataUrl],
-      //     }));
-      //   });
-      // });
-      TEST.forEach(url => {
+      visibleColKeys.forEach(url => {
         this.toDataURL(url, dataUrl => {
           this.setState(prevState => ({
             base64URLs: [...prevState.base64URLs, dataUrl],
@@ -952,8 +943,8 @@ export class TableRenderer extends React.Component {
     return (
       <div className='screenshot-chart-container'>
         {
-          /*base64URLs*/TEST.length > 0 ? (
-            /*base64URLs*/TEST.map((base64URL, index) => (
+          base64URLs.length > 0 ? (
+            base64URLs.map((base64URL, index) => (
               <img key={ index } src={ base64URL } alt={ `Converted ${ index }` }/>
             ))
           ) : (
