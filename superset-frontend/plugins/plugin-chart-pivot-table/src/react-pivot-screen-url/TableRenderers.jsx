@@ -952,8 +952,8 @@ export class TableRenderer extends React.Component {
     return (
       <div className='screenshot-chart-container'>
         {
-          base64URLs.length > 0 ? (
-            base64URLs.map((base64URL, index) => (
+          /*base64URLs*/TEST.length > 0 ? (
+            /*base64URLs*/TEST.map((base64URL, index) => (
               <img key={ index } src={ base64URL } alt={ `Converted ${ index }` }/>
             ))
           ) : (
