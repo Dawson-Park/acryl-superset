@@ -161,10 +161,10 @@ const BigdataIcon = () => (
 );
 
 const list = [
-  { label: '모니터링', to: '#', icon: <MonotoringIcon /> },
-  { label: '심의', to: '#', icon: <ReviewIcon /> },
-  { label: '통계', to: '#', icon: <StatisticsIcon /> },
-  { label: '업무포털', to: '#', icon: <PortalIcon /> },
+  { label: '모니터링', to: 'http://icopsmt.kcopa.or.kr:8080/', icon: <MonotoringIcon /> },
+  { label: '심의', to: 'https://icopsres.kcopa.or.kr/dlbrt/main.do', icon: <ReviewIcon /> },
+  { label: '통계', to: 'http://icopsstat.kcopa.or.kr:9001/editds/report/viewer.do', icon: <StatisticsIcon /> },
+  { label: '업무포털', to: 'https://icopsres.kcopa.or.kr/taskportal/main.do', icon: <PortalIcon /> },
   { label: '빅데이터 통계분석', to: '/superset/dashboard/license_dashboard/', icon: <BigdataIcon /> },
 ];
 
