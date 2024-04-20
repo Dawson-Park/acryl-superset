@@ -1,2 +1,2 @@
 #!/bin/bash
-docker stop superset_app superset_nginx superset_worker_beat superset_worker superset_node superset_cache superset_db
+docker stop superset_app superset_worker superset_worker_beat superset_node superset_init superset_nginx
