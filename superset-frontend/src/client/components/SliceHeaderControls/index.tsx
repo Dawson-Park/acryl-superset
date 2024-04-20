@@ -18,6 +18,7 @@
  */
 import React, {
   MouseEvent,
+  useEffect,
   // Key,
   // ReactChild,
   // useState,
@@ -59,6 +60,7 @@ import { LOG_ACTIONS_CHART_DOWNLOAD_AS_IMAGE } from 'src/logger/LogUtils';
 // import { RootState } from 'src/client/types';
 // import { useCrossFiltersScopingModal } from '../nativeFilters/FilterBar/CrossFilters/ScopingModal/useCrossFiltersScopingModal';
 import DownloadButton from '../DownloadButton';
+import useEffectEvent from '../../../hooks/useEffectEvent';
 
 // const MENU_KEYS = {
 //   DOWNLOAD_AS_IMAGE: 'download_as_image',
@@ -570,6 +572,10 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
   const onClickExcel = () => {
     props.exportXLSX?.(props.slice.slice_id);
   };
+
+  useEffect(() => {
+    console.log(props)
+  }, [props])
 
   return (
     <>
