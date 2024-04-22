@@ -23,6 +23,7 @@ import React from 'react';
 // import { t } from '@superset-ui/core';
 import PropTypes from 'prop-types';
 import { PivotData, flatKey } from './utilities';
+import downloadAsImage from '../plugin/downloadAsImage';
 // import { Styles } from './Styles';
 
 // const parseLabel = value => {
@@ -957,8 +958,16 @@ export class TableRenderer extends React.Component {
         {/*}*/}
 
         {visibleColKeys.map((v, i) => (
-          <div key={i} className='screenshot-image-box'>
-            <img src={v[1]} alt={v[1]} className="screenshot-image"/>
+          <div key={i} className='screenshot-image-box' onClick={e => {
+            downloadAsImage(
+              `div.screenshot-image-box img.screenshot-image[data-imgsrc="${
+                v[1]
+              }"]`,
+              v[1],
+              true,
+            )(e);
+          }}>
+            <img src={v[1]} alt={v[1]} data-imgsrc={v[1]} className="screenshot-image"/>
           </div>
         ))}
       </div>

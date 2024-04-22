@@ -18,7 +18,6 @@
  */
 import React, {
   MouseEvent,
-  useEffect,
   // Key,
   // ReactChild,
   // useState,
@@ -572,10 +571,6 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
   const onClickExcel = () => {
     props.exportXLSX?.(props.slice.slice_id);
   };
-
-  useEffect(() => {
-    console.log(props)
-  }, [props])
 
   return (
     <>

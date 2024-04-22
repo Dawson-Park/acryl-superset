@@ -23,6 +23,7 @@ import React from 'react';
 // import { t } from '@superset-ui/core';
 import PropTypes from 'prop-types';
 import { PivotData, flatKey } from './utilities';
+import downloadAsImage from '../plugin/downloadAsImage';
 // import { Styles } from './Styles';
 
 // const DUDAGI_URL = 'http://gocap.kr:30643/api/v1/storage/';
@@ -1032,8 +1033,16 @@ export class TableRenderer extends React.Component {
           {/*}*/}
 
           {visibleColKeys.map((v, i) => (
-            <div key={i} className='screenshot-image-box'>
-              <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} className="screenshot-image"/>
+            <div key={i} className='screenshot-image-box' onClick={e => {
+              downloadAsImage(
+                `div.screenshot-image-box img.screenshot-image[data-imgsrc="${
+                  DUDAGI_URL + v[1]
+                }"]`,
+                DUDAGI_URL,
+                true,
+              )(e);
+            }}>
+              <img src={DUDAGI_URL + v[1]} alt={DUDAGI_URL + v[1]} data-imgsrc={DUDAGI_URL + v[1]} className="screenshot-image"/>
             </div>
           ))}
         </div>
