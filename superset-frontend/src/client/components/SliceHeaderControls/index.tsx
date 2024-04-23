@@ -600,7 +600,7 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
       {/*  </span> */}
       {/* </NoAnimationDropdown> */}
       <ButtonBox data-sliceid={props.slice.slice_id}>
-        {props.supersetCanCSV && isTable ? (
+        {['table', 'pivot_table_v2'].includes(props.slice.viz_type) ? (
           <DownloadButton
             onClick={
               isFeatureEnabled(FeatureFlag.ALLOW_FULL_CSV_EXPORT)
@@ -608,17 +608,32 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
                 : onClickExcel
             }
           >
-            엑셀
+            시트 저장
           </DownloadButton>
         ) : (
-          // isFeatureEnabled(FeatureFlag.ALLOW_FULL_CSV_EXPORT) ? (
-          //   <DownloadButton onClick={onClickExcelFull}>{t('excel')}</DownloadButton>
-          // ) : (
-          //   <DownloadButton onClick={onClickExcel}>{t('excel')}</DownloadButton>
-          // )
-          <DownloadButton onClick={onClickDownloadCSV}>CSV</DownloadButton>
+          <DownloadButton onClick={onClickDownloadImage}>
+            이미지 저장
+          </DownloadButton>
         )}
-        <DownloadButton onClick={onClickDownloadImage}>이미지</DownloadButton>
+        {/*{props.supersetCanCSV && isTable ? (*/}
+        {/*  <DownloadButton*/}
+        {/*    onClick={*/}
+        {/*      isFeatureEnabled(FeatureFlag.ALLOW_FULL_CSV_EXPORT)*/}
+        {/*        ? onClickExcelFull*/}
+        {/*        : onClickExcel*/}
+        {/*    }*/}
+        {/*  >*/}
+        {/*    엑셀*/}
+        {/*  </DownloadButton>*/}
+        {/*) : (*/}
+        {/*  // isFeatureEnabled(FeatureFlag.ALLOW_FULL_CSV_EXPORT) ? (*/}
+        {/*  //   <DownloadButton onClick={onClickExcelFull}>{t('excel')}</DownloadButton>*/}
+        {/*  // ) : (*/}
+        {/*  //   <DownloadButton onClick={onClickExcel}>{t('excel')}</DownloadButton>*/}
+        {/*  // )*/}
+        {/*  <DownloadButton onClick={onClickDownloadCSV}>CSV</DownloadButton>*/}
+        {/*)}*/}
+        {/*<DownloadButton onClick={onClickDownloadImage}>이미지</DownloadButton>*/}
       </ButtonBox>
       {/* {canEditCrossFilters && scopingModal} */}
     </>
