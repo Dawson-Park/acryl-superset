@@ -157,7 +157,8 @@ function SortIcon<D extends object>({ column }: { column: ColumnInstance<D> }) {
 function SearchInput({ count, value, onChange }: SearchInputProps) {
   return (
     <span className="dt-global-filter">
-      {t('Search')}{' '}
+      {/*{t('Search')}{' '}*/}
+      {'결과 내 검색'}{' '}
       <input
         className="form-control input-sm"
         placeholder={tn('search.num_records', count)}
