@@ -29,10 +29,15 @@ interface WelcomeProps {
 const DashboardRoute = ({ user }: WelcomeProps) => {
   const { idOrSlug } = useParams<{ idOrSlug: string }>();
 
-  return Object.keys(user?.roles ?? {}).includes('Client') ? (
-    <ClientDashboardPage idOrSlug={idOrSlug} />
-  ) : (
+  // return Object.keys(user?.roles ?? {}).includes('Client') ? (
+  //   <ClientDashboardPage idOrSlug={idOrSlug} />
+  // ) : (
+  //   <DashboardPage idOrSlug={idOrSlug} />
+  // );
+  return Object.keys(user?.roles ?? {}).includes('Admin') ? (
     <DashboardPage idOrSlug={idOrSlug} />
+  ) : (
+    <ClientDashboardPage idOrSlug={idOrSlug} />
   );
 };
 
