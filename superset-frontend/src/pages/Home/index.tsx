@@ -358,9 +358,10 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
   const histoy = useHistory();
   useEffect(() => {
     // console.log(Object.keys((user as BootstrapUser)?.roles ?? {}));
-    if (Object.keys((user as BootstrapUser)?.roles ?? {}).includes('Client')) {
+    // if (Object.keys((user as BootstrapUser)?.roles ?? {}).includes('Client')) {
+    if (!Object.keys((user as BootstrapUser)?.roles ?? {}).includes('Admin')) {
       document.getElementById('global-navigation-bar')?.remove();
-      // @TODO: dashboard slug 변경 하면 '/superset/dashboard/license_dashboard/'로 변경
+      // @TODO: @dawson URL을 확인해서 파라미터값에 jsessionId가 있으면 dashboard로 이동 아니면 말고
       histoy.push('/superset/dashboard/license_dashboard/');
     }
   }, [user]);

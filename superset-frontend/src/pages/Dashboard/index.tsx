@@ -29,6 +29,7 @@ interface WelcomeProps {
 const DashboardRoute = ({ user }: WelcomeProps) => {
   const { idOrSlug } = useParams<{ idOrSlug: string }>();
 
+  // @TODO: @dawson URL을 확인해서 파라미터값에 jsessionId가 있으면 dashboard로 이동 아니면 말고
   // return Object.keys(user?.roles ?? {}).includes('Client') ? (
   //   <ClientDashboardPage idOrSlug={idOrSlug} />
   // ) : (
