@@ -351,6 +351,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
     ];
   }
 
+  console.log("useEffect.user", (user as BootstrapUser)?.roles);
+
   /**
    * @author Dawson
    * 만약 유저의 권한이 Client인 경우 GNB 삭제
