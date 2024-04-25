@@ -351,15 +351,13 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
     ];
   }
 
-  console.log("useEffect.user", (user as BootstrapUser)?.roles);
-
   /**
    * @author Dawson
    * 만약 유저의 권한이 Client인 경우 GNB 삭제
    */
   const histoy = useHistory();
   useEffect(() => {
-    console.log("user", (user as BootstrapUser)?.roles);
+    console.log("user", Object.keys((user as BootstrapUser)?.roles ?? {}));
     // console.log(Object.keys((user as BootstrapUser)?.roles ?? {}));
     if (Object.keys((user as BootstrapUser)?.roles ?? {}).includes('Client')) {
     // if (!Object.keys((user as BootstrapUser)?.roles ?? {}).includes('Admin')) {
