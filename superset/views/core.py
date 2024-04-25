@@ -940,10 +940,10 @@ class Superset(BaseSupersetView):  # pylint: disable=too-many-public-methods
     def welcome(self) -> FlaskResponse:
         """Personalized welcome page"""
         if not g.user or not get_user_id():
-#             if conf["PUBLIC_ROLE_LIKE"]:
+            if conf["PUBLIC_ROLE_LIKE"]:
 #                 return self.render_template("superset/public_welcome.html")
-#             return redirect(appbuilder.get_url_for_login)
-            return redirect("/superset/dashboard/license_dashboard/")
+                return redirect("/superset/dashboard/license_dashboard/")
+            return redirect(appbuilder.get_url_for_login)
 
         if welcome_dashboard_id := (
             db.session.query(UserAttribute.welcome_dashboard_id)
