@@ -695,8 +695,8 @@ class SupersetIndexView(IndexView):
     @expose("/")
     def index(self) -> FlaskResponse:
         aa = "/superset/welcome/"
-        if not request.args.get('j-session') is None:
-            aa += "?j-session="+request.args.get('j-session')
+        #if not request.args.get('j-session') is None:
+        aa += "?j-session="+request.args.get('j-session')
         return redirect(aa)
 # TODO: @dawson j-session이 있으면 /superset/dashboard/license_dashboard로 이동
 # 아니면 침해대응 사이트의 login으로 보내라
