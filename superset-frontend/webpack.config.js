@@ -355,16 +355,6 @@ const config = {
         use: ['react-hot-loader/webpack'],
       },
       {
-        test: /\.js$/,
-        exclude: /node_modules\/(?!dompurify)/, // dompurify를 제외하고 node_modules를 배제
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
-        }
-      },
-      {
         test: /\.css$/,
         include: [APP_DIR, /superset-ui.+\/src/],
         use: [
@@ -481,7 +471,7 @@ const config = {
     'react/lib/ReactContext': true,
   },
   plugins,
-  devtool: 'source-map',
+  devtool: isDevMode ? 'eval-source-map' : 'source-map',
 };
 
 // find all the symlinked plugins and use their source code for imports
