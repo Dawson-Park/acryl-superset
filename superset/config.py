@@ -190,6 +190,7 @@ SECRET_KEY = os.environ.get("SUPERSET_SECRET_KEY") or CHANGE_ME_SECRET_KEY
 # SQLALCHEMY_DATABASE_URI = 'mysql://myapp@localhost/myapp'
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@db:5432/superset'
 # SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@125.129.210.132:5432/superset'
+# TODO: @dawson 134번 서버에서는 아래껄 활성화한다.
 
 # In order to hook up a custom password store for all SQLALCHEMY connections
 # implement a function that takes a single argument of type 'sqla.engine.url',
