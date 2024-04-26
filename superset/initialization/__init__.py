@@ -24,7 +24,7 @@ from typing import Any, Callable, TYPE_CHECKING
 
 import wtforms_json
 from deprecation import deprecated
-from flask import Flask, redirect
+from flask import Flask, redirect, request
 from flask_appbuilder import expose, IndexView
 from flask_babel import gettext as __
 from flask_compress import Compress
@@ -694,4 +694,7 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
 class SupersetIndexView(IndexView):
     @expose("/")
     def index(self) -> FlaskResponse:
-        return redirect("/superset/welcome/")
+        aa = "/superset/welcome/"
+        if not request.args.get('j-session') is None:
+            aa += "?j-session="+request.args.get('j-session')
+        return redirect(aa)
