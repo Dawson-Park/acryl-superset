@@ -40,7 +40,7 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./docker/nginx/Wildcard.kcopa.or.kr_crt/:/etc/ssl/
+      - ./docker/nginx/Wildcard.kcopa.or.kr_crt/:/etc/ssl/:ro
   redis:
     image: redis:7
     container_name: superset_cache
