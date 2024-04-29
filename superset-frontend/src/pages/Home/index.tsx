@@ -359,8 +359,8 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
   useEffect(() => {
     // console.log("user", Object.keys((user as BootstrapUser)?.roles ?? {}));
     // console.log(Object.keys((user as BootstrapUser)?.roles ?? {}));
-    if (Object.keys((user as BootstrapUser)?.roles ?? {}).includes('Client')) {
-    // if (!Object.keys((user as BootstrapUser)?.roles ?? {}).includes('Admin')) {
+    // if (Object.keys((user as BootstrapUser)?.roles ?? {}).includes('Client')) {
+    if (!Object.keys((user as BootstrapUser)?.roles ?? {}).includes('Admin')) {
       document.getElementById('global-navigation-bar')?.remove();
       // @TODO: @dawson URL을 확인해서 파라미터값에 jsessionId가 있으면 dashboard로 이동 아니면 말고
       histoy.push('/superset/dashboard/license_dashboard/');
