@@ -943,17 +943,18 @@ class Superset(BaseSupersetView):  # pylint: disable=too-many-public-methods
             if conf["PUBLIC_ROLE_LIKE"]:
 # TODO: @dawson 여기서 url을 읽을 수 있으면 front에서 수정 안해도 구별할 수 있음
 #                 return self.render_template("superset/public_welcome.html")
-                  return self.render_template(
-                      "superset/spa.html",
-                      entry="spa",
-                      bootstrap_data=json.dumps(
-                          {
-                              "user": bootstrap_user_data(None, include_perms=True),
-                              "common": common_bootstrap_payload(),
-                          },
-                          default=utils.pessimistic_json_iso_dttm_ser
-                      ),
-                  )
+                  return self.dashboard(dashboard_id_or_slug='license_dashboard')
+#                   return self.render_template(
+#                       "superset/spa.html",
+#                       entry="spa",
+#                       bootstrap_data=json.dumps(
+#                           {
+#                               "user": bootstrap_user_data(None, include_perms=True),
+#                               "common": common_bootstrap_payload(),
+#                           },
+#                           default=utils.pessimistic_json_iso_dttm_ser
+#                       ),
+#                   )
             return redirect(appbuilder.get_url_for_login)
 
         if welcome_dashboard_id := (
