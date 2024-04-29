@@ -347,8 +347,7 @@ AUTH_TYPE = AUTH_DB
 # This is useful if one wants to enable anonymous users to view
 # dashboards. Explicit grant on specific datasets is still required.
 # PUBLIC_ROLE_LIKE: str | None = None
-#PUBLIC_ROLE_LIKE: str | None = "Gamma"
-PUBLIC_ROLE_LIKE: str | None = "Client"
+PUBLIC_ROLE_LIKE: str | None = "Gamma"
 
 # ---------------------------------------------------
 # Babel config for translations
@@ -1586,7 +1585,7 @@ GLOBAL_ASYNC_QUERIES_POLLING_DELAY = int(
 GLOBAL_ASYNC_QUERIES_WEBSOCKET_URL = "ws://127.0.0.1:8080/"
 
 # Embedded config options
-GUEST_ROLE_NAME = "Client"
+GUEST_ROLE_NAME = "Public"
 GUEST_TOKEN_JWT_SECRET = "test-guest-secret-change-me"
 GUEST_TOKEN_JWT_ALGO = "HS256"
 GUEST_TOKEN_HEADER_NAME = "X-GuestToken"
