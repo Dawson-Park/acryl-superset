@@ -347,7 +347,8 @@ AUTH_TYPE = AUTH_DB
 # This is useful if one wants to enable anonymous users to view
 # dashboards. Explicit grant on specific datasets is still required.
 # PUBLIC_ROLE_LIKE: str | None = None
-PUBLIC_ROLE_LIKE: str | None = "Gamma"
+#PUBLIC_ROLE_LIKE: str | None = "Gamma"
+PUBLIC_ROLE_LIKE: str | None = "Client"
 
 # ---------------------------------------------------
 # Babel config for translations
