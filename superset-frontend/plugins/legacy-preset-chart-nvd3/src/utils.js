@@ -18,7 +18,7 @@
  */
 import d3 from 'd3';
 import d3tip from 'd3-tip';
-import dompurify from 'dompurify';
+// import dompurify from 'dompurify';
 import { smartDateFormatter, getNumberFormatter } from '@superset-ui/core';
 // Regexp for the label added to time shifted series
 // (1 hour offset, 2 days offset, etc.)
@@ -104,7 +104,8 @@ function getFormattedKey(seriesKey, shouldDompurify) {
     return `&lt;${seriesKey.slice(1, -1)}&gt;`;
   }
 
-  return shouldDompurify ? dompurify.sanitize(seriesKey) : seriesKey;
+  // return shouldDompurify ? dompurify.sanitize(seriesKey) : seriesKey;
+  return seriesKey;
 }
 
 // Custom sorted tooltip
@@ -139,7 +140,8 @@ export function generateRichLineTooltipContent(
   });
   tooltip += '</tbody></table>';
 
-  return dompurify.sanitize(tooltip);
+  // return dompurify.sanitize(tooltip);
+  return tooltip;
 }
 
 export function generateCompareTooltipContent(d, valueFormatter) {
@@ -168,7 +170,8 @@ export function generateCompareTooltipContent(d, valueFormatter) {
   });
   tooltip += '</tbody></table>';
 
-  return dompurify.sanitize(tooltip);
+  // return dompurify.sanitize(tooltip);
+  return tooltip;
 }
 
 export function generateAreaChartTooltipContent(
@@ -208,7 +211,8 @@ export function generateAreaChartTooltipContent(
   });
   tooltip += '</tbody></table>';
 
-  return dompurify.sanitize(tooltip);
+  // return dompurify.sanitize(tooltip);
+  return tooltip;
 }
 
 export function generateMultiLineTooltipContent(d, xFormatter, yFormatters) {
@@ -262,7 +266,8 @@ export function generateTimePivotTooltip(d, xFormatter, yFormatter) {
 
   tooltip += '</tbody></table>';
 
-  return dompurify.sanitize(tooltip);
+  // return dompurify.sanitize(tooltip);
+  return tooltip;
 }
 
 function getLabel(stringOrObjectWithLabel) {
