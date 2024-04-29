@@ -35,7 +35,7 @@ const DashboardRoute = ({ user }: WelcomeProps) => {
   // ) : (
   //   <DashboardPage idOrSlug={idOrSlug} />
   // );
-  return Object.keys(user?.roles ?? {}).includes('Admin') ? (
+  return Object.keys(user?.roles ?? {}) === 'Admin' ? (
     <DashboardPage idOrSlug={idOrSlug} />
   ) : (
     <ClientDashboardPage idOrSlug={idOrSlug} />
