@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from '@superset-ui/core';
-import { Logo, SideNav, LogoutButton, DashNav } from '../components/OuterFrame';
+import { Logo, LogoutButton, DashNav } from '../components/OuterFrame';
+import KcopaSideNav from 'src/components/KcopaSideNav';
 
 interface Props {
   children: React.ReactNode;
@@ -26,14 +27,13 @@ const StyledNav = styled.nav`
   z-index: 2000;
 `;
 
-// eslint-disable-next-line theme-colors/no-literal-colors
 const StyledHeader = styled.header`
   position: sticky;
   top: 0;
   z-index: 999;
   height: 100%;
   width: 100%;
-  background-color: #fff;
+  background-color: #ffffff;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;
@@ -53,7 +53,7 @@ const OuterFrame = ({ children }: Props) => (
     </StyledHeader>
     <StyledNav>
       <Logo />
-      <SideNav />
+      <KcopaSideNav />
     </StyledNav>
     <StyledMain className="license-dashboard-main">
       <DashNav />

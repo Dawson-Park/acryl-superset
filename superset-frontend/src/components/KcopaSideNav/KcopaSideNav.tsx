@@ -1,3 +1,4 @@
+/* eslint-disable theme-colors/no-literal-colors */
 import React from 'react';
 import { styled, css } from '@superset-ui/core';
 
@@ -5,13 +6,16 @@ const SideNavContainer = styled.aside`
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
+  max-width: 78px;
   //height: fit-content;
   height: 100%;
   max-height: calc(100vh - 48px);
   overflow-y: auto;
   margin: 0;
-  padding: 20px 0;
+  //padding: 20px 0;
   background-color: #246198;
+  position: sticky;
+  top: 0;
 `;
 
 type Props = {
@@ -27,8 +31,8 @@ const SideItem = styled.a<Props>`
   padding: 16px 8px;
 
   ${props =>
-    props?.$active
-      ? css`
+  props?.$active
+    ? css`
           &,
           &:hover {
             background-color: #fff;
@@ -36,7 +40,7 @@ const SideItem = styled.a<Props>`
             text-decoration: none;
           }
         `
-      : css`
+    : css`
           &,
           &:hover {
             color: #fff;
@@ -160,28 +164,16 @@ const BigdataIcon = () => (
   </SideIcon>
 );
 
+const Hamburger = styled.div`
+  width: 100%;
+  height: 20px;
+`
+
 const list = [
-  {
-    label: '모니터링',
-    to: 'http://icopsmt.kcopa.or.kr:8080/',
-    icon: <MonotoringIcon />,
-  },
-  {
-    label: '심의',
-    to: 'https://icopsres.kcopa.or.kr/dlbrt/main.do',
-    icon: <ReviewIcon />,
-  },
-  {
-    label: '통계',
-    to: 'http://icopsstat.kcopa.or.kr:9001/editds/report/viewer.do',
-    icon: <StatisticsIcon />,
-  },
-  {
-    label: '업무포털',
-    to: 'https://icopsres.kcopa.or.kr/taskportal/main.do',
-    icon: <PortalIcon />,
-  },
-  // { label: '모니터링 도구', to: 'https://montool.kcopa.or.kr/montool/main.do', icon: <PortalIcon /> },
+  { label: '모니터링', to: '#', icon: <MonotoringIcon /> },
+  { label: '심의', to: '#', icon: <ReviewIcon /> },
+  { label: '통계', to: '#', icon: <StatisticsIcon /> },
+  { label: '업무포털', to: '#', icon: <PortalIcon /> },
   {
     label: '빅데이터 통계분석',
     to: '/superset/dashboard/license_dashboard/',
@@ -190,9 +182,10 @@ const list = [
 ];
 
 const SideNav = () => (
-  <SideNavContainer className='SideNavContainer'>
+  <SideNavContainer className='kcopa-side-nav'>
+    <Hamburger />
     {list.map(v => (
-      <SideItem key={v.label} href={v.to} $active={v.label === '빅데이터 통계분석'}>
+      <SideItem key={v.label} $active={v.label === '빅데이터 통계분석'}>
         {v.icon}
         <SideLabel>{v.label}</SideLabel>
       </SideItem>
@@ -200,4 +193,4 @@ const SideNav = () => (
   </SideNavContainer>
 );
 
-export default React.memo(SideNav);
+export default SideNav;
