@@ -948,7 +948,7 @@ class Superset(BaseSupersetView):  # pylint: disable=too-many-public-methods
                       entry="spa",
                       bootstrap_data=json.dumps(
                           {
-                              "user": None,
+                              "user": bootstrap_user_data(None, include_perms=True),
                               "common": common_bootstrap_payload(),
                           },
                           default=utils.pessimistic_json_iso_dttm_ser
