@@ -58,15 +58,25 @@ const output = {
   path: BUILD_DIR,
   publicPath: `${ASSET_BASE_URL}/static/assets/`,
 };
+// if (isDevMode) {
+//   output.filename = '[name].[contenthash:8].entry.js';
+//   output.chunkFilename = '[name].[contenthash:8].chunk.js';
+// } else if (nameChunks) {
+//   output.filename = '[name].[chunkhash].entry.js';
+//   output.chunkFilename = '[name].[chunkhash].chunk.js';
+// } else {
+//   output.filename = '[name].[chunkhash].entry.js';
+//   output.chunkFilename = '[chunkhash].chunk.js';
+// }
 if (isDevMode) {
-  output.filename = '[name].[contenthash:8].entry.js';
-  output.chunkFilename = '[name].[contenthash:8].chunk.js';
+  output.filename = '[name].entry.js';
+  output.chunkFilename = '[name].chunk.js';
 } else if (nameChunks) {
-  output.filename = '[name].[chunkhash].entry.js';
-  output.chunkFilename = '[name].[chunkhash].chunk.js';
+  output.filename = '[name].entry.js';
+  output.chunkFilename = '[name].chunk.js';
 } else {
-  output.filename = '[name].[chunkhash].entry.js';
-  output.chunkFilename = '[chunkhash].chunk.js';
+  output.filename = '[name].entry.js';
+  output.chunkFilename = 'chunkhash.chunk.js';
 }
 
 if (!isDevMode) {
@@ -150,8 +160,10 @@ if (!isDevMode) {
   // text loading (webpack 4+)
   plugins.push(
     new MiniCssExtractPlugin({
-      filename: '[name].[chunkhash].entry.css',
-      chunkFilename: '[name].[chunkhash].chunk.css',
+      // filename: '[name].[chunkhash].entry.css',
+      // chunkFilename: '[name].[chunkhash].chunk.css',
+      filename: '[name].entry.css',
+      chunkFilename: '[name].chunk.css',
     }),
   );
 
@@ -400,7 +412,8 @@ const config = {
         },
         type: 'asset',
         generator: {
-          filename: '[name].[contenthash:8].[ext]',
+          // filename: '[name].[contenthash:8].[ext]',
+          filename: '[name].[ext]',
         },
       },
       {
@@ -428,7 +441,8 @@ const config = {
         test: /\.(jpg|gif)$/,
         type: 'asset/resource',
         generator: {
-          filename: '[name].[contenthash:8].[ext]',
+          // filename: '[name].[contenthash:8].[ext]',
+          filename: '[name].[ext]',
         },
       },
       /* for font-awesome */
