@@ -1,0 +1,48 @@
+{
+  "app": "superset",
+  "entrypoints": {
+    "preamble": {
+      "css": [],
+      "js": [
+        "/static/assets/vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_sty-305bf2.de2c5aa0.entry.js",
+        "/static/assets/preamble.0a6b2d9b.entry.js"
+      ]
+    },
+    "theme": {
+      "css": [],
+      "js": [
+        "/static/assets/theme.88b6ef6c.entry.js"
+      ]
+    },
+    "menu": {
+      "css": [],
+      "js": [
+        "/static/assets/vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_sty-305bf2.de2c5aa0.entry.js",
+        "/static/assets/vendors-node_modules_ant-design_icons_es_components_Icon_js-node_modules_ant-design_icons_es_-1db459.50e20493.entry.js",
+        "/static/assets/node_modules_moment_locale_sync_recursive_-packages_superset-ui-core_src_ui-overrides_Extensi-5cf8b3.69b1f1c0.entry.js",
+        "/static/assets/menu.160035ee.entry.js"
+      ]
+    },
+    "spa": {
+      "css": [],
+      "js": [
+        "/static/assets/thumbnail.a8af1353.entry.js",
+        "/static/assets/vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_sty-305bf2.de2c5aa0.entry.js",
+        "/static/assets/vendors-node_modules_ant-design_icons_es_components_Icon_js-node_modules_ant-design_icons_es_-1db459.50e20493.entry.js",
+        "/static/assets/vendors-node_modules_echarts_index_js-node_modules_lodash_isBoolean_js-node_modules_math-expr-4aa9b9.1805a2c2.entry.js",
+        "/static/assets/node_modules_moment_locale_sync_recursive_-packages_superset-ui-core_src_ui-overrides_Extensi-5cf8b3.69b1f1c0.entry.js",
+        "/static/assets/src_dashboard_util_propShapes_jsx-src_setup_setupPlugins_ts.4ad1fe37.entry.js",
+        "/static/assets/spa.db5392a0.entry.js"
+      ]
+    },
+    "embedded": {
+      "css": [],
+      "js": [
+        "/static/assets/vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_sty-305bf2.de2c5aa0.entry.js",
+        "/static/assets/vendors-node_modules_ant-design_icons_es_components_Icon_js-node_modules_ant-design_icons_es_-1db459.50e20493.entry.js",
+        "/static/assets/node_modules_moment_locale_sync_recursive_-packages_superset-ui-core_src_ui-overrides_Extensi-5cf8b3.69b1f1c0.entry.js",
+        "/static/assets/embedded.ef9a7839.entry.js"
+      ]
+    }
+  }
+}

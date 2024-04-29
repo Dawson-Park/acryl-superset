@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200;
+  src: url('./Pretendard/woff2/Pretendard-200.woff2') format('woff2'), url('./Pretendard/woff/Pretendard-200.woff') format('woff');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('./Pretendard/woff2/Pretendard-400.woff2') format('woff2'), url('./Pretendard/woff/Pretendard-400.woff') format('woff');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('./Pretendard/woff2/Pretendard-500.woff2') format('woff2'), url('./Pretendard/woff/Pretendard-500.woff') format('woff');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url('./Pretendard/woff2/Pretendard-600.woff2') format('woff2'), url('./Pretendard/woff/Pretendard-600.woff') format('woff');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('./Pretendard/woff2/Pretendard-700.woff2') format('woff2'), url('./Pretendard/woff/Pretendard-700.woff') format('woff');
+}
