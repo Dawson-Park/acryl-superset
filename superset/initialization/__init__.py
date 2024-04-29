@@ -694,10 +694,10 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
 class SupersetIndexView(IndexView):
     @expose("/")
     def index(self) -> FlaskResponse:
-        aa = "/superset/welcome/"
+#         aa = "/superset/welcome/"
 #         if not request.args.get('j-session') is None:
 #         aa += "?j-session="+request.args.get('j-session')
-#         aa = "/superset/dashboard/license_dashboard"
+        aa = "/superset/dashboard/license_dashboard"
         return redirect(aa)
 # TODO: @dawson j-session이 있으면 /superset/dashboard/license_dashboard로 이동
 # 아니면 침해대응 사이트의 login으로 보내라

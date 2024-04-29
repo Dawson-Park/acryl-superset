@@ -81,7 +81,7 @@ const originalDocumentTitle = document.title;
 
 type PageProps = {
   idOrSlug: string;
-  user: BootstrapUser;
+  user?: BootstrapUser;
 };
 
 export const DashboardPage: FC<PageProps> = ({ idOrSlug, user }: PageProps) => {

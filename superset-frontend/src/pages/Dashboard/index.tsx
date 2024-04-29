@@ -23,7 +23,7 @@ import { DashboardPage } from 'src/dashboard/containers/DashboardPage';
 import { DashboardPage as ClientDashboardPage } from 'src/client/containers/DashboardPage';
 
 interface WelcomeProps {
-  user: BootstrapUser;
+  user?: BootstrapUser;
 }
 
 const DashboardRoute = ({ user }: WelcomeProps) => {
@@ -38,7 +38,7 @@ const DashboardRoute = ({ user }: WelcomeProps) => {
   //   <DashboardPage idOrSlug={idOrSlug} />
   // );
   return Object.keys(user?.roles ?? {})[0] === 'Admin' ? (
-    <DashboardPage idOrSlug={idOrSlug} />
+    <DashboardPage idOrSlug={idOrSlug} user={user}/>
   ) : (
     <ClientDashboardPage idOrSlug={idOrSlug} />
   );
