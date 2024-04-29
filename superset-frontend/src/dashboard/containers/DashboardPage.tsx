@@ -63,6 +63,7 @@ import SyncDashboardState, {
   getDashboardContextLocalStorage,
 } from '../components/SyncDashboardState';
 import { OuterFrame } from '../components/OuterFrame';
+import { BootstrapUser } from 'src/types/bootstrapTypes';
 
 export const DashboardPageIdContext = React.createContext('');
 
@@ -80,9 +81,10 @@ const originalDocumentTitle = document.title;
 
 type PageProps = {
   idOrSlug: string;
+  user: BootstrapUser;
 };
 
-export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
+export const DashboardPage: FC<PageProps> = ({ idOrSlug, user }: PageProps) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -111,6 +113,8 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
   const filterSetEnabled =
     isFeatureEnabled(FeatureFlag.DASHBOARD_NATIVE_FILTERS_SET) &&
     isFeatureEnabled(FeatureFlag.DASHBOARD_NATIVE_FILTERS);
+
+  console.log('Object.keys(user?.roles ?? {})222', Object.keys(user?.roles ?? {}));
 
   useEffect(() => {
     // mark tab id as redundant when user closes browser tab - a new id will be
