@@ -63,6 +63,7 @@ import SyncDashboardState, {
   getDashboardContextLocalStorage,
 } from '../components/SyncDashboardState';
 import { OuterFrame } from '../components/OuterFrame';
+import { BootstrapUser } from 'src/types/bootstrapTypes';
 
 export const DashboardPageIdContext = React.createContext('');
 
@@ -73,16 +74,17 @@ const DashboardBuilder = React.lazy(
       /* webpackChunkName: "DashboardContainer" */
       /* webpackPreload: true */
       'src/dashboard/components/DashboardBuilder/DashboardBuilder'
-    ),
+      ),
 );
 
 const originalDocumentTitle = document.title;
 
 type PageProps = {
   idOrSlug: string;
+  user?: BootstrapUser;
 };
 
-export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
+export const DashboardPage: FC<PageProps> = ({ idOrSlug, user }: PageProps) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const history = useHistory();

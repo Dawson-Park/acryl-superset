@@ -1144,7 +1144,7 @@ CUSTOM_TEMPLATE_PROCESSORS: dict[str, type[BaseTemplateProcessor]] = {}
 
 # Roles that are controlled by the API / Superset and should not be changed
 # by humans.
-ROBOT_PERMISSION_ROLES = ["Public", "Gamma", "Alpha", "Admin", "sql_lab"]
+ROBOT_PERMISSION_ROLES = ["Public", "Gamma", "Alpha", "Client", "Admin", "sql_lab"]
 
 CONFIG_PATH_ENV_VAR = "SUPERSET_CONFIG_PATH"
 
