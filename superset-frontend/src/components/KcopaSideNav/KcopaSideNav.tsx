@@ -132,7 +132,7 @@ const list = [
             target="_blank"
             rel="noreferrer"
           >
-            · 수집·분석
+            수집·분석
           </a>
         </Label>
         <Label>
@@ -141,7 +141,7 @@ const list = [
             target="_blank"
             rel="noreferrer"
           >
-            · 수집·분석 <Strong>N</Strong>
+            수집·분석 <Strong>N</Strong>
           </a>
         </Label>
         <Label>
@@ -150,7 +150,7 @@ const list = [
             target="_blank"
             rel="noreferrer"
           >
-            · 접수·조치
+            접수·조치
           </a>
         </Label>
       </>
@@ -173,7 +173,7 @@ const list = [
             target="_blank"
             rel="noreferrer"
           >
-            · 정형통계
+            정형통계
           </a>
         </Label>
         <Label>
@@ -182,7 +182,7 @@ const list = [
             target="_blank"
             rel="noreferrer"
           >
-            · 비정형통계
+            비정형통계
           </a>
         </Label>
       </>
@@ -201,8 +201,8 @@ const list = [
       <>
         <Label>
           <Link to="/superset/dashboard/license_dashboard/"
-                /*to='https://icopsbig.kcopa.or.kr/superset/dashboard/license_dashboard/'*/>
-            · 통계분석
+            /*to='https://icopsbig.kcopa.or.kr/superset/dashboard/license_dashboard/'*/>
+            통계분석
           </Link>
         </Label>
         <Label>
@@ -211,7 +211,7 @@ const list = [
             target="_blank"
             rel="noreferrer"
           >
-            · 운영관리
+            운영관리
           </a>
         </Label>
       </>
