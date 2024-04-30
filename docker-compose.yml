@@ -124,13 +124,13 @@ services:
     healthcheck:
       disable: true
 
-#  superset-node:
-#    image: node:16
-#    container_name: superset_node
-#    command: ["/app/docker/docker-frontend.sh"]
-#    env_file: docker/.env
-#    depends_on: *superset-depends-on
-#    volumes: *superset-volumes
+  superset-node:
+    image: node:16
+    container_name: superset_node
+    command: ["/app/docker/docker-frontend.sh"]
+    env_file: docker/.env
+    depends_on: *superset-depends-on
+    volumes: *superset-volumes
 
   superset-worker:
     image: *superset-image
