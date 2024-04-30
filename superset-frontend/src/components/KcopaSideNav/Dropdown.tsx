@@ -10,16 +10,23 @@ interface Props {
 }
 
 const Container = styled.div`
-  & > div:first-of-type {
+  & .dropdown-childrenbox {
     position: relative;
   }
-`
+  //div[data-selected='true'] &[data-active='true'] .dropdown-childrenbox {
+  //  background-color: #fff;
+  //  color: #1f4f7a;
+  //  & > a {
+  //    color: inherit;
+  //  }
+  //}
+`;
 const Box = styled.div`
   height: 0;
   overflow: hidden;
   transition: height 250ms ease-in-out;
   background-color: #1e4e7a;
-  
+
   & > div {
     display: flex;
     flex-flow: column;
@@ -37,7 +44,7 @@ const Dropdown = ({ children, contents, activate = false }: Props) => {
   useEffect(() => {
     if (!boxRef || !boxRef.current) return;
     let timeout: string | number | NodeJS.Timeout | undefined;
-    const { height } = itemRef?.current?.getClientRects()[0] ?? { height: 0 };
+    const { height } = itemRef?.current?.getClientRects()[0] ?? { height: 95 };
 
     if (active) {
       timeout && clearTimeout(timeout);
@@ -50,22 +57,20 @@ const Dropdown = ({ children, contents, activate = false }: Props) => {
       timeout && clearTimeout(timeout);
       // boxRef.current.setAttribute('style', `height: ${height}px`);
       // timeout = setTimeout(() => {
-        boxRef.current?.setAttribute('style', 'height: 0px');
-        // timeout && clearTimeout(timeout);
+      boxRef.current?.setAttribute('style', 'height: 0px');
+      // timeout && clearTimeout(timeout);
       // }, 200);
     }
   }, [active]);
 
   return (
     <Container data-active={active}>
-      <div onClick={() => setActive(!active)}>
+      <div className='dropdown-childrenbox' onClick={() => setActive(!active)}>
         {children}
         <Tips active={active} />
       </div>
       <Box ref={boxRef}>
-        <div ref={itemRef}>
-          {contents}
-        </div>
+        <div ref={itemRef}>{contents}</div>
       </Box>
     </Container>
   );

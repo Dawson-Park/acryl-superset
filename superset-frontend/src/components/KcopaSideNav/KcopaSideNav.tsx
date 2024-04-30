@@ -1,6 +1,7 @@
 /* eslint-disable theme-colors/no-literal-colors */
 import React from 'react';
 import { styled, css } from '@superset-ui/core';
+import { Link } from 'react-router-dom';
 import {
   BigdataIcon,
   MonotoringIcon,
@@ -45,27 +46,27 @@ const SideItem = styled.a<Props>`
   padding: 16px 8px;
 
   ${props =>
-    props?.$active
-      ? css`
-          &,
-          &:hover {
-            background-color: #fff;
-            color: #1f4f7a;
-            text-decoration: none;
-          }
-        `
-      : css`
-          &,
-          &:hover {
-            color: #fff;
-            text-decoration: none;
-          }
-        `}//&:first-of-type {
-  //  border-top: 1px solid #4782b8;
-  //}
-  //&:last-of-type {
-  //  border-bottom: none;
-  //}
+          props?.$active
+                  ? css`
+                    &,
+                    &:hover {
+                      background-color: #fff;
+                      color: #1f4f7a;
+                      text-decoration: none;
+                    }
+                  `
+                  : css`
+                    &,
+                    &:hover {
+                      color: #fff;
+                      text-decoration: none;
+                    }
+                  `}//&:first-of-type {
+          //  border-top: 1px solid #4782b8;
+          //}
+          //&:last-of-type {
+          //  border-bottom: none;
+          //}
 `;
 
 const SideLabel = styled.span`
@@ -177,13 +178,29 @@ const list = [
   },
   {
     label: '업무포털',
-    to: 'https://icopsres.kcopa.or.kr/taskportal/main.do',
+    to: '',
     icon: <PortalIcon />,
   },
   {
     label: '빅데이터 통계분석',
-    to: '/superset/dashboard/license_dashboard/',
+    to: '',
     icon: <BigdataIcon />,
+    more: (
+      <>
+        <Label>
+          <Link to="/superset/dashboard/license_dashboard/">· 통계분석</Link>
+        </Label>
+        <Label>
+          <a
+            href="http://125.129.210.132:8080/operation.do"
+            target="_blank"
+            rel="noreferrer"
+          >
+            · 운영관리
+          </a>
+        </Label>
+      </>
+    ),
   },
 ];
 
@@ -191,7 +208,7 @@ const SideNav = () => {
   const renderItem = (v: any) => (
     <SideItem
       key={v.label}
-      $active={v.label === '빅데이터 통계분석'}
+      // $active={v.label === '빅데이터 통계분석'}
       href={v.to.length > 0 ? v.to : undefined}
       target="_blank"
       rel="noreferrer"
@@ -208,9 +225,14 @@ const SideNav = () => {
       </SideItemBox>
 
       {list.map(v => (
-        <SideItemBox>
+        <SideItemBox data-selected={v.label === '빅데이터 통계분석'}>
           {v.more ? (
-            <Dropdown contents={v.more}>{renderItem(v)}</Dropdown>
+            <Dropdown
+              contents={v.more}
+              activate={v.label === '빅데이터 통계분석'}
+            >
+              {renderItem(v)}
+            </Dropdown>
           ) : (
             renderItem(v)
           )}
