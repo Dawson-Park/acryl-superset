@@ -16,7 +16,8 @@ const SideNavContainer = styled.aside`
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  max-width: 78px;
+  //max-width: 78px;
+  max-width: 90px;
   //height: fit-content;
   height: 100%;
   max-height: calc(100vh - 48px);
@@ -89,6 +90,17 @@ const Label = styled.div`
   & > a {
     text-decoration: none;
     color: #fff;
+    padding-left: 3px;
+
+    &::before {
+      display: inline-block;
+      content: "";
+      width: 3px;
+      height: 3px;
+      background-color: rgba(255, 255, 255, 0.9);
+      vertical-align: middle;
+      margin: 0 5px 2px 0;
+    }
   }
 `;
 
@@ -182,7 +194,7 @@ const list = [
     icon: <PortalIcon />,
   },
   {
-    label: '빅데이터 통계분석',
+    label: '빅데이터',
     to: '',
     icon: <BigdataIcon />,
     more: (
@@ -228,11 +240,11 @@ const SideNav = () => {
       </SideItemBox>
 
       {list.map(v => (
-        <SideItemBox data-selected={v.label === '빅데이터 통계분석'}>
+        <SideItemBox data-selected={v.label === '빅데이터'}>
           {v.more ? (
             <Dropdown
               contents={v.more}
-              activate={v.label === '빅데이터 통계분석'}
+              activate={v.label === '빅데이터'}
             >
               {renderItem(v)}
             </Dropdown>
