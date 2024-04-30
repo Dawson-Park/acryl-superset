@@ -1,5 +1,6 @@
 import { styled } from '@superset-ui/core';
 import React from 'react';
+import montool from './montool.png';
 
 const SideIcon = styled.div`
   width: 48px;
@@ -22,6 +23,14 @@ export const MonotoringIcon = () => (
         fill="currentColor"
       />
     </svg>
+  </SideIcon>
+);
+
+export const MonitorIcon = () => (
+  <SideIcon>
+    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', }}>
+      <img src={montool} alt='montool'/>
+    </div>
   </SideIcon>
 );
 

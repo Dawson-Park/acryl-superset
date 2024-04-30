@@ -18,7 +18,7 @@ const HamburgerIcon = styled.div`
   cursor: pointer;
 
   & > img {
-    height: 50%;
+    height: 60%;
   }
 `;
 

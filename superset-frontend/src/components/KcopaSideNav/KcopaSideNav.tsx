@@ -1,9 +1,9 @@
 /* eslint-disable theme-colors/no-literal-colors */
-import React from 'react';
+import React, {useState} from 'react';
 import { styled, css } from '@superset-ui/core';
 import { Link } from 'react-router-dom';
 import {
-  BigdataIcon,
+  BigdataIcon, MonitorIcon,
   MonotoringIcon,
   PortalIcon,
   ReviewIcon,
@@ -21,7 +21,7 @@ const SideNavContainer = styled.aside`
   //height: fit-content;
   height: 100%;
   max-height: calc(100vh - 48px);
-  overflow-y: auto;
+  overflow-y: hidden;
   margin: 0;
   //padding: 20px 0;
   background-color: #246198;
@@ -46,37 +46,20 @@ const SideItem = styled.a<Props>`
   gap: 8px;
   padding: 16px 8px;
 
-  ${props =>
-          props?.$active
-                  ? css`
-                    &,
-                    &:hover {
-                      background-color: #fff;
-                      color: #1f4f7a;
-                      text-decoration: none;
-                    }
-                  `
-                  : css`
-                    &,
-                    &:hover {
-                      color: #fff;
-                      text-decoration: none;
-                    }
-                  `}//&:first-of-type {
-          //  border-top: 1px solid #4782b8;
-          //}
-          //&:last-of-type {
-          //  border-bottom: none;
-          //}
+  &,
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
 `;
 
 const SideLabel = styled.span`
   display: inline-block;
   text-align: center;
-  width: 48px;
+  width: 68px;
   font-family: Pretendard, 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 22px;
   letter-spacing: -0.02em;
 `;
@@ -94,7 +77,7 @@ const Label = styled.div`
 
     &::before {
       display: inline-block;
-      content: "";
+      content: '';
       width: 3px;
       height: 3px;
       background-color: rgba(255, 255, 255, 0.9);
@@ -194,14 +177,21 @@ const list = [
     icon: <PortalIcon />,
   },
   {
+    label: '모니터링 도구',
+    to: 'https://montool.kcopa.or.kr/montool/main.do',
+    icon: <MonitorIcon />,
+  },
+  {
     label: '빅데이터',
     to: '',
     icon: <BigdataIcon />,
     more: (
       <>
         <Label>
-          <Link to="/superset/dashboard/license_dashboard/"
-            /*to='https://icopsbig.kcopa.or.kr/superset/dashboard/license_dashboard/'*/>
+          <Link
+            to="/superset/dashboard/license_dashboard/"
+            /* to='https://icopsbig.kcopa.or.kr/superset/dashboard/license_dashboard/' */
+          >
             통계분석
           </Link>
         </Label>
@@ -220,6 +210,8 @@ const list = [
 ];
 
 const SideNav = () => {
+  const [active, setActive] = useState('');
+
   const renderItem = (v: any) => (
     <SideItem
       key={v.label}
@@ -240,12 +232,13 @@ const SideNav = () => {
       </SideItemBox>
 
       {list.map(v => (
-        <SideItemBox data-selected={v.label === '빅데이터'}>
+        <SideItemBox
+          // data-selected={v.label === '빅데이터'}
+          onClick={() => {
+            setActive(v.label)
+          }}>
           {v.more ? (
-            <Dropdown
-              contents={v.more}
-              activate={v.label === '빅데이터'}
-            >
+            <Dropdown contents={v.more} activate={v.label === active}>
               {renderItem(v)}
             </Dropdown>
           ) : (

@@ -39,14 +39,14 @@ const Box = styled.div`
 const Dropdown = ({ children, contents, activate = false }: Props) => {
   const boxRef = useRef<HTMLDivElement>(null);
   const itemRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(activate);
+  // const [active, setActive] = useState(activate);
 
   useEffect(() => {
     if (!boxRef || !boxRef.current) return;
     let timeout: string | number | NodeJS.Timeout | undefined;
     const { height } = itemRef?.current?.getClientRects()[0] ?? { height: 95 };
 
-    if (active) {
+    if (activate) {
       timeout && clearTimeout(timeout);
       boxRef.current.setAttribute('style', `height: ${height}px;`);
       // timeout = setTimeout(() => {
@@ -61,13 +61,16 @@ const Dropdown = ({ children, contents, activate = false }: Props) => {
       // timeout && clearTimeout(timeout);
       // }, 200);
     }
-  }, [active]);
+  }, [activate]);
 
   return (
-    <Container data-active={active}>
-      <div className='dropdown-childrenbox' onClick={() => setActive(!active)}>
+    <Container data-active={activate}>
+      <div
+        className="dropdown-childrenbox"
+        // onClick={() => setActive(!active)}
+      >
         {children}
-        <Tips active={active} />
+        <Tips active={activate} />
       </div>
       <Box ref={boxRef}>
         <div ref={itemRef}>{contents}</div>
