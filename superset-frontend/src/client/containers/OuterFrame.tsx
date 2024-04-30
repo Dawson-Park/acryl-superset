@@ -9,7 +9,8 @@ interface Props {
 
 const StyledDiv = styled.div`
   display: grid;
-  grid-template-columns: 78px 1fr;
+  //grid-template-columns: 78px 1fr;
+  grid-template-columns: 90px 1fr;
   grid-template-rows: 48px auto;
   grid-template-areas:
     'outer-nav outer-header'
@@ -22,7 +23,8 @@ const StyledNav = styled.nav`
   top: 0;
   left: 0;
   grid-area: outer-nav;
-  width: 78px;
+  //width: 78px;
+  width: 90px;
   height: 100%;
   z-index: 2000;
 `;

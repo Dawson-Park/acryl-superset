@@ -7,7 +7,8 @@ const Frame = styled.div`
   //display: flex;
   //flex-flow: row nowrap;
   display: grid;
-  grid-template-columns: 78px 1fr;
+  //grid-template-columns: 78px 1fr;
+  grid-template-columns: 90px 1fr;
   grid-template-rows: auto;
   grid-template-areas: 'outer-nav outer-main';
   width: 1903px;
@@ -18,7 +19,8 @@ const Aside = styled.div`
   //height: 100%;
   position: sticky;
   top: 0;
-  width: 78px;
+  //width: 78px;
+  width: 90px;
   height: 100vh;
   grid-area: outer-nav;
   background-color: #246198;

@@ -178,7 +178,7 @@ const list = [
   },
   {
     label: '업무포털',
-    to: '',
+    to: 'https://icopsres.kcopa.or.kr/taskportal/main.do',
     icon: <PortalIcon />,
   },
   {
