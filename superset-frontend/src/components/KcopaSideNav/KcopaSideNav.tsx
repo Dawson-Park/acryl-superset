@@ -188,7 +188,10 @@ const list = [
     more: (
       <>
         <Label>
-          <Link to="/superset/dashboard/license_dashboard/">· 통계분석</Link>
+          <Link to="/superset/dashboard/license_dashboard/"
+                /*to='https://icopsbig.kcopa.or.kr/superset/dashboard/license_dashboard/'*/>
+            · 통계분석
+          </Link>
         </Label>
         <Label>
           <a
