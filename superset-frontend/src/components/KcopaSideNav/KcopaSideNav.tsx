@@ -50,7 +50,7 @@ const SideItem = styled.a<Props>`
   padding: 25px 8px 31px 8px;
 
   &[data-label='모니터링 도구'] {
-    padding: 27px 8px 31px 8px;
+    padding: 27px 8px 29px 8px;
     & > span {
       height: 24px;
       margin-top: -6px;
