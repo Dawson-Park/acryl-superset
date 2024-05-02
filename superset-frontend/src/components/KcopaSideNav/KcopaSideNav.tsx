@@ -45,8 +45,9 @@ const SideItem = styled.a<Props>`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 24px 8px;
+  gap: 14px;
+  //padding: 24px 8px;
+  padding: 25px 8px 31px 8px;
 
   &,
   &:hover {
@@ -61,7 +62,7 @@ const SideLabel = styled.span`
   width: 68px;
   font-family: Pretendard, 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1;
   //letter-spacing: -0.02em;
 `;
