@@ -49,6 +49,21 @@ const SideItem = styled.a<Props>`
   //padding: 24px 8px;
   padding: 25px 8px 31px 8px;
 
+  &[data-label='모니터링 도구'] {
+    padding: 27px 8px 31px 8px;
+    & > span {
+      height: 24px;
+      margin-top: -6px;
+      line-height: 1.1;
+    }
+  }
+  &[data-label='빅데이터'] {
+    & > span {
+      height: 24px;
+      margin-top: -6px;
+    }
+  }
+
   &,
   &:hover {
     color: #fff;
@@ -222,6 +237,7 @@ const SideNav = () => {
       href={v.to.length > 0 ? v.to : undefined}
       target="_blank"
       rel="noreferrer"
+      data-label={v.label}
     >
       {v.icon}
       <SideLabel>{v.label}</SideLabel>
