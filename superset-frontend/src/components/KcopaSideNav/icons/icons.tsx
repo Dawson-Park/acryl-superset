@@ -9,7 +9,7 @@ import bigdata from './mu-bigdata.png';
 
 const SideIcon = styled.div`
   width: 48px;
-  height: 48px;
+  height: 38px;
 `;
 
 export const MonitorIcon = () => (
@@ -17,7 +17,7 @@ export const MonitorIcon = () => (
     <div
       style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
     >
-      <img src={monitoring} alt="montool" />
+      <img src={monitortools} alt="monitortools" />
     </div>
   </SideIcon>
 );
@@ -27,7 +27,7 @@ export const MonotoringIcon = () => (
     <div
       style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
     >
-      <img src={monitortools} alt="montool" />
+      <img src={monitoring} alt="monitoring" />
     </div>
   </SideIcon>
 );
@@ -37,7 +37,7 @@ export const ReviewIcon = () => (
     <div
       style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
     >
-      <img src={review} alt="montool" />
+      <img src={review} alt="review" />
     </div>
   </SideIcon>
 );
@@ -47,7 +47,7 @@ export const StatisticsIcon = () => (
     <div
       style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
     >
-      <img src={statistical} alt="montool" />
+      <img src={statistical} alt="statistical" />
     </div>
   </SideIcon>
 );
@@ -57,7 +57,7 @@ export const PortalIcon = () => (
     <div
       style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
     >
-      <img src={portal} alt="montool" />
+      <img src={portal} alt="portal" />
     </div>
   </SideIcon>
 );
@@ -67,7 +67,7 @@ export const BigdataIcon = () => (
     <div
       style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
     >
-      <img src={bigdata} alt="montool" />
+      <img src={bigdata} alt="bigdata" />
     </div>
   </SideIcon>
 );
