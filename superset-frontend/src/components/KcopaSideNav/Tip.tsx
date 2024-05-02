@@ -1,5 +1,5 @@
-import downMenu from './downmenu.png';
-import arrow from './mu-arrow.png';
+import downMenu from './icons/downmenu.png';
+import arrow from './icons/mu-arrow.png';
 import styled from '@emotion/styled';
 
 const TipBox = styled.div`

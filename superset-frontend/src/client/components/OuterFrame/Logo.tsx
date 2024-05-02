@@ -13,7 +13,8 @@ const LogoContainer = styled.h1`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 48px;
+  //height: 48px;
+  height: 60px;
   margin: 0;
   background-color: #fff;
 `;

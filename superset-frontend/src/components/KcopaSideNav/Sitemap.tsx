@@ -4,8 +4,8 @@
 import { styled } from '@superset-ui/core';
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import icon from './hamburger.png';
-import close from './CloseButton.png';
+import icon from './icons/hamburger.png';
+import close from './icons/CloseButton.png';
 
 const HamburgerIcon = styled.div`
   display: flex;

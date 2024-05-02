@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@superset-ui/core';
-import { Logo, LogoutButton, DashNav } from '../components/OuterFrame';
 import KcopaSideNav from 'src/components/KcopaSideNav';
+import { Logo, LogoutButton, DashNav } from '../components/OuterFrame';
 
 interface Props {
   children: React.ReactNode;
@@ -11,11 +11,13 @@ const StyledDiv = styled.div`
   display: grid;
   //grid-template-columns: 78px 1fr;
   grid-template-columns: 90px 1fr;
-  grid-template-rows: 48px auto;
+  grid-template-rows: 60px auto;
   grid-template-areas:
     'outer-nav outer-header'
     'outer-nav outer-main';
-  width: 1903px;
+  //width: 1903px;
+  width: calc(100vw - 17px);
+  min-width: 1903px;
 `;
 
 const StyledNav = styled.nav`

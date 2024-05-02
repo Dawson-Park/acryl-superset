@@ -1,14 +1,15 @@
 /* eslint-disable theme-colors/no-literal-colors */
-import React, {useState} from 'react';
-import { styled, css } from '@superset-ui/core';
+import React, { useState } from 'react';
+import { styled } from '@superset-ui/core';
 import { Link } from 'react-router-dom';
 import {
-  BigdataIcon, MonitorIcon,
+  BigdataIcon,
+  MonitorIcon,
   MonotoringIcon,
   PortalIcon,
   ReviewIcon,
   StatisticsIcon,
-} from './icons';
+} from './icons/icons';
 import Dropdown from './Dropdown';
 import SitemapPortal from './Sitemap';
 
@@ -20,7 +21,8 @@ const SideNavContainer = styled.aside`
   max-width: 90px;
   //height: fit-content;
   height: 100%;
-  max-height: calc(100vh - 48px);
+  //max-height: calc(100vh - 48px);
+  max-height: calc(100vh - 60px);
   overflow-y: hidden;
   margin: 0;
   //padding: 20px 0;
@@ -44,7 +46,7 @@ const SideItem = styled.a<Props>`
   justify-content: center;
   align-items: center;
   gap: 8px;
-  padding: 16px 8px;
+  padding: 24px 8px;
 
   &,
   &:hover {
@@ -59,9 +61,9 @@ const SideLabel = styled.span`
   width: 68px;
   font-family: Pretendard, 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: -0.02em;
+  font-size: 17px;
+  line-height: 1;
+  //letter-spacing: -0.02em;
 `;
 
 const Label = styled.div`
@@ -235,8 +237,9 @@ const SideNav = () => {
         <SideItemBox
           // data-selected={v.label === '빅데이터'}
           onClick={() => {
-            setActive(v.label)
-          }}>
+            setActive(v.label);
+          }}
+        >
           {v.more ? (
             <Dropdown contents={v.more} activate={v.label === active}>
               {renderItem(v)}

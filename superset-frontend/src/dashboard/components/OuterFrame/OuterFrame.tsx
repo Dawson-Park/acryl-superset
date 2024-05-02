@@ -11,7 +11,9 @@ const Frame = styled.div`
   grid-template-columns: 90px 1fr;
   grid-template-rows: auto;
   grid-template-areas: 'outer-nav outer-main';
-  width: 1903px;
+  //width: 1903px;
+  width: calc(100vw - 17px);
+  min-width: 1903px;
   position: relative;
 `;
 
