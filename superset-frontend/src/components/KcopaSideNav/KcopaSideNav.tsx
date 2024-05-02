@@ -85,8 +85,9 @@ const SideLabel = styled.span`
 const Label = styled.div`
   width: 100%;
   position: relative;
-  font-size: 14px;
-  padding: 6px 4px;
+  font-size: 15px;
+  //padding: 6px 4px;
+  padding: 6px;
 
   & > a {
     text-decoration: none;
@@ -209,6 +210,7 @@ const list = [
           <Link
             to="/superset/dashboard/license_dashboard/"
             /* to='https://icopsbig.kcopa.or.kr/superset/dashboard/license_dashboard/' */
+            style={{ color: '#a1defc' }}
           >
             통계분석
           </Link>
