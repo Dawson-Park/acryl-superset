@@ -1,14 +1,15 @@
 /* eslint-disable theme-colors/no-literal-colors */
-import React, {useState} from 'react';
-import { styled, css } from '@superset-ui/core';
+import React, { useState } from 'react';
+import { styled } from '@superset-ui/core';
 import { Link } from 'react-router-dom';
 import {
-  BigdataIcon, MonitorIcon,
+  BigdataIcon,
+  MonitorIcon,
   MonotoringIcon,
   PortalIcon,
   ReviewIcon,
   StatisticsIcon,
-} from './icons';
+} from './icons/icons';
 import Dropdown from './Dropdown';
 import SitemapPortal from './Sitemap';
 
@@ -20,7 +21,8 @@ const SideNavContainer = styled.aside`
   max-width: 90px;
   //height: fit-content;
   height: 100%;
-  max-height: calc(100vh - 48px);
+  //max-height: calc(100vh - 48px);
+  max-height: calc(100vh - 60px);
   overflow-y: hidden;
   margin: 0;
   //padding: 20px 0;
@@ -43,8 +45,25 @@ const SideItem = styled.a<Props>`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 16px 8px;
+  gap: 14px;
+  //padding: 24px 8px;
+  padding: 25px 8px 31px 8px;
+
+  &[data-label='모니터링 도구'] {
+    padding: 27px 8px 32px 8px;
+    & > span {
+      height: 24px;
+      margin-top: -9px;
+      line-height: 1.1;
+    }
+  }
+  &[data-label='빅데이터'] {
+    & > span {
+      height: 24px;
+      margin-top: -6px;
+      font-weight: 500;
+    }
+  }
 
   &,
   &:hover {
@@ -59,16 +78,17 @@ const SideLabel = styled.span`
   width: 68px;
   font-family: Pretendard, 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: -0.02em;
+  font-size: 18px;
+  line-height: 1;
+  //letter-spacing: -0.02em;
 `;
 
 const Label = styled.div`
   width: 100%;
   position: relative;
-  font-size: 14px;
-  padding: 6px 4px;
+  font-size: 15px;
+  //padding: 6px 4px;
+  padding: 6px;
 
   & > a {
     text-decoration: none;
@@ -191,6 +211,7 @@ const list = [
           <Link
             to="/superset/dashboard/license_dashboard/"
             /* to='https://icopsbig.kcopa.or.kr/superset/dashboard/license_dashboard/' */
+            style={{ color: '#a1defc' }}
           >
             통계분석
           </Link>
@@ -219,6 +240,7 @@ const SideNav = () => {
       href={v.to.length > 0 ? v.to : undefined}
       target="_blank"
       rel="noreferrer"
+      data-label={v.label}
     >
       {v.icon}
       <SideLabel>{v.label}</SideLabel>
@@ -235,8 +257,9 @@ const SideNav = () => {
         <SideItemBox
           // data-selected={v.label === '빅데이터'}
           onClick={() => {
-            setActive(v.label)
-          }}>
+            setActive(v.label);
+          }}
+        >
           {v.more ? (
             <Dropdown contents={v.more} activate={v.label === active}>
               {renderItem(v)}

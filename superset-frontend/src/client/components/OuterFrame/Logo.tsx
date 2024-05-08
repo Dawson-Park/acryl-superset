@@ -3,7 +3,7 @@ import { styled } from '@superset-ui/core';
 import image from './license_logo.png';
 
 const LogoRoot = styled.img`
-  width: 30px;
+  width: 32px;
   height: 32px;
 `;
 
@@ -13,7 +13,8 @@ const LogoContainer = styled.h1`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 48px;
+  //height: 48px;
+  height: 60px;
   margin: 0;
   background-color: #fff;
 `;
