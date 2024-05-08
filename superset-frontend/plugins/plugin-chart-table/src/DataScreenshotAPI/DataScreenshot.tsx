@@ -77,7 +77,8 @@ export interface DataTableProps<D extends object> extends TableOptions<D> {
 // }
 
 // const DUDAGI_URL = 'http://gocap.kr:30643/api/v1/storage/';
-const DUDAGI_URL = 'http://125.129.210.138:80/api/v1/storage/';
+// const DUDAGI_URL = 'http://125.129.210.138:80/api/v1/storage/';
+const DUDAGI_URL = '/api/v1/storage/';
 
 const sortTypes = {
   alphanumeric: sortAlphanumericCaseInsensitive,
