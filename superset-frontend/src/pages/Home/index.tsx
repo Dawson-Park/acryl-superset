@@ -357,6 +357,7 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
    */
   const histoy = useHistory();
   useEffect(() => {
+    console.log('console.log /');
     // console.log("user", Object.keys((user as BootstrapUser)?.roles ?? {}));
     // console.log(Object.keys((user as BootstrapUser)?.roles ?? {}));
     if (Object.keys((user as BootstrapUser)?.roles ?? {}).includes('Client')) {

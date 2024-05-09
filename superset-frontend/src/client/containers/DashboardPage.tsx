@@ -18,7 +18,7 @@
  */
 import React, { FC, useEffect, useMemo, useRef } from 'react';
 import { Global } from '@emotion/react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   CategoricalColorNamespace,
   FeatureFlag,
@@ -86,6 +86,7 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const history = useHistory();
+  const { search } = useLocation();
   const dashboardPageId = useMemo(() => shortid.generate(), []);
   const hasDashboardInfoInitiated = useSelector<RootState, Boolean>(
     ({ dashboardInfo }) =>
@@ -134,6 +135,10 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
   useEffect(() => {
     dispatch(setDatasetsStatus(status));
   }, [dispatch, status]);
+
+  useEffect(() => {
+    console.log('CLIENT DASHBOARD search', search);
+  }, [search])
 
   useEffect(() => {
     // eslint-disable-next-line consistent-return
