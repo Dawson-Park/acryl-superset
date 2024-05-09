@@ -140,6 +140,7 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
     const params = new URLSearchParams(search);
     const jtoken = params.get('JTOKEN');
     if(jtoken !== null) {
+      console.log('console.log jtoken', jtoken)
       window.sessionStorage.setItem('JTOKEN', jtoken);
     }
   }, [search])
