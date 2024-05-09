@@ -137,7 +137,8 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
   }, [dispatch, status]);
 
   useEffect(() => {
-    console.log('CLIENT DASHBOARD search', search);
+    const params = new URLSearchParams(search);
+    console.log('CLIENT DASHBOARD params', params);
   }, [search])
 
   useEffect(() => {
