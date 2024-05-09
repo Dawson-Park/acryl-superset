@@ -138,7 +138,10 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
 
   useEffect(() => {
     const params = new URLSearchParams(search);
-    console.log('CLIENT DASHBOARD params', params.get('JTOKEN'));
+    const jtoken = params.get('JTOKEN');
+    if(jtoken !== null) {
+      window.sessionStorage.setItem('JTOKEN', jtoken);
+    }
   }, [search])
 
   useEffect(() => {
