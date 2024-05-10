@@ -142,15 +142,15 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
     const mberid = params.get('MBER_ID');
     const mbernm = params.get('MBER_NM');
 
-    if(jtoken !== null) {
+    if(jtoken !== null && jtoken.length > 0) {
       console.log('console.log jtoken', jtoken)
       window.sessionStorage.setItem('JTOKEN', jtoken);
     }
-    if(mberid !== null) {
+    if(mberid !== null && mberid.length > 0) {
       console.log('console.log mberid', mberid)
       window.sessionStorage.setItem('MBER_ID', mberid);
     }
-    if(mbernm !== null) {
+    if(mbernm !== null && mbernm.length > 0) {
       console.log('console.log mbernm', mbernm)
       window.sessionStorage.setItem('MBER_NM', mbernm);
     }
