@@ -700,6 +700,10 @@ class SupersetIndexView(IndexView):
         aa = "/superset/dashboard/license_dashboard"
         if not request.args.get('JTOKEN') is None:
             aa += "?JTOKEN="+request.args.get('JTOKEN')
+        if not request.args.get('MBER_ID') is None:
+            aa += "?MBER_ID="+request.args.get('MBER_ID')
+        if not request.args.get('MBER_NM') is None:
+            aa += "?MBER_NM="+request.args.get('MBER_NM')
         return redirect(aa)
 # TODO: @dawson j-session이 있으면 /superset/dashboard/license_dashboard로 이동
 # 아니면 침해대응 사이트의 login으로 보내라
