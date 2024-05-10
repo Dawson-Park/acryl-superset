@@ -146,7 +146,7 @@ const SideNav = () => {
         <>
           <Label>
             <a
-              href={`http://icopsmt.kcopa.or.kr:8080/cmmn/sysLink.do?REDIRECT_URL=/main.do?id=${sessions.mberid}`}
+              href={`http://icopsmt.kcopa.or.kr:8080/cmmn/sysLink.do?REDIRECT_URL=/main.do&id=${sessions.mberid}`}
               target="_blank"
               rel="noreferrer"
             >
