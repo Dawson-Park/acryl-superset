@@ -1,5 +1,5 @@
 /* eslint-disable theme-colors/no-literal-colors */
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useMemo, useState } from 'react';
 import { styled } from '@superset-ui/core';
 import {Link} from 'react-router-dom';
 import {
@@ -122,150 +122,128 @@ const Strong = styled.strong`
   right: 3px;
 `;
 
-const list = [
-  {
-    label: '모니터링',
-    to: '',
-    icon: <MonotoringIcon />,
-    more: (
-      <>
-        <Label>
-          <a
-            href="http://icopsmt.kcopa.or.kr:8080/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            수집·분석
-          </a>
-        </Label>
-        <Label>
-          <a
-            href="https://icopsmt.kcopa.or.kr/main.do"
-            target="_blank"
-            rel="noreferrer"
-          >
-            수집·분석 <Strong>N</Strong>
-          </a>
-        </Label>
-        <Label>
-          <a
-            href="https://icopsres.kcopa.or.kr/rceptcntr/main.do"
-            target="_blank"
-            rel="noreferrer"
-          >
-            접수·조치
-          </a>
-        </Label>
-      </>
-    ),
-  },
-  {
-    label: '심의',
-    to: 'https://icopsres.kcopa.or.kr/dlbrt/main.do',
-    icon: <ReviewIcon />,
-  },
-  {
-    label: '통계',
-    to: '',
-    icon: <StatisticsIcon />,
-    more: (
-      <>
-        <Label>
-          <a
-            href="http://icopsstat.kcopa.or.kr:9001/editds/report/viewer.do"
-            target="_blank"
-            rel="noreferrer"
-          >
-            정형통계
-          </a>
-        </Label>
-        <Label>
-          <a
-            href="http://icopsstat.kcopa.or.kr:9002/main"
-            target="_blank"
-            rel="noreferrer"
-          >
-            비정형통계
-          </a>
-        </Label>
-      </>
-    ),
-  },
-  {
-    label: '업무포털',
-    to: 'https://icopsres.kcopa.or.kr/taskportal/main.do',
-    icon: <PortalIcon />,
-  },
-  {
-    label: '모니터링 도구',
-    to: 'https://montool.kcopa.or.kr/montool/main.do',
-    icon: <MonitorIcon />,
-  },
-  {
-    label: '빅데이터',
-    to: '',
-    icon: <BigdataIcon />,
-    more: (
-      <>
-        <Label>
-          <Link
-            to="/superset/dashboard/license_dashboard/"
-            /* to='https://icopsbig.kcopa.or.kr/superset/dashboard/license_dashboard/' */
-            style={{ color: '#a1defc' }}
-          >
-            통계분석
-          </Link>
-        </Label>
-        <Label>
-          <a
-            href="http://125.129.210.132:8080/operation.do"
-            target="_blank"
-            rel="noreferrer"
-          >
-            운영관리
-          </a>
-        </Label>
-      </>
-    ),
-  },
-];
-
 const SideNav = () => {
   const [active, setActive] = useState('');
 
   const sessions = useMemo(() => {
-    let jtoken = window.sessionStorage.getItem('JTOKEN');
-    let mberid = window.sessionStorage.getItem('MBER_ID');
-    let mbernm = window.sessionStorage.getItem('MBER_NM');
-
-    // const params = new URLSearchParams(search);
-    // const _jtoken = params.get('JTOKEN');
-    // const _mberid = params.get('MBER_ID');
-    // const _mbernm = params.get('MBER_NM');
-    //
-    // if(jtoken !== null) {
-    //   console.log('console.log jtoken', jtoken)
-    //   window.sessionStorage.setItem('JTOKEN', jtoken);
-    // }
-    // if(mberid !== null) {
-    //   console.log('console.log mberid', mberid)
-    //   window.sessionStorage.setItem('MBER_ID', mberid);
-    // }
-    // if(mbernm !== null) {
-    //   console.log('console.log mbernm', mbernm)
-    //   window.sessionStorage.setItem('MBER_NM', mbernm);
-    // }
+    const jtoken = window.sessionStorage.getItem('JTOKEN');
+    const mberid = window.sessionStorage.getItem('MBER_ID');
+    const mbernm = window.sessionStorage.getItem('MBER_NM');
 
     return {
-      jtoken,
-      mberid,
-      mbernm,
+      jtoken: jtoken ?? '',
+      mberid: mberid ?? '',
+      mbernm: mbernm ?? '',
     };
-  }, [])
+  }, []);
 
-  useEffect(() => {
-    console.log(sessions)
-  }, [sessions])
+  const list = [
+    {
+      label: '모니터링',
+      to: '',
+      icon: <MonotoringIcon />,
+      more: (
+        <>
+          <Label>
+            <a
+              href={`http://icopsmt.kcopa.or.kr:8080/cmmn/sysLink.do?REDIRECT_URL=/main.do?id=${sessions.mberid}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              수집·분석
+            </a>
+          </Label>
+          <Label>
+            <a
+              href={`https://icopsmt.kcopa.or.kr/cmmn/sysLink.do?REDIRECT_URL=/main.do&JTOKEN=${sessions.jtoken}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              수집·분석 <Strong>N</Strong>
+            </a>
+          </Label>
+          <Label>
+            <a
+              href={`https://icopsres.kcopa.or.kr/cmmn/sysLink.do?REDIRECT_URL=/rceptcntr/main.do&JTOKEN=${sessions.jtoken}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              접수·조치
+            </a>
+          </Label>
+        </>
+      ),
+    },
+    {
+      label: '심의',
+      to: `https://icopsres.kcopa.or.kr/cmmn/sysLink.do?REDIRECT_URL=/dlbrt/main.do&JTOKEN=${sessions.jtoken}`,
+      icon: <ReviewIcon />,
+    },
+    {
+      label: '통계',
+      to: '',
+      icon: <StatisticsIcon />,
+      more: (
+        <>
+          <Label>
+            <a
+              href={`http://icopsstat.kcopa.or.kr:9001/editds/report/edit.do?USER=${sessions.mberid}&assign_name=bWVpcw==`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              정형통계
+            </a>
+          </Label>
+          <Label>
+            <a
+              href={`http://icopsstat.kcopa.or.kr:9002`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              비정형통계
+            </a>
+          </Label>
+        </>
+      ),
+    },
+    {
+      label: '업무포털',
+      to: `https://icopsres.kcopa.or.kr/cmmn/sysLink.do?REDIRECT_URL=/taskportal/main.do&JTOKEN=${sessions.jtoken}`,
+      icon: <PortalIcon />,
+    },
+    {
+      label: '모니터링 도구',
+      to: `https://montool.kcopa.or.kr/cmmn/sysLink.do?REDIRECT_URL=/montool/main.do&JTOKEN=${sessions.jtoken}`,
+      icon: <MonitorIcon />,
+    },
+    {
+      label: '빅데이터',
+      to: '',
+      icon: <BigdataIcon />,
+      more: (
+        <>
+          <Label>
+            <Link
+              to="/superset/dashboard/license_dashboard/"
+              /* to='https://icopsbig.kcopa.or.kr/superset/dashboard/license_dashboard/' */
+              style={{ color: '#a1defc' }}
+            >
+              통계분석
+            </Link>
+          </Label>
+          <Label>
+            <a
+              href={`http://125.129.210.132:8080/operation.do?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              운영관리
+            </a>
+          </Label>
+        </>
+      ),
+    },
+  ]
 
   const renderItem = (v: any) => {
     return (
