@@ -1,7 +1,7 @@
 /* eslint-disable theme-colors/no-literal-colors */
-import React, { useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import { styled } from '@superset-ui/core';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {
   BigdataIcon,
   MonitorIcon,
@@ -233,19 +233,55 @@ const list = [
 const SideNav = () => {
   const [active, setActive] = useState('');
 
-  const renderItem = (v: any) => (
-    <SideItem
-      key={v.label}
-      // $active={v.label === '빅데이터 통계분석'}
-      href={v.to.length > 0 ? v.to : undefined}
-      target="_blank"
-      rel="noreferrer"
-      data-label={v.label}
-    >
-      {v.icon}
-      <SideLabel>{v.label}</SideLabel>
-    </SideItem>
-  );
+  const sessions = useMemo(() => {
+    let jtoken = window.sessionStorage.getItem('JTOKEN');
+    let mberid = window.sessionStorage.getItem('MBER_ID');
+    let mbernm = window.sessionStorage.getItem('MBER_NM');
+
+    // const params = new URLSearchParams(search);
+    // const _jtoken = params.get('JTOKEN');
+    // const _mberid = params.get('MBER_ID');
+    // const _mbernm = params.get('MBER_NM');
+    //
+    // if(jtoken !== null) {
+    //   console.log('console.log jtoken', jtoken)
+    //   window.sessionStorage.setItem('JTOKEN', jtoken);
+    // }
+    // if(mberid !== null) {
+    //   console.log('console.log mberid', mberid)
+    //   window.sessionStorage.setItem('MBER_ID', mberid);
+    // }
+    // if(mbernm !== null) {
+    //   console.log('console.log mbernm', mbernm)
+    //   window.sessionStorage.setItem('MBER_NM', mbernm);
+    // }
+
+    return {
+      jtoken,
+      mberid,
+      mbernm,
+    };
+  }, [])
+
+  useEffect(() => {
+    console.log(sessions)
+  }, [sessions])
+
+  const renderItem = (v: any) => {
+    return (
+      <SideItem
+        key={v.label}
+        // $active={v.label === '빅데이터 통계분석'}
+        href={v.to.length > 0 ? v.to : undefined}
+        target="_blank"
+        rel="noreferrer"
+        data-label={v.label}
+      >
+        {v.icon}
+        <SideLabel>{v.label}</SideLabel>
+      </SideItem>
+    )
+  };
 
   return (
     <SideNavContainer className="kcopa-side-nav">
