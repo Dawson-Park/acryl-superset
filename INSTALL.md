@@ -68,6 +68,10 @@
   ```
 ## 설치 이후 작업
 ### Dashboard 설정
+#### Dashboard Export
+1. admin 로그인
+2. `Dashboards`로 이동
+3. 대시보드에 마우스 오버 후 `Export` 클릭
 #### import가 가능한 경우
 1. admin 로그인
 2. `Dashboards`로 이동
