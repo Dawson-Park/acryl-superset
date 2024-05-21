@@ -114,10 +114,51 @@
 2. `Settings` > `역할 목록` 클릭
 3. Public의 `레코드 수정`
 4. 아래를 하나씩 복붙 + 엔터
-- Public, Gamma 권한
+- Public 권한 중 없는 것
+  ```text
+  all datasource access on all_datasource_access
+  all database access on all_database_access
   ```
-  [can list on SavedQuery, can export on Chart, can write on Chart, can read on Chart, can read on Dataset, can recent activity on Log, can export on Dashboard, can get embedded on Dashboard, can delete embedded on Dashboard, can write on Dashboard, can read on Dashboard, can read on Database, can this form post on ResetMyPasswordView, can this form get on ResetMyPasswordView, resetmypassword on UserDBModelView, can userinfo on UserDBModelView, can get on OpenApi, can show on SwaggerView, can get on MenuApi, can list on AsyncEventsRestApi, can read on AdvancedDataType, can read on AvailableDomains, can invalidate on CacheRestApi, can write on DashboardFilterStateRestApi, can read on DashboardFilterStateRestApi, can write on DashboardPermalinkRestApi, can read on DashboardPermalinkRestApi, can external metadata on Datasource, can get on Datasource, can external metadata by name on Datasource, can read on EmbeddedDashboard, can read on Explore, can write on ExploreFormDataRestApi, can read on ExploreFormDataRestApi, can write on ExplorePermalinkRestApi, can read on ExplorePermalinkRestApi, can add on FilterSets, can edit on FilterSets, can list on FilterSets, can delete on FilterSets, can write on Tag, can read on Tag, can bulk create on Tag, can format sql on SQLLab, can estimate query cost on SQLLab, can list on DynamicPlugin, can show on DynamicPlugin, can time range on Api, can query form data on Api, can query on Api, can get value on KV, can store on KV, can read on Profile, can share chart on Superset, can share dashboard on Superset, can csv on Superset, can slice on Superset, can dashboard on Superset, can log on Superset, can import dashboards on Superset, can fetch datasource metadata on Superset, can explore json on Superset, can dashboard permalink on Superset, can profile on Superset, can explore on Superset, menu access on Tags, can download on Tags, can add on Tags, can edit on Tags, can list on Tags, can delete on Tags, can show on Tags, can tags on TagView, can read on SecurityRestApi, can read on RowLevelSecurity, menu access on Home, menu access on Data, menu access on Databases, menu access on Dashboards, menu access on Charts, menu access on Datasets, menu access on Plugins, menu access on Import Dashboards, all datasource access on all_datasource_access, all database access on all_database_access]
+- Gamma 권한 중 없는 것
+  ```text
+  can list on SavedQuery
+  can export on Chart
+  can write on Chart
+  can read on Chart
+  can read on Dataset
+  can recent activity on Log
+  can export on Dashboard
+  can get embedded on Dashboard
+  can delete embedded on Dashboard
+  can write on Dashboard
+  can read on Dashboard
+  can read on Database
+  can external metadata on Datasource
+  can get on Datasource
+  can external metadata by name on Datasource
+  can share chart on Superset
+  can share dashboard on Superset
+  can csv on Superset
+  can slice on Superset
+  can dashboard on Superset
+  can log on Superset
+  can import dashboards on Superset
+  can fetch datasource metadata on Superset
+  can explore json on Superset
+  can dashboard permalink on Superset
+  can profile on Superset
+  can explore on Superset
+  menu access on Tags
+  can download on Tags
+  can add on Tags
+  can edit on Tags
+  can list on Tags
+  can delete on Tags
+  can show on Tags
+  all datasource access on all_datasource_access
+  all database access on all_database_access
   ```
+  
 #### Client 생성(Optional)
 - 기존엔 client는 client 로그인을 해야하는 것으로 개발을 진행했으나 client 계정이 필요 없는 경우 아래는 진행하지 않아도 된다
 1. admin 로그인
