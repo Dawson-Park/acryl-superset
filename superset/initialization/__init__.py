@@ -698,12 +698,31 @@ class SupersetIndexView(IndexView):
 #         if not request.args.get('j-session') is None:
 #         aa += "?j-session="+request.args.get('j-session')
         aa = "/superset/dashboard/license_dashboard"
-        if not request.args.get('JTOKEN') is None:
-            aa += "?JTOKEN="+request.args.get('JTOKEN')
-        if not request.args.get('MBER_ID') is None:
-            aa += "?MBER_ID="+request.args.get('MBER_ID')
-        if not request.args.get('MBER_NM') is None:
-            aa += "?MBER_NM="+request.args.get('MBER_NM')
+        # if not request.args.get('JTOKEN') is None:
+        #     aa += "?JTOKEN="+request.args.get('JTOKEN')
+        # if not request.args.get('MBER_ID') is None:
+        #     aa += "&MBER_ID="+request.args.get('MBER_ID')
+        # if not request.args.get('MBER_NM') is None:
+        #     aa += "&MBER_NM="+request.args.get('MBER_NM')
+
+        # Collect query parameters safely
+        jtoken = request.args.get('JTOKEN')
+        mber_id = request.args.get('MBER_ID')
+        mber_nm = request.args.get('MBER_NM')
+
+        # Append query parameters if they are not None
+        params = []
+        if jtoken:
+            params.append(f"JTOKEN={jtoken}")
+        if mber_id:
+            params.append(f"MBER_ID={mber_id}")
+        if mber_nm:
+            params.append(f"MBER_NM={mber_nm}")
+
+        # If there are any parameters, append them to the URL
+        if params:
+            aa += '?' + '&'.join(params)
+
         return redirect(aa)
 # TODO: @dawson j-session이 있으면 /superset/dashboard/license_dashboard로 이동
 # 아니면 침해대응 사이트의 login으로 보내라
