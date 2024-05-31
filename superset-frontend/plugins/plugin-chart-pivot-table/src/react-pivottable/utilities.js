@@ -532,6 +532,23 @@ const locales = {
       by: 'by',
     },
   },
+  ko: {
+    aggregators,
+    localeStrings: {
+      renderError: 'PivotTable 결과를 렌더링하는 중 오류가 발생했습니다',
+      computeError: 'PivotTable 결과를 계산하는 중 오류가 발생했습니다.',
+      uiRenderError: 'PivotTable UI를 렌더링하는 중 오류가 발생했습니다.',
+      selectAll: '모두 선택',
+      selectNone: '선택 해제',
+      tooMany: '(목록이 너무 많음)',
+      filterResults: 'Filter values',
+      apply: '적용',
+      cancel: '취소',
+      totals: '합계',
+      vs: 'vs',
+      by: 'by',
+    },
+  },
 };
 
 // dateFormat deriver l10n requires month and day names to be passed in directly
