@@ -233,7 +233,7 @@ const SideNav = () => {
           </Label>
           <Label>
             <a
-              href={`http://125.129.210.132:8080/operation.do?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}
+              href={`http://icopsbig.kcopa.or.kr:8080/operation.do?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}
               target="_blank"
               rel="noreferrer"
             >
