@@ -20,7 +20,7 @@ import {
   DataRecordValue,
   GenericDataType,
   getNumberFormatter,
-  // isProbablyHTML,
+  isProbablyHTML,
   // sanitizeHtml,
 } from '@superset-ui/core';
 import { DataColumnMeta } from '../types';
@@ -52,7 +52,7 @@ function formatValue(
   }
   if (typeof value === 'string') {
     // return isProbablyHTML(value) ? [true, sanitizeHtml(value)] : [false, value];
-    return [true, value];
+    return isProbablyHTML(value) ? [true, value] : [false, value];
   }
   return [false, value.toString()];
 }
