@@ -20,8 +20,8 @@ import {
   DataRecordValue,
   GenericDataType,
   getNumberFormatter,
-  isProbablyHTML,
-  sanitizeHtml,
+  // isProbablyHTML,
+  // sanitizeHtml,
 } from '@superset-ui/core';
 import { DataColumnMeta } from '../types';
 import DateWithFormatter from './DateWithFormatter';
@@ -51,7 +51,8 @@ function formatValue(
     return [false, formatter(value as number)];
   }
   if (typeof value === 'string') {
-    return isProbablyHTML(value) ? [true, sanitizeHtml(value)] : [false, value];
+    // return isProbablyHTML(value) ? [true, sanitizeHtml(value)] : [false, value];
+    return [false, value];
   }
   return [false, value.toString()];
 }
