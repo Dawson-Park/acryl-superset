@@ -11,4 +11,4 @@ docker rmi $superset_id $node_id
 
 docker compose up -d
 
-docker ps -a
+docker ps -a | grep superset

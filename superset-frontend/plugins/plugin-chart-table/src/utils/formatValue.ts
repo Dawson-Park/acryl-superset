@@ -52,7 +52,7 @@ function formatValue(
   }
   if (typeof value === 'string') {
     // return isProbablyHTML(value) ? [true, sanitizeHtml(value)] : [false, value];
-    return [false, value];
+    return [true, value];
   }
   return [false, value.toString()];
 }
