@@ -51,8 +51,8 @@ function formatValue(
     return [false, formatter(value as number)];
   }
   if (typeof value === 'string') {
-    return isProbablyHTML(value) ? [true, sanitizeHtml(value)] : [false, value];
-    // return isProbablyHTML(value) ? [true, value] : [false, value]; // TODO: 쿼리에서 해결이 불가능한 경우 주석 해제
+    // return isProbablyHTML(value) ? [true, sanitizeHtml(value)] : [false, value];
+    return isProbablyHTML(value) ? [true, value] : [false, value]; // TODO: 쿼리에서 해결이 불가능한 경우 주석 해제
   }
   return [false, value.toString()];
 }
