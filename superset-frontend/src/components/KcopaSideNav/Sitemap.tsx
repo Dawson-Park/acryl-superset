@@ -1185,7 +1185,7 @@ const Bigdata = ({ sessions }:CommonProps) => (
         <h4>대시보드</h4>
         <ul>
           <li>
-            <A to={`/superset/dashboard/license_dashboard/`}>
+            <A to={`/superset/dashboard/license_dashboard/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               대시보드
             </A>
           </li>
@@ -1194,22 +1194,22 @@ const Bigdata = ({ sessions }:CommonProps) => (
         <h4>수집현황</h4>
         <ul>
           <li>
-            <A to={`/superset/dashboard/collection_site/`}>
+            <A to={`/superset/dashboard/collection_site/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               불법유통사이트 탐지 현황
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/collection_contents/`}>
+            <A to={`/superset/dashboard/collection_contents/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               불법 콘텐츠 수집 현황
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/collection_news/`}>
+            <A to={`/superset/dashboard/collection_news/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               뉴스 수집 현황
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/collection_sns/`}>
+            <A to={`/superset/dashboard/collection_sns/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               SNS 수집 현황
             </A>
           </li>
@@ -1218,22 +1218,22 @@ const Bigdata = ({ sessions }:CommonProps) => (
         <h4>유통 현황 분석</h4>
         <ul>
           <li>
-            <A to={`/superset/dashboard/distribution_site/`}>
+            <A to={`/superset/dashboard/distribution_site/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               사이트별 유통 현황 분석
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/distribution_language/`}>
+            <A to={`/superset/dashboard/distribution_language/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               언어별 유통 현황 분석
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/distribution_genre/`}>
+            <A to={`/superset/dashboard/distribution_genre/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               장르별 유통 현황 분석
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/distribution_focus/`}>
+            <A to={`/superset/dashboard/distribution_focus/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               중점 저작물별 유통 현황 분석
             </A>
           </li>
@@ -1242,22 +1242,22 @@ const Bigdata = ({ sessions }:CommonProps) => (
         <h4>침해 현황 분석</h4>
         <ul>
           <li>
-            <A to={`/superset/dashboard/infringement_site/`}>
+            <A to={`/superset/dashboard/infringement_site/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               사이트별 침해 금액 추정 분석
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/infringement_language/`}>
+            <A to={`/superset/dashboard/infringement_language/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               언어별 침해 금액 추정 분석
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/infringement_genre/`}>
+            <A to={`/superset/dashboard/infringement_genre/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               장르별 침해 금액 추정 분석
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/infringement_revenue/`}>
+            <A to={`/superset/dashboard/infringement_revenue/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               사이트별 수입 규모 추정 분석
             </A>
           </li>
@@ -1266,12 +1266,12 @@ const Bigdata = ({ sessions }:CommonProps) => (
         <h4>동향 분석</h4>
         <ul>
           <li>
-            <A to={`/superset/dashboard/trend_news/`}>
+            <A to={`/superset/dashboard/trend_news/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               뉴스 동향 분석
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/trend_sns/`}>
+            <A to={`/superset/dashboard/trend_sns/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               SNS 동향 분석
             </A>
           </li>
@@ -1280,22 +1280,22 @@ const Bigdata = ({ sessions }:CommonProps) => (
         <h4>수사 지원 분석</h4>
         <ul>
           <li>
-            <A to={`/superset/dashboard/investigation_site/`}>
+            <A to={`/superset/dashboard/investigation_site/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               사이트 정보 분석
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/investigation_response/`}>
+            <A to={`/superset/dashboard/investigation_response/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               동적 응답 분석
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/investigation_clustering/`}>
+            <A to={`/superset/dashboard/investigation_clustering/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               클러스터링 분석
             </A>
           </li>
           <li>
-            <A to={`/superset/dashboard/investigation_lifecycle/`}>
+            <A to={`/superset/dashboard/investigation_lifecycle/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               라이프사이클 분석
             </A>
           </li>
