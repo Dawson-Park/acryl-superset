@@ -98,12 +98,16 @@ const ModalBody = styled.div`
       //background-size: 30px;
 
       .background-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
         color: #fff;
         width: 40px;
         height: 40px;
         position: absolute;
         top: 94%;
-        left: 79%;
+        left: 75%;
         transform: translate(50%, -100%);
       }
     }
@@ -163,8 +167,8 @@ const ModalBody = styled.div`
     h2 {
       height: 40px;
       .background-icon {
-        top: 97%;
-        left: 90%;
+        top: 100%;
+        left: 82%;
       }
     }
   }
@@ -1042,7 +1046,7 @@ const MonitoringTool = ({sessions}: CommonProps) => (
     <h2>
       모니터링 도구
       <div className='background-icon'>
-        <svg width='100%' height='100%' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'
+        <svg width='80%' height='80%' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'
              xmlnsXlink='http://www.w3.org/1999/xlink'>
           <rect x='2' y='3' width='36' height='34' fill='url(#pattern0_43_74)'/>
           <defs>
@@ -1161,7 +1165,7 @@ const Bigdata = () => (
     <h2>
       빅데이터
       <div className='background-icon'>
-        <svg width='100%' height='100%' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'
+        <svg width='80%' height='80%' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'
              xmlnsXlink='http://www.w3.org/1999/xlink'>
           <rect x='2' y='5' width='36' height='30' fill='url(#pattern0_45_80)'/>
           <defs>
