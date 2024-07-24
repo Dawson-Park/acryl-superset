@@ -703,7 +703,7 @@ const Monitoring = ({ sessions }:CommonProps) => (
   </div>
 );
 
-const Review = ({sessions}: CommonProps) => (
+const Review = ({ sessions }:CommonProps) => (
   <div className='menu review'>
     <h2>
       심의
@@ -870,7 +870,7 @@ const Review = ({sessions}: CommonProps) => (
   </div>
 );
 
-const Portal = ({sessions}: CommonProps) => (
+const Portal = ({ sessions }:CommonProps) => (
   <div className='menu portal'>
     <h2>
       업무포털
@@ -1041,7 +1041,7 @@ const Portal = ({sessions}: CommonProps) => (
   </div>
 );
 
-const MonitoringTool = ({sessions}: CommonProps) => (
+const MonitoringTool = ({ sessions }:CommonProps) => (
   <div className='menu monitor-tool'>
     <h2>
       모니터링 도구
@@ -1160,7 +1160,7 @@ const MonitoringTool = ({sessions}: CommonProps) => (
   </div>
 );
 
-const Bigdata = () => (
+const Bigdata = ({ sessions }:CommonProps) => (
   <div className="menu bigdata">
     <h2>
       빅데이터
@@ -1309,17 +1309,17 @@ const Bigdata = () => (
         <h4>수집운영 관리</h4>
         <ul>
           <li>
-            <A to={``}>
+            <A to={`http://icopsbig.kcopa.or.kr:8080/operation.do?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               탐지사이트 관리
             </A>
           </li>
           <li>
-            <A to={``}>
+            <A to={`http://icopsbig.kcopa.or.kr:8080/keyWordManage.do?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               키워드 관리
             </A>
           </li>
           <li>
-            <A to={``}>
+            <A to={`http://icopsbig.kcopa.or.kr:8080/systemManage.do?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`}>
               시스템 관리
             </A>
           </li>
@@ -1357,7 +1357,7 @@ const Sitemap = ({onClose}: Props) => {
         {/*<Statistical sessions={sessions}/>*/}
         <Portal sessions={sessions} />
         <MonitoringTool sessions={sessions} />
-        <Bigdata />
+        <Bigdata sessions={sessions} />
       </ModalBody>
     </ModalContainer>
   );
