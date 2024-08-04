@@ -381,12 +381,20 @@ const Monitoring = ({ sessions }:CommonProps) => (
             </A>
           </li>
           <li>
-            <A to={`http://icopsmt.kcopa.or.kr:8080/acct/mgmtKeyword/index.do`}>
+            {/*<A to={`http://icopsmt.kcopa.or.kr:8080/acct/mgmtKeyword/index.do`}>*/}
+            <A to={`http://125.129.210.123:9001/`}>
               특징점 관리
             </A>
           </li>
           <li>
+            {/*<A to={`http://icopsmt.kcopa.or.kr:8080/acct/mgmtKeyword/index.do`}>*/}
             <A to={`https://icopsmt.kcopa.or.kr/feature-management`}>
+              특징점 관리N
+            </A>
+          </li>
+          <li>
+            {/*<A to={`https://icopsmt.kcopa.or.kr/feature-management`}>*/}
+            <A to={`https://icopsmt.kcopa.or.kr/cmmn/sysLink.do?REDIRECT_URL=/main.do&JTOKEN=${sessions.jtoken}#MENU_ID=35`}>
               시스템 운영
             </A>
           </li>
@@ -856,7 +864,8 @@ const Review = ({ sessions }:CommonProps) => (
     <div className='contents'>
       <ul className='f-large'>
         <li>
-          <A to='http://125.129.210.190:9001/editds/report/edit.do?USER=dudaji1&assign_name=bWVpcw=='>
+          {/*<A to='http://125.129.210.190:9001/editds/report/edit.do?USER=dudaji1&assign_name=bWVpcw=='>*/}
+          <A to={`http://125.129.210.190:9001/editds/report/edit.do?USER=${sessions.mberid}&assign_name=bWVpcw==`}>
             정형통계
           </A>
         </li>
