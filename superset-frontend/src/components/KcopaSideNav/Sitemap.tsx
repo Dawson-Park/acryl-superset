@@ -389,7 +389,7 @@ const Monitoring = ({ sessions }:CommonProps) => (
           <li>
             {/*<A to={`http://icopsmt.kcopa.or.kr:8080/acct/mgmtKeyword/index.do`}>*/}
             <A to={`https://icopsmt.kcopa.or.kr/feature-management`}>
-              특징점 관리N
+              특징점 관리
             </A>
           </li>
           <li>
