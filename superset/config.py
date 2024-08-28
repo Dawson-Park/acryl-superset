@@ -793,7 +793,8 @@ HTML_SANITIZATION_SCHEMA_EXTENSIONS: dict[str, Any] = {}
 SUPERSET_WEBSERVER_DOMAINS = None
 
 # Allowed format types for upload on Database view
-EXCEL_EXTENSIONS = {"xlsx", "xls"}
+# EXCEL_EXTENSIONS = {"xlsx", "xls"}
+EXCEL_EXTENSIONS = {"xlsx"}
 CSV_EXTENSIONS = {"csv", "tsv", "txt"}
 COLUMNAR_EXTENSIONS = {"parquet", "zip"}
 ALLOWED_EXTENSIONS = {*EXCEL_EXTENSIONS, *CSV_EXTENSIONS, *COLUMNAR_EXTENSIONS}
