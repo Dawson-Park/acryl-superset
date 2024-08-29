@@ -541,8 +541,12 @@ export default function TableChart<D extends DataRecord = DataRecord>(
               isActiveFilterValue(key, value) ? ' dt-is-active-filter' : '',
             ].join(' '),
           };
+
+          console.log(cellProps)
+
           if (html) {
             if (truncateLongCells) {
+              console.log(1)
               // eslint-disable-next-line react/no-danger
               return (
                 <StyledCell {...cellProps}>
@@ -554,9 +558,11 @@ export default function TableChart<D extends DataRecord = DataRecord>(
                 </StyledCell>
               );
             }
+            console.log(2)
             // eslint-disable-next-line react/no-danger
             return <StyledCell {...cellProps} dangerouslySetInnerHTML={html} />;
           }
+          console.log(3)
           // If cellProps renders textContent already, then we don't have to
           // render `Cell`. This saves some time for large tables.
           return (
