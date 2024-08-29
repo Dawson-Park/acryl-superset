@@ -542,11 +542,10 @@ export default function TableChart<D extends DataRecord = DataRecord>(
             ].join(' '),
           };
 
-          console.log(cellProps, 'text', text, value)
+          console.log(cellProps, html, text, value)
 
           if (html) {
             if (truncateLongCells) {
-              console.log(1)
               // eslint-disable-next-line react/no-danger
               return (
                 <StyledCell {...cellProps}>
@@ -560,7 +559,8 @@ export default function TableChart<D extends DataRecord = DataRecord>(
             }
             console.log(2)
             // eslint-disable-next-line react/no-danger
-            return <StyledCell {...cellProps} dangerouslySetInnerHTML={html} />;
+            // return <StyledCell {...cellProps} dangerouslySetInnerHTML={html} />;
+            return <StyledCell {...cellProps}>바로가기</StyledCell>
           }
           console.log(3)
           // If cellProps renders textContent already, then we don't have to
