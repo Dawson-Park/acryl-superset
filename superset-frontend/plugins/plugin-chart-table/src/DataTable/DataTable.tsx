@@ -275,8 +275,12 @@ export default typedMemo(function DataTable<D extends object>({
             const { key: rowKey, ...rowProps } = row.getRowProps();
             return (
               <tr key={rowKey || row.id} {...rowProps}>
-                {row.cells.map(cell =>
-                  cell.render('Cell', { key: cell.column.id }),
+                {row.cells.map(cell => {
+                  console.log(cell)
+                    return (
+                      cell.render('Cell', { key: cell.column.id })
+                    )
+                  }
                 )}
               </tr>
             );
