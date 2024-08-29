@@ -542,7 +542,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
             ].join(' '),
           };
 
-          console.log(cellProps)
+          console.log(cellProps, text)
 
           if (html) {
             if (truncateLongCells) {
