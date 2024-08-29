@@ -253,3 +253,36 @@ const DashNav = () => {
 };
 
 export default React.memo(DashNav);
+
+
+// 통계분석
+// 대시보드: `/superset/dashboard/license_dashboard/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+//
+// 수집현황
+// 불법유통사이트 탐지 현황: `/superset/dashboard/collection_site/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 불법 콘텐츠 수집 현황: `/superset/dashboard/collection_contents/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 뉴스 수집 현황: `/superset/dashboard/collection_news/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// SNS 수집 현황: `/superset/dashboard/collection_sns/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+//
+// 유통 현황 분석
+// 사이트별 유통 현황 분석: `/superset/dashboard/distribution_site/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 언어별 유통 현황 분석: `/superset/dashboard/distribution_language/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 장르별 유통 현황 분석: `/superset/dashboard/distribution_genre/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 중점 저작물별 유통 현황 분석: `/superset/dashboard/distribution_focus/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+//
+// 침해 현황 분석
+// 사이트별 침해 금액 추정 분석: `/superset/dashboard/infringement_site/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 언어별 침해 금액 추정 분석: `/superset/dashboard/infringement_language/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 장르별 침해 금액 추정 분석: `/superset/dashboard/infringement_genre/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 사이트별 수입 규모 추정 분석: `/superset/dashboard/infringement_revenue/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+//
+// 동향 분석
+// 뉴스 동향 분석: `/superset/dashboard/trend_news/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// SNS 동향 분석: `/superset/dashboard/trend_sns/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+//
+// 수사 지원 분석
+// 사이트 정보 분석: `/superset/dashboard/investigation_site/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 동적 응답 분석: `/superset/dashboard/investigation_response/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 클러스터링 분석: `/superset/dashboard/investigation_clustering/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+// 라이프사이클 분석: `/superset/dashboard/investigation_lifecycle/?JTOKEN=${sessions.jtoken}&MBER_ID=${sessions.mberid}&MBER_NM=${sessions.mbernm}`
+//
