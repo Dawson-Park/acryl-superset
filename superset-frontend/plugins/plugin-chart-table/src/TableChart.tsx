@@ -542,7 +542,8 @@ export default function TableChart<D extends DataRecord = DataRecord>(
             ].join(' '),
           };
 
-          console.log(cellProps, html, text, value)
+          // 바로가기 a태그에서 http 문자열로 시작하면 a태그로 감싸도록 변경하려면 여기 코드를 봐야함
+          // console.log(cellProps, html, text, value)
 
           if (html) {
             if (truncateLongCells) {
@@ -557,12 +558,18 @@ export default function TableChart<D extends DataRecord = DataRecord>(
                 </StyledCell>
               );
             }
-            console.log(2)
+
+            // 현재 텍스트에 a태그가 포함되면 이쪽으로 빠지는데, http로 변경하면 아래로 내려갈 것 같음
             // eslint-disable-next-line react/no-danger
-            // return <StyledCell {...cellProps} dangerouslySetInnerHTML={html} />;
-            return <StyledCell {...cellProps}>바로가기</StyledCell>
+            return <StyledCell {...cellProps} dangerouslySetInnerHTML={html} />;
+            // return <StyledCell {...cellProps}>바로가기</StyledCell> // 이 코드는 엑셀화 할때 테이블의 데이터를 읽는건지 쿼리 데이터를 읽는건지 확인하기 위해서 작성했는데, 확인 결과 쿼리 데이터를 읽는 것으로 보임
           }
-          console.log(3)
+
+          const isUrl = () => {
+            const urlRegex = /^(https?:\/\/)/;
+            return urlRegex.test(text) ? (<a href={text} rel='noreferrer noopener' target='_blank'>바로가기</a>) : (text);
+          }
+
           // If cellProps renders textContent already, then we don't have to
           // render `Cell`. This saves some time for large tables.
           return (
@@ -582,11 +589,9 @@ export default function TableChart<D extends DataRecord = DataRecord>(
                   className="dt-truncate-cell"
                   style={columnWidth ? { width: columnWidth } : undefined}
                 >
-                  {text}
+                  {isUrl()}
                 </div>
-              ) : (
-                text
-              )}
+              ) : isUrl()}
             </StyledCell>
           );
         },
